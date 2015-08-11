@@ -340,13 +340,13 @@
 		-ms-transition: border-bottom-color 0.2s ease, color 0.2s ease;
 		transition: border-bottom-color 0.2s ease, color 0.2s ease;
 		border-bottom: dotted 1px rgba(255, 255, 255, 0.25);
-		color: #1cb495;
+		color: white;
 		text-decoration: none;
 	}
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #1cb495 !important;
+			color: white !important;
 			text-decoration: none;
 		}
 
@@ -469,6 +469,7 @@
 		position: relative;
 		margin: 0 0 1.5em 0;
 	}
+
 
 	header h2 + p {
 		font-size: 1.25em;
@@ -623,7 +624,7 @@
 			}
 
 			form .message.success {
-				color: #1cb495;
+				color: grey;
 			}
 
 				form .message.success:before {
@@ -785,7 +786,7 @@
 			-ms-animation: focus 0.1s;
 			animation: focus 0.1s;
 			background-color: rgba(255, 255, 255, 0.125);
-			border-color: #1cb495;
+			border-color: grey;
 		}
 
 	.select-wrapper {
@@ -887,16 +888,16 @@
 
 		input[type="checkbox"]:checked + label:before,
 		input[type="radio"]:checked + label:before {
-			background: #1cb495;
-			border-color: #1cb495;
+			background: grey;
+			border-color: grey;
 			color: #ffffff;
 			content: '\f00c';
 		}
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #1cb495;
-			box-shadow: 0 0 0 2px #1cb495;
+			border-color: grey;
+			box-shadow: 0 0 0 2px grey;
 		}
 
 	input[type="checkbox"] + label:before {
@@ -947,7 +948,7 @@
 		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-		background-color: #1cb495;
+		background-color: grey;
 		border-radius: 6px;
 		border: 0;
 		color: #ffffff !important;
@@ -967,7 +968,7 @@
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: #1fcaa7;
+			background-color: darkgrey;
 		}
 
 		input[type="submit"]:active,
@@ -975,7 +976,7 @@
 		input[type="button"]:active,
 		button:active,
 		.button:active {
-			background-color: #199e83;
+			background-color: darkgrey;
 		}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,
