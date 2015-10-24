@@ -1,0 +1,1107 @@
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+
+
+body {
+  font-size: 2rem;
+  font-family: "Open Sans", sans-serif;
+  color: black;
+  background-color: white;
+     -webkit-font-smoothing: antialiased;
+    text-shadow: rgba(0,0,0,.01) 0 0 1px;
+    
+        animation: fadein 1s;
+    -moz-animation: fadein 1s; /* Firefox */
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+
+a {
+text-decoration: none;
+}
+
+nav a{
+    color: black;
+}
+
+nav a:hover{
+    
+    opacity: 0.5;
+}
+
+h1, h2 {
+    font-weight: 200;
+}
+
+/* -------------------------------- 
+
+Pattern
+
+-------------------------------- */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+
+/* -------------------------------- 
+
+About Page
+
+-------------------------------- */
+
+.aboutsection{
+    text-align: center;
+    padding-top: 3em;
+    margin-bottom: 10%;
+}
+
+img.aboutimg1{
+    width: 12%;
+    position: absolute;
+    z-index: -10;
+    background: whitesmoke;
+    border-radius: 100%;
+    padding: 1em;
+    border: double lightcoral 1px;
+    min-width: 164px;
+}
+
+img.aboutimg2{
+    width: 12%;
+    opacity: 1;
+    background: black;
+    border-radius: 100%;
+    padding: 1em;
+          -webkit-transition: opacity 0.4s 0s;
+  -moz-transition: opacity 0.4s 0s;
+  transition: opacity 0.4s 0s;
+    border: double lightcoral 1px;
+    min-width: 164px;
+}
+
+img.aboutimg1:hover{
+    opacity:1;
+    
+
+
+}
+
+img.aboutimg2:hover{
+    opacity:0;
+      -webkit-transition: opacity 0.4s 0s;
+  -moz-transition: opacity 0.4s 0s;
+  transition: opacity 0.4s 0s;
+}
+
+.aboutwrite{
+    padding-top: 1em;
+    width: 100%;
+    margin: auto;
+    line-height: 2;
+    font-family: "Montserrat";
+    font-weight: 100;
+    letter-spacing: 1px;
+    font-size: 1em;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.aboutwrite h1 {
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.aboutwrite b {
+    font-family: "Open Sans";
+    color: lightcoral;
+    font-weight: 900;
+}
+
+
+/* -------------------------------- 
+
+thanks
+
+-------------------------------- */
+
+.thanks{
+    text-align: center;
+    padding-top: 1em;
+}
+
+.thanks img{
+    
+    width: 20%;
+    min-width: 200px;
+    max-width: 450px;
+}
+
+.thanks img:hover{
+    opacity:0.5;
+}
+
+
+
+/* -------------------------------- 
+
+Nav
+
+-------------------------------- */
+nav {
+  height: 75px;
+  line-height: 45px;
+  text-align: center;
+  background: white;
+    /*background-image: url(images/gridme.png);*/
+    font-family: sans-serif;
+    /*padding-top: 30px;*/
+    position: relative;
+    min-height: 75px;
+    max-height: 75px;
+    border-bottom: solid darkgray;
+}
+
+nav h1 {
+font-family: "Montserrat", monospace;
+  font-size: 2rem;
+  color: dark;
+    float: left;
+    padding-left: 1em;
+    padding-top: .6em;
+    letter-spacing: 5px;
+}
+
+nav h2 {
+    
+    color: darkgray;
+    font-weight: 100;
+    
+}
+
+nav h2 b {
+    font-weight:900;
+}
+
+
+
+.close {
+    color: darkgray;
+    line-height: 25px;
+    position: absolute;
+    right: -1px;
+    text-align: center;
+    top: -1px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: 500;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+
+}
+
+ul.top-bar li {
+    display: inline-block;
+    padding-right: 1.2em;
+    font-family: "Montserrat", monospace;
+    font-weight: 100;
+    letter-spacing: 5px;
+    font-size: .7em;
+}
+
+ul.top-bar {
+    text-align: right;
+    /* padding-right: 1em; */
+    padding-top: .6em;
+}
+
+
+ul.contact li{
+    
+    display: inline-block;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: .8em;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+ul.contact li a{
+    color: orange;
+    font-weight: bolder;
+    
+}
+
+.modalDialog img{
+    
+    width: 60%;
+    min-width: 200px;
+    max-width: 300px;
+    border: solid;
+    border-radius: 300px;
+    border-width: thick;
+    border-color: white;
+    padding: 20px;
+    
+    
+}
+
+
+.modalDialog h2{
+    font-weight: 300;
+    font-size: 1.5em;
+}
+
+nav p{
+    
+    font-size: .7em;
+    line-height: 30px;
+    font-weight: 500;
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+
+    
+}
+
+nav img{
+    width: 18%;
+    min-width: 75px;
+    max-width: 80px;
+}
+
+
+@media only screen and (min-width: 800px) {
+  nav {
+    height: 70px;
+      min-height: 70px;
+      max-height: 70px;
+      
+  }
+
+    nav img{
+        width: 6%;
+        min-width: 75px;
+        max-width: 80px;
+    }
+}
+
+
+.pvc-goals {
+    
+    padding-bottom:1em;
+    
+}
+
+.pvc-goals li{
+    display: inline;
+padding: .5em;
+}
+
+.pvc-goals img{
+    width: 30%;
+}
+
+
+
+/* -------------------------------- 
+
+Footer
+
+-------------------------------- */
+
+footer {
+  height: 75px;
+  line-height: 45px;
+  background: #ffffff;
+    font-family: "Montserrat", monospace;
+    text-align: center;
+    color: black;
+    font-weight: 100;
+    letter-spacing: 5px;
+    position: relative;
+    min-height: 75px;
+    max-height: 75px;
+    bottom:0px;
+    
+
+    
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer a{
+    color: black;
+}
+
+footer h1 {
+  font-size: 3rem;
+  color: black;
+    float: left;
+    padding-left: 1em;
+    padding-top: .6em;
+    letter-spacing: 2px;
+}
+
+
+@media only screen and (min-width: 600px) {
+  footer {
+    height: 200px;
+  }
+  footer h1 {
+    font-size: 2rem;
+  }
+}
+
+
+footer ul li {
+    display: inline-block;
+    padding: 1em;
+    font-size: .8em;
+    padding-top: 2em;
+}
+
+
+/* -------------------------------- 
+
+Main content
+
+-------------------------------- */
+.cd-main {
+  overflow-x: hidden;
+}
+.cd-main::before {
+  /* never visible - this is used in jQuery to check the current MQ */
+  display: none;
+  content: 'mobile';
+}
+.cd-main > * {
+  -webkit-transition: -webkit-transform 0.5s 0.4s;
+  -moz-transition: -moz-transform 0.5s 0.4s;
+  transition: transform 0.5s 0.4s;
+}
+.cd-main.fold-is-open > * {
+  /* on mobile - translate .cd-main content to the right when the .cd-folding-panel is open */
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-transition: -webkit-transform 0.5s 0s;
+  -moz-transition: -moz-transform 0.5s 0s;
+  transition: transform 0.5s 0s;
+}
+@media only screen and (min-width: 600px) {
+  .cd-main.fold-is-open > * {
+    -webkit-transform: translateX(600px);
+    -moz-transform: translateX(600px);
+    -ms-transform: translateX(600px);
+    -o-transform: translateX(600px);
+    transform: translateX(600px);
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .cd-main::before {
+    /* never visible - this is used in jQuery to check the current MQ */
+    content: 'desktop';
+  }
+  .cd-main.fold-is-open > * {
+    /* reset style - on bigger devices we translate the gallery items */
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.cd-gallery::after {
+  clear: both;
+  content: "";
+  display: table;
+    
+}
+.cd-gallery::before {
+  /* this is the dark layer covering the .cd-gallery when the .cd-folding-panel is open */
+  display: block;
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /*background-color: rgba(28, 23, 38, 0.1); ---------------------------------------------------------------------------------------------------------- */ 
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
+  -moz-transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
+  transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
+}
+.fold-is-open .cd-gallery::before {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 0.5s 0s, visibility 0s 0s;
+  -moz-transition: opacity 0.5s 0s, visibility 0s 0s;
+  transition: opacity 0.5s 0s, visibility 0s 0s;
+}
+
+.cd-item {
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  /* Force Hardware Acceleration */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.5s 0.4s;
+  -moz-transition: -moz-transform 0.5s 0.4s;
+  transition: transform 0.5s 0.4s;
+}
+.cd-item > a {
+  display: table;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.cd-item > a.dark-text {
+  color: black;
+}
+.cd-item > a.dark-text b {
+  border-color: black;
+}
+.cd-item div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/*img.background {
+    position: fixed;
+    width: 100%;
+}*/
+
+
+.cd-item:nth-of-type(1) {
+  background-color: black;
+    background-image: url(images/Z-LAUNCH.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+/*.cd-item:nth-of-type(1):hover {
+    -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}*/
+
+.cd-item:nth-of-type(2) {
+  background-color: black;
+    background-image: url(images/Capacity-mock.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.cd-item:nth-of-type(3) {
+    background-color: black;
+    background-image: url(images/whisk-background.jpg);
+    background-size:cover;
+    background-position: center;
+}
+
+
+
+.cd-item:nth-of-type(4) {
+  background-color: black;
+    background-image: url(images/pvc-background.jpg);
+    background-size: cover;
+    background-position: center;
+    
+}
+
+.cd-item:nth-of-type(5) {
+    background-color: black;
+    background-image: url(images/unight-background.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.cd-item:nth-of-type(6) {
+    background-color: black;
+    background-image: url(images/cs-arcade.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+
+.cd-item p {
+  line-height: 1.2;
+  font-size: 1.4rem;
+  opacity: 0.6;
+  padding: 1em 0;
+}
+.cd-item b {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1em 1.3em;
+  border-radius: 50em;
+  border: 1px solid #ffffff;
+}
+@media only screen and (min-width: 1100px) {
+  .cd-item {
+    width: 50%;
+    float: left;
+    height: 520px;
+    -webkit-transition: -webkit-transform 0.5s 0.4s;
+    -moz-transition: -moz-transform 0.5s 0.4s;
+    transition: transform 0.5s 0.4s;
+  }
+  .cd-item h2 {
+    font-size: 3rem;
+  }
+  .cd-item p {
+    font-size: 1.6rem;
+  }
+  .cd-item h2, .cd-item p {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    -o-transform: translateY(30px);
+    transform: translateY(30px);
+    -webkit-transition: -webkit-transform 0.3s 0.1s;
+    -moz-transition: -moz-transform 0.3s 0.1s;
+    transition: transform 0.3s 0.1s;
+    /*opacity: 0;  ------------------------------------------------------------------------>THIS ONE */
+  }
+  .cd-item b {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    -moz-transform: translateY(20px);
+    -ms-transform: translateY(20px);
+    -o-transform: translateY(20px);
+    transform: translateY(20px);
+    -webkit-transition: opacity 0.3s 0s, -webkit-transform 0.3s 0s;
+    -moz-transition: opacity 0.3s 0s, -moz-transform 0.3s 0s;
+    transition: opacity 0.3s 0s, transform 0.3s 0s;
+  }
+  .no-touch .cd-item a:hover h2, .no-touch .cd-item a:hover p {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: -webkit-transform 0.3s 0s;
+    -moz-transition: -moz-transform 0.3s 0s;
+    transition: transform 0.3s 0s;
+  }
+  .no-touch .cd-item a:hover b {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: opacity 0.3s 0.1s, -webkit-transform 0.3s 0.1s;
+    -moz-transition: opacity 0.3s 0.1s, -moz-transform 0.3s 0.1s;
+    transition: opacity 0.3s 0.1s, transform 0.3s 0.1s;
+  }
+  .fold-is-open .cd-item {
+    -webkit-transition: -webkit-transform 0.5s 0s;
+    -moz-transition: -moz-transform 0.5s 0s;
+    transition: transform 0.5s 0s;
+    -webkit-transform: translateX(-400px);
+    -moz-transform: translateX(-400px);
+    -ms-transform: translateX(-400px);
+    -o-transform: translateX(-400px);
+    transform: translateX(-400px);
+  }
+  .fold-is-open .cd-item:nth-of-type(2n) {
+    -webkit-transform: translateX(400px);
+    -moz-transform: translateX(400px);
+    -ms-transform: translateX(400px);
+    -o-transform: translateX(400px);
+    transform: translateX(400px);
+  }
+}
+
+/* -------------------------------- 
+
+folding panel
+
+-------------------------------- */
+.cd-folding-panel {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  -webkit-transition: visibility 0s 0.9s;
+  -moz-transition: visibility 0s 0.9s;
+  transition: visibility 0s 0.9s;
+}
+.cd-folding-panel .fold-left,
+.cd-folding-panel .fold-right {
+  /* the :after elements of .fold-left and .fold-right are the 2 fold sides */
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  /* enable a 3D-space for children elements */
+  -webkit-perspective: 2000px;
+  -moz-perspective: 2000px;
+  perspective: 2000px;
+}
+.cd-folding-panel .fold-left::after,
+.cd-folding-panel .fold-right::after {
+  /* 2 fold sides */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* Force Hardware Acceleration */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.5s 0.4s, background-color 0.5s 0.4s;
+  -moz-transition: -moz-transform 0.5s 0.4s, background-color 0.5s 0.4s;
+  transition: transform 0.5s 0.4s, background-color 0.5s 0.4s;
+}
+.cd-folding-panel .fold-right {
+  -webkit-perspective-origin: 0% 50%;
+  -moz-perspective-origin: 0% 50%;
+  perspective-origin: 0% 50%;
+}
+.cd-folding-panel .fold-right::after {
+  -webkit-transform-origin: right center;
+  -moz-transform-origin: right center;
+  -ms-transform-origin: right center;
+  -o-transform-origin: right center;
+  transform-origin: right center;
+  -webkit-transform: translateX(-100%) rotateY(-90deg);
+  -moz-transform: translateX(-100%) rotateY(-90deg);
+  -ms-transform: translateX(-100%) rotateY(-90deg);
+  -o-transform: translateX(-100%) rotateY(-90deg);
+  transform: translateX(-100%) rotateY(-90deg);
+  background-color: white;
+}
+.cd-folding-panel .fold-left {
+  /* on mobile only the right fold side is visible */
+  display: none;
+}
+.cd-folding-panel .fold-left::after {
+  background-color: white;
+}
+.cd-folding-panel .cd-close {
+  /* 'X' close icon */
+  position: absolute;
+  z-index: 1;
+  display: inline-block;
+  top: 10px;
+  right: 10px;
+  height: 44px;
+  width: 44px;
+  /* image replacement */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s 0s;
+  -moz-transition: opacity 0.2s 0s;
+  transition: opacity 0.2s 0s;
+}
+.cd-folding-panel .cd-close::after, .cd-folding-panel .cd-close::before {
+  /* lines of 'X' icon */
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 32px;
+  left: 50%;
+  top: 50%;
+  background-color: black;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+.cd-folding-panel .cd-close::after {
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -o-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+.cd-folding-panel .cd-close::before {
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -o-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+}
+.cd-folding-panel.is-open {
+  visibility: visible;
+  -webkit-transition: visibility 0s 0s;
+  -moz-transition: visibility 0s 0s;
+  transition: visibility 0s 0s;
+}
+.cd-folding-panel.is-open .fold-right::after,
+.cd-folding-panel.is-open .fold-left::after {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: -webkit-transform 0.5s 0s, background-color 0.5s 0s;
+  -moz-transition: -moz-transform 0.5s 0s, background-color 0.5s 0s;
+  transition: transform 0.5s 0s, background-color 0.5s 0s;
+}
+.cd-folding-panel.is-open .fold-right::after {
+  background-color: white;
+}
+.cd-folding-panel.is-open .cd-close {
+  opacity: 1;
+  -webkit-transition: opacity 0.2s 0.5s;
+  -moz-transition: opacity 0.2s 0.5s;
+  transition: opacity 0.2s 0.5s;
+}
+@media only screen and (min-width: 600px) {
+  .cd-folding-panel {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .cd-folding-panel {
+    left: 50%;
+    right: auto;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 70%;
+  }
+  .cd-folding-panel .fold-left,
+  .cd-folding-panel .fold-right {
+    width: 50%;
+    float: left;
+    height: 100%;
+  }
+  .cd-folding-panel .fold-right {
+    /* change perspective-origin so that the 2 fold sides have the same vanishing point */
+    -webkit-perspective-origin: 0% 50%;
+    -moz-perspective-origin: 0% 50%;
+    perspective-origin: 0% 50%;
+  }
+  .cd-folding-panel .fold-right::after {
+    -webkit-transform-origin: right center;
+    -moz-transform-origin: right center;
+    -ms-transform-origin: right center;
+    -o-transform-origin: right center;
+    transform-origin: right center;
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+    -moz-transform: translateX(-100%) rotateY(-90deg);
+    -ms-transform: translateX(-100%) rotateY(-90deg);
+    -o-transform: translateX(-100%) rotateY(-90deg);
+    transform: translateX(-100%) rotateY(-90deg);
+  }
+  .cd-folding-panel .fold-left {
+    display: block;
+    /* change perspective-origin so that the 2 fold sides have the same vanishing point */
+    -webkit-perspective-origin: 100% 50%;
+    -moz-perspective-origin: 100% 50%;
+    perspective-origin: 100% 50%;
+  }
+  .cd-folding-panel .fold-left::after {
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -ms-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
+    -webkit-transform: translateX(100%) rotateY(90deg);
+    -moz-transform: translateX(100%) rotateY(90deg);
+    -ms-transform: translateX(100%) rotateY(90deg);
+    -o-transform: translateX(100%) rotateY(90deg);
+    transform: translateX(100%) rotateY(90deg);
+  }
+}
+
+.title{
+    padding-bottom: 1.5em;
+    width: auto;
+      -webkit-transition: -webkit-transform 0.2s 0.2s, opacity 0.2s 0.2s;
+  -moz-transition: -moz-transform 0.2s 0.2s, opacity 0.2s 0.2s;
+  transition: transform 0.2s 0.2s, opacity 0.2s 0.2s;
+}
+
+
+
+.cd-fold-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 4em 2em;
+  visibility: hidden;
+  -webkit-transition: visibility 0s 0.4s;
+  -moz-transition: visibility 0s 0.4s;
+  transition: visibility 0s 0.4s;
+
+}
+
+ul.skills{
+    line-height: 2em;
+    font-size: 1.2em;
+}
+
+.portcontent{
+    width: 100%;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+p.center{
+    text-align: center;
+    color: black;
+}
+
+p a{
+    font-size: 1.5em;
+    color: black;
+    text-decoration: underline;
+    font-weight: 300
+
+}
+
+p a:hover{
+    opacity:0.7;
+}
+
+.small-img{
+/* margin: auto; */
+margin-left: 15%; 
+width: 70%;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+.demo-video{
+    margin-left: 30%;
+}
+
+.head-image{
+    width: 100%;
+margin: auto;
+padding-bottom: 1.5em;
+    
+      -webkit-transition: visibility 0s 0.4s;
+  -moz-transition: visibility 0s 0.4s;
+  transition: visibility 0s 0.4s;
+    
+    
+          -webkit-transition: -webkit-transform 0.2s 0.2s, opacity 0.2s 0.2s;
+  -moz-transition: -moz-transform 0.2s 0.2s, opacity 0.2s 0.2s;
+  transition: transform 0.2s 0.2s, opacity 0.2s 0.2s;
+    
+    
+}
+
+.cd-fold-content > * {
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+  -moz-transform: translateY(20px);
+  -ms-transform: translateY(20px);
+  -o-transform: translateY(20px);
+  transform: translateY(20px);
+}
+.cd-fold-content h2 {
+  -webkit-transition: -webkit-transform 0.2s 0.2s, opacity 0.2s 0.2s;
+  -moz-transition: -moz-transform 0.2s 0.2s, opacity 0.2s 0.2s;
+  transition: transform 0.2s 0.2s, opacity 0.2s 0.2s;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.3em !important;
+    font-weight:300;
+    padding-top: 1em;
+    padding-bottom: 1.5em;
+}
+
+.cd-fold-content h3 {
+    padding-top: 1em;
+}
+
+.cd-fold-content em {
+    line-height: 1.6;
+  display: inline-block;
+    font-family: "Open Sans", sans-serif;
+  margin: 1em 0;
+    font-weight: 300;
+  font-size: 1.8em;
+  color: black;
+    text-rendering: geometricPrecision;
+    border-left: solid;
+    padding-left: 1em;
+  -webkit-transition: -webkit-transform 0.2s 0.1s, opacity 0.2s 0.1s;
+  -moz-transition: -moz-transform 0.2s 0.1s, opacity 0.2s 0.1s;
+  transition: transform 0.2s 0.1s, opacity 0.2s 0.1s;
+        
+}
+
+.cd-fold-content b{
+    font-weight: bold;
+}
+
+.cd-fold-content p {
+  margin-bottom: 1em;
+  font-size: .7em;
+    
+  -webkit-transition: -webkit-transform 0.2s 0s, opacity 0.2s 0s;
+  -moz-transition: -moz-transform 0.2s 0s, opacity 0.2s 0s;
+  transition: transform 0.2s 0s, opacity 0.2s 0s;
+    
+    
+    line-height: 1.6;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    letter-spacing: 1.8px;
+    color: black;
+    
+}
+
+.is-open .cd-fold-content {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  visibility: visible;
+  -webkit-transition: visibility 0s 0.5s;
+  -moz-transition: visibility 0s 0.5s;
+  transition: visibility 0s 0.5s;
+}
+.is-open .cd-fold-content > * {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+.is-open .cd-fold-content h2 {
+  -webkit-transition: -webkit-transform 0.2s 0.5s, opacity 0.2s 0.5s;
+  -moz-transition: -moz-transform 0.2s 0.5s, opacity 0.2s 0.5s;
+  transition: transform 0.2s 0.5s, opacity 0.2s 0.5s;
+}
+.is-open .cd-fold-content em {
+  -webkit-transition: -webkit-transform 0.2s 0.6s, opacity 0.2s 0.6s;
+  -moz-transition: -moz-transform 0.2s 0.6s, opacity 0.2s 0.6s;
+  transition: transform 0.2s 0.6s, opacity 0.2s 0.6s;
+}
+.is-open .cd-fold-content p {
+  -webkit-transition: -webkit-transform 0.2s 0.7s, opacity 0.2s 0.7s;
+  -moz-transition: -moz-transform 0.2s 0.7s, opacity 0.2s 0.7s;
+  transition: transform 0.2s 0.7s, opacity 0.2s 0.7s;
+}
+@media only screen and (min-width: 600px) {
+  .cd-fold-content h2 {
+    font-size: 3.2rem;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .cd-fold-content {
+    padding: 4em;
+  }
+  .cd-fold-content > * {
+    -webkit-transform: translateY(40px);
+    -moz-transform: translateY(40px);
+    -ms-transform: translateY(40px);
+    -o-transform: translateY(40px);
+    transform: translateY(40px);
+  }
+
+}
+
+
+
+keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+
+/* -------------------------------- 
+
+Javascript disabled
+
+-------------------------------- */
+.no-js .cd-fold-content.single-page {
+  position: static;
+  visibility: visible;
+  height: auto;
+  background-color: white;
+}
+.no-js .cd-fold-content.single-page > * {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
