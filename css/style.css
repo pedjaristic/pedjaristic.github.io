@@ -3,6 +3,14 @@
 Primary style
 
 -------------------------------- */
+
+
+@font-face {
+    font-family:Montserrat;
+    src: url(Fonts/Montserrat/Montserrat-Light.ttf);
+    font-weight: normal;
+}
+
 *, *::after, *::before {
   box-sizing: border-box;
 }
@@ -109,8 +117,8 @@ img.aboutimg2:hover{
     width: 100%;
     margin: auto;
     line-height: 2;
-    font-family: "Montserrat";
-    font-weight: 100;
+    font-family: Montserrat;
+    font-weight: normal;
     letter-spacing: 1px;
     font-size: 1em;
     padding-left: 20%;
@@ -173,7 +181,7 @@ nav {
 }
 
 nav h1 {
-font-family: "Montserrat", monospace;
+font-family: Montserrat, monospace;
   font-size: 2rem;
   color: dark;
     float: left;
@@ -214,8 +222,8 @@ nav h2 b {
 ul.top-bar li {
     display: inline-block;
     padding-right: 1.2em;
-    font-family: "Montserrat", monospace;
-    font-weight: 100;
+    font-family: Montserrat, monospace;
+    font-weight: normal;
     letter-spacing: 5px;
     font-size: .7em;
 }
@@ -324,10 +332,10 @@ footer {
   height: 75px;
   line-height: 45px;
   background: #ffffff;
-    font-family: "Montserrat", monospace;
+    font-family: Montserrat, monospace;
     text-align: center;
     color: black;
-    font-weight: 100;
+    font-weight: normal;
     letter-spacing: 5px;
     position: relative;
     min-height: 75px;
