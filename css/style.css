@@ -1092,7 +1092,65 @@ keyframes fadein {
 }
 
 
+/* -------------------------------- 
 
+Amazon
+
+-------------------------------- */
+
+
+.amazon{
+    text-align: center;
+    padding-top: 3em;
+    margin-bottom: 10%;
+}
+.amazonwrite{
+    padding-top: 1em;
+    width: 100%;
+    margin: auto;
+    line-height: 2;
+    font-family: Montserrat;
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-size: 1em;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.amazonwrite h1 {
+    font-weight: 700;
+    font-size: 2em;
+    color: darkgray;
+}
+
+.amazonwrite b {
+    font-family: "Open Sans";
+    color: orange;
+    font-weight: 900;
+}
+
+img.cart{
+    width: 25%;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+a.show-button {
+    background-color: dodgerblue;
+    padding: .5em;
+    border-radius: 10px;
+    color: white;
+    font-size: 2em;
+}
+
+.amazonwrite p {
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+a.show-button:hover {
+  opacity: 0.5;
+}
 
 /* -------------------------------- 
 
