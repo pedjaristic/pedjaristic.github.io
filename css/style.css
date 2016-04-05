@@ -5,6 +5,8 @@ Primary style
 -------------------------------- */
 
 
+
+
 @font-face {
     font-family:Montserrat;
     src: url(Fonts/Montserrat/Montserrat-Light.ttf);
@@ -17,6 +19,8 @@ Primary style
 
 html {
   font-size: 62.5%;
+    	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
 }
 
 
@@ -183,7 +187,7 @@ nav {
 nav h1 {
 font-family: Montserrat, monospace;
   font-size: 2rem;
-  color: dark;
+  color: black;
     float: left;
     padding-left: 1em;
     padding-top: .6em;
@@ -1001,7 +1005,7 @@ padding-bottom: 1.5em;
     line-height: 1.6;
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
-    letter-spacing: 1.8px;
+    letter-spacing: 1.1px;
     color: black;
     
 }
