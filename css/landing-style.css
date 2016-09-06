@@ -4,25 +4,9 @@ Landing Page Style
 
 -------------------------------- */
 
-@font-face {
-    font-family:Montserrat;
-    src: url(Fonts/Montserrat/Montserrat-Regular.ttf);
-    font-weight: normal;
-}
+@import 'https://fonts.googleapis.com/css?family=Montserrat:400,700';
 
-
-@font-face {
-    font-family:Montserrat-bold;
-    src: url(Fonts/Montserrat/Montserrat-Bold.ttf);
-    font-weight: bold;
-}
-
-
-@font-face {
-    font-family:Montserrat-light;
-    src: url(Fonts/Montserrat/Montserrat-Light.ttf);
-    font-weight: lighter;
-}
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400';
 
 *, *::after, *::before {
   box-sizing: border-box;
@@ -33,7 +17,6 @@ html {
     text-rendering: optimizeLegibility !important;
 	-webkit-font-smoothing: antialiased !important;
 }
-
 
 
 body {
@@ -70,8 +53,8 @@ body {
 }
 
 .landing-page h2{
-    font-family: "Montserrat-Regular";
-    font-weight: normal;
+    font-family: 'Montserrat';
+    font-weight: 400;
     font-size: 2em;
     color: #fff;
     padding-top: 1em;
@@ -88,8 +71,8 @@ body {
 .landing-page p{
     color: #fff;
     letter-spacing: 1px;
-    font-weight: lighter;
-    font-family: "Montserrat-Light";
+    font-weight: 300;
+    font-family: 'Open Sans';
     padding-bottom: 3em;
     line-height: 1.5em;
     font-size: 1.1em;
@@ -103,8 +86,8 @@ text-decoration: none;
 
 ul.landing-links{
     display: inline;
-    font-family: "Montserrat-Regular";
-    font-weight: normal;
+    font-family: 'Montserrat';
+    font-weight: 400;
 }
 
 ul.landing-links li{
@@ -124,6 +107,7 @@ ul.landing-links li a:hover{
 
 #mask-img{
 
+    position: absolute;
     
     animation-name: p-gradient;
     animation-duration: 40s;
@@ -154,7 +138,6 @@ ul.landing-links li a:hover{
     
     
 }
-
 
 @-webkit-keyframes p-gradient {
     0% {x: -10px; y:0px;}
@@ -194,4 +177,4 @@ ul.landing-links li a:hover{
     50% {x: -375px; y:-190px}
     75% {x: -10px; y:-190px;}
     100% {x: -10px; y:0px;}
-} 
+}
