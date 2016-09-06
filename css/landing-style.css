@@ -4,9 +4,6 @@ Landing Page Style
 
 -------------------------------- */
 
-
-
-
 @font-face {
     font-family:Montserrat;
     src: url(Fonts/Montserrat/Montserrat-Regular.ttf);
@@ -126,15 +123,28 @@ ul.landing-links li a:hover{
 
 
 #mask-img{
-    background-repeat: repeat-x;
+
     
-    -webkit-animation-name: example; /* Chrome, Safari, Opera */
-    -webkit-animation-duration: 40s; /* Chrome, Safari, Opera */
-    -webkit-animation-iteration-count: infinite; 
     animation-name: p-gradient;
     animation-duration: 40s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+    
+    -webkit-animation-name: p-gradient;
+    -webkit-animation-duration: 40s; 
+    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-direction: alternate; 
+    
+    -moz-animation-name: p-gradient;
+    -moz-animation-duration: 40s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    
+    -ms-animation-name: p-gradient;
+    -ms-animation-duration: 40s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-direction: alternate;
+
     
   transition: all 1s ease-in-out;
   -webkit-transition: all 1s ease-in-out;
@@ -154,6 +164,29 @@ ul.landing-links li a:hover{
     100% {x: -10px; y:0px;}
 } 
 
+@-moz-keyframes p-gradient {
+    0% {x: -10px; y:0px;}
+    25% {x: -375px; y:0px;}
+    50% {x: -375px; y:-190px}
+    75% {x: -10px; y:-190px;}
+    100% {x: -10px; y:0px;}
+} 
+
+@-o-keyframes p-gradient {
+    0% {x: -10px; y:0px;}
+    25% {x: -375px; y:0px;}
+    50% {x: -375px; y:-190px}
+    75% {x: -10px; y:-190px;}
+    100% {x: -10px; y:0px;}
+} 
+
+@-ms-keyframes p-gradient {
+    0% {x: -10px; y:0px;}
+    25% {x: -375px; y:0px;}
+    50% {x: -375px; y:-190px}
+    75% {x: -10px; y:-190px;}
+    100% {x: -10px; y:0px;}
+} 
 
 @keyframes p-gradient {
     0% {x: -10px; y:0px;}
