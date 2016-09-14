@@ -16,6 +16,8 @@ html {
   font-size: 62.5%;
     text-rendering: optimizeLegibility !important;
 	-webkit-font-smoothing: antialiased !important;
+    
+    background: #222222;
 }
 
 
@@ -29,14 +31,12 @@ body {
     -o-animation: fadein 3s; /* Opera */
     
     background: #222222;
-    
-    border-top: solid #333333 70px;
 
     
 }
 
 .landing-page{
-    height: 50%;
+    height: 60%;
     margin: auto;
     position: absolute;
     top: 0;
@@ -45,6 +45,22 @@ body {
     right: 0;
     
 }
+
+@media (min-width:10px) and (max-width:600px) {
+    
+    
+    .landing-page{
+margin-top: 4em;
+    
+}
+    
+    .landing-page li {
+        padding-bottom: 1em;
+    }
+    
+    
+}
+
 
 .container {
     text-align: center;
@@ -65,7 +81,7 @@ body {
 .landing-page p b{
     font-weight: bold;
     color: #fff;
-    color: cornflowerblue;
+    color: orangered;
 }
 
 .landing-page p{
@@ -106,8 +122,6 @@ ul.landing-links li a:hover{
 
 
 #mask-img{
-
-    position: absolute;
     
     animation-name: p-gradient;
     animation-duration: 40s;
@@ -117,7 +131,7 @@ ul.landing-links li a:hover{
     -webkit-animation-name: p-gradient;
     -webkit-animation-duration: 40s; 
     -webkit-animation-iteration-count: infinite; 
-    -webkit-animation-direction: alternate; 
+    -webkit-animation-direction: alternate;
     
     -moz-animation-name: p-gradient;
     -moz-animation-duration: 40s;
@@ -146,6 +160,15 @@ ul.landing-links li a:hover{
     75% {x: -10px; y:-190px;}
     100% {x: -10px; y:0px;}
 } 
+
+
+/*@-webkit-keyframes p-gradient {
+    0% {transform: translate(-2px);}
+    25% {transform: translate(-10px);}
+    50% {transform: translate(-10px,-2px);}
+    75% {transform: translate(-5px,-2px);}
+    100% {transform: translate(-2px);} */
+    
 
 @-moz-keyframes p-gradient {
     0% {x: -10px; y:0px;}
