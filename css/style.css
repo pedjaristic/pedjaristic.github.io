@@ -10,8 +10,30 @@ Primary style
 @font-face {
     font-family:Montserrat;
     src: url(Fonts/Montserrat/Montserrat-Light.ttf);
-    font-weight: normal;
+    font-weight: 200;
 }
+
+
+@font-face {
+    font-family:Montserrat;
+    src: url(Fonts/Montserrat/Montserrat-Bold.ttf);
+    font-weight: 900;
+}
+
+
+@font-face {
+    font-family:Montserrat;
+    src: url(Fonts/Montserrat/Montserrat-Thin.ttf);
+    font-weight: 100;
+}
+
+
+@font-face {
+    font-family:Montserrat;
+    src: url(Fonts/Montserrat/Montserrat-Regular.ttf);
+    font-weight: 300;
+}
+
 
 *, *::after, *::before {
   box-sizing: border-box;
@@ -33,10 +55,10 @@ body {
      -webkit-font-smoothing: antialiased;
     text-shadow: rgba(0,0,0,.01) 0 0 1px;
     
-        animation: fadein 1s;
-    -moz-animation: fadein 1s; /* Firefox */
-    -webkit-animation: fadein 1s; /* Safari and Chrome */
-    -o-animation: fadein 2s; /* Opera */
+        animation: fadein 1.5s;
+    -moz-animation: fadein 1.5s; /* Firefox */
+    -webkit-animation: fadein 1.5s; /* Safari and Chrome */
+    -o-animation: fadein 1.5s; /* Opera */
 }
 
 a {
@@ -44,7 +66,7 @@ text-decoration: none;
 }
 
 nav a{
-    color: black;
+    color: #555555;
 }
 
 nav a:hover{
@@ -181,7 +203,7 @@ nav {
     position: relative;
     min-height: 75px;
     max-height: 75px;
-    border-bottom: solid darkgray;
+    /*border-bottom: solid darkgray;*/
 }
 
 nav h1 {
@@ -189,7 +211,7 @@ font-family: Montserrat, monospace;
   font-size: 2rem;
   color: black;
     float: left;
-    padding-left: 1em;
+    padding-left: 1.5em;
     padding-top: .6em;
     letter-spacing: 5px;
 }
@@ -225,11 +247,12 @@ nav h2 b {
 
 ul.top-bar li {
     display: inline-block;
-    padding-right: 1.2em;
+    padding-right: 1.5em;
     font-family: Montserrat, monospace;
     font-weight: normal;
     letter-spacing: 5px;
-    font-size: .7em;
+    font-size: .5em;
+    color: #777777;
 }
 
 ul.top-bar {
@@ -336,26 +359,27 @@ footer {
   height: 75px;
   line-height: 45px;
   background: #ffffff;
-    font-family: Montserrat, monospace;
+    font-family: Montserrat;
     text-align: center;
-    color: black;
-    font-weight: normal;
+    font-weight: 200;
     letter-spacing: 5px;
     position: relative;
     min-height: 75px;
     max-height: 75px;
     bottom:0px;
+    text-transform: uppercase;
+    font-size: .7em;
     
 
     
 }
 
 footer a:hover {
-    text-decoration: underline;
+    color: black;
 }
 
 footer a{
-    color: black;
+    color: #777777;
 }
 
 footer h1 {
@@ -514,7 +538,7 @@ Main content
 
 .cd-item:nth-of-type(1) {
   background-color: black;
-    background-image: url(images/Z-LAUNCH.jpg);
+    background-image: url(images/zlauncher-cover.png);
     background-size: cover;
     background-position: center;
 }
@@ -529,13 +553,13 @@ Main content
 
 .cd-item:nth-of-type(2) {
   background-color: black;
-    background-image: url(images/Capacity-mock.jpg);
+    background-image: url(images/capacity-cover.png);
     background-size: cover;
     background-position: center;
 }
 .cd-item:nth-of-type(3) {
     background-color: black;
-    background-image: url(images/whisk-background.jpg);
+    background-image: url(images/hylo-cover.png);
     background-size:cover;
     background-position: center;
 }
@@ -544,7 +568,7 @@ Main content
 
 .cd-item:nth-of-type(4) {
   background-color: black;
-    background-image: url(images/pvc-background.jpg);
+    background-image: url(images/pvc-cover.png);
     background-size: cover;
     background-position: center;
     
@@ -1098,9 +1122,117 @@ keyframes fadein {
 
 /* -------------------------------- 
 
+TOP SECTION
+
+-------------------------------- */
+
+
+.top-section{
+    height: 20em;
+    max-height: 600px;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 50%;
+    margin: auto;
+    max-width: 1000px;
+    min-width: 300px;
+    
+}
+
+
+.top-section h2 {
+    padding-bottom: .5em;
+    font-family: Montserrat;
+    font-weight: 900;
+    letter-spacing: .1em;
+    font-size: 2em;
+    color: black;
+
+}
+
+
+.top-content {
+
+    
+}
+
+
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+}
+
+
+.dots li {
+  background: black;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  float: left;
+  margin: 0 2px;
+  -webkit-animation: float 1.8s infinite;
+          animation: float 1.8s infinite;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+.dots li:nth-child(2) {
+  -webkit-animation-delay: .2s;
+          animation-delay: .2s;
+}
+.dots li:nth-child(3) {
+  -webkit-animation-delay: .4s;
+          animation-delay: .4s;
+}
+
+@-webkit-keyframes float {
+  0%, 100% {
+    -webkit-transform: translateY(4px);
+            transform: translateY(4px);
+  }
+  50% {
+    -webkit-transform: translateY(-4px);
+            transform: translateY(-4px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    -webkit-transform: translateY(4px);
+            transform: translateY(4px);
+  }
+  50% {
+    -webkit-transform: translateY(-4px);
+            transform: translateY(-4px);
+  }
+}
+
+
+.top-section p {
+    
+    
+    /*width: 60%;*/
+    margin: auto;
+    line-height: 1.6em;
+    font-family: montserrat;
+    font-weight: 200;
+    color: black;
+    display: inline-flex;
+    padding-top: .7em;
+    font-size: 1.2em;
+    letter-spacing: .1em;
+}
+
+
+
+/* -------------------------------- 
+
 Amazon
 
 -------------------------------- */
+
+
 
 
 .amazon{
