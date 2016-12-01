@@ -213,7 +213,7 @@ font-family: Montserrat, monospace;
     float: left;
     padding-left: 1.5em;
     padding-top: .6em;
-    letter-spacing: 5px;
+    letter-spacing: .3em;
 }
 
 nav h2 {
@@ -257,7 +257,7 @@ ul.top-bar li {
 
 ul.top-bar {
     text-align: right;
-    /* padding-right: 1em; */
+    padding-right: 1em;
     padding-top: .6em;
 }
 
@@ -1146,9 +1146,9 @@ TOP SECTION
     padding-bottom: .5em;
     font-family: Montserrat;
     font-weight: 900;
-    letter-spacing: .1em;
+    letter-spacing: .3em;
     font-size: 2em;
-    color: black;
+    color: #555555;
 
 }
 
@@ -1214,13 +1214,13 @@ TOP SECTION
     
     /*width: 60%;*/
     margin: auto;
-    line-height: 1.6em;
+    line-height: 1.8em;
     font-family: montserrat;
-    font-weight: 200;
+    font-weight: 100;
     color: black;
     display: inline-flex;
     padding-top: .7em;
-    font-size: 1.2em;
+    font-size: 1em;
     letter-spacing: .1em;
 }
 
