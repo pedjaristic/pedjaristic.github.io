@@ -4,7 +4,23 @@ Primary style
 
 -------------------------------- */
 
+::-webkit-scrollbar { width: 0 !important }
 
+::-webkit-scrollbar
+{
+  width: 8px; 
+  height: 2px;
+}
+
+::-webkit-scrollbar-track
+{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: rgba(0, 0, 0, 1);
+}
 
 
 @font-face {
@@ -36,6 +52,8 @@ Primary style
 
 
 *, *::after, *::before {
+    -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -65,13 +83,11 @@ a {
 text-decoration: none;
 }
 
-nav a{
-    color: #555555;
-}
 
 nav a:hover{
     
-    opacity: 0.5;
+    color: black;
+
 }
 
 h1, h2 {
@@ -107,7 +123,7 @@ img.aboutimg1{
     background: whitesmoke;
     border-radius: 100%;
     padding: 1em;
-    border: double lightcoral 1px;
+    border: double #777777 3px;
     min-width: 164px;
 }
 
@@ -120,14 +136,13 @@ img.aboutimg2{
           -webkit-transition: opacity 0.4s 0s;
   -moz-transition: opacity 0.4s 0s;
   transition: opacity 0.4s 0s;
-    border: double lightcoral 1px;
+    border: double #777777 3px;
     min-width: 164px;
 }
 
 img.aboutimg1:hover{
     opacity:1;
     
-
 
 }
 
@@ -143,8 +158,9 @@ img.aboutimg2:hover{
     width: 100%;
     margin: auto;
     line-height: 2;
+    color: #222222;
     font-family: Montserrat;
-    font-weight: normal;
+    font-weight: 200;
     letter-spacing: 1px;
     font-size: 1em;
     padding-left: 20%;
@@ -154,12 +170,18 @@ img.aboutimg2:hover{
 .aboutwrite h1 {
     font-weight: 700;
     font-size: 2em;
+    color: #333333
 }
 
 .aboutwrite b {
-    font-family: "Open Sans";
-    color: lightcoral;
+    font-family: "Montserrat";
+    color: #1c1c1c;
     font-weight: 900;
+}
+
+.aboutwrite i{
+    color: darkorange;
+    font-weight: 800;
 }
 
 
@@ -197,6 +219,9 @@ nav {
   line-height: 45px;
   text-align: center;
   background: white;
+    padding-top: .7em;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
     /*background-image: url(images/gridme.png);*/
     font-family: sans-serif;
     /*padding-top: 30px;*/
@@ -206,13 +231,11 @@ nav {
     /*border-bottom: solid darkgray;*/
 }
 
-nav h1 {
+h1 a {
 font-family: Montserrat, monospace;
-  font-size: 2rem;
-  color: black;
+  font-size: .9em;
+  color: #555555;
     float: left;
-    padding-left: 1.5em;
-    padding-top: .6em;
     letter-spacing: .3em;
 }
 
@@ -247,18 +270,26 @@ nav h2 b {
 
 ul.top-bar li {
     display: inline-block;
-    padding-right: 1.5em;
+    padding-left: 3em;
     font-family: Montserrat, monospace;
-    font-weight: normal;
-    letter-spacing: 5px;
+    font-weight: 200;
+    letter-spacing: 4px;
     font-size: .5em;
-    color: #777777;
+    /*color: #777777;*/
+}
+
+ul.top-bar a{
+    color: #555555;
+}
+
+ul.top-bar a:hover{
+    color: black;
 }
 
 ul.top-bar {
     text-align: right;
-    padding-right: 1em;
-    padding-top: .6em;
+    float:right;
+    
 }
 
 
@@ -323,6 +354,7 @@ nav img{
       max-height: 70px;
       
   }
+    
 
     nav img{
         width: 6%;
@@ -479,7 +511,7 @@ Main content
   left: 0;
   height: 100%;
   width: 100%;
-  /*background-color: rgba(28, 23, 38, 0.1); ---------------------------------------------------------------------------------------------------------- */ 
+  background-color: rgba(0, 0, 0, 0.4); 
   opacity: 0;
   visibility: hidden;
   -webkit-transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
@@ -537,10 +569,12 @@ Main content
 
 
 .cd-item:nth-of-type(1) {
-  background-color: black;
+  background-color: #222222;
     background-image: url(images/zlauncher-cover.png);
-    background-size: cover;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
+
 }
 
 /*.cd-item:nth-of-type(1):hover {
@@ -552,25 +586,28 @@ Main content
 }*/
 
 .cd-item:nth-of-type(2) {
-  background-color: black;
+  background-color: #222222;
     background-image: url(images/capacity-cover.png);
-    background-size: cover;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
 }
 .cd-item:nth-of-type(3) {
-    background-color: black;
+    background-color: #f8f8f8;
     background-image: url(images/hylo-cover.png);
-    background-size:cover;
+    background-size:contain;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 
 
 .cd-item:nth-of-type(4) {
-  background-color: black;
+  background-color: #f8f8f8;
     background-image: url(images/pvc-cover.png);
-    background-size: cover;
+    background-size: contain;
     background-position: center;
+    background-repeat: no-repeat;
     
 }
 
@@ -845,7 +882,7 @@ folding panel
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
-    width: 70%;
+    width: 75%;
   }
   .cd-folding-panel .fold-left,
   .cd-folding-panel .fold-right {
@@ -945,15 +982,16 @@ p a:hover{
 }
 
 .small-img{
-/* margin: auto; */
-margin-left: 15%; 
-width: 70%;
+margin: auto;
+width: 100%;
     padding-bottom: 1em;
     padding-top: 1em;
 }
 
-.demo-video{
-    margin-left: 30%;
+video.demo-video{
+    display: flex;
+    width: 60%;
+    margin:auto;
 }
 
 .head-image{
@@ -1146,23 +1184,32 @@ TOP SECTION
     padding-bottom: .5em;
     font-family: Montserrat;
     font-weight: 900;
-    letter-spacing: .3em;
+    letter-spacing: .2em;
     font-size: 2em;
     color: #555555;
 
 }
 
 
-.top-content {
 
+
+.dots {
+    position: absolute;
+    z-index: 99999;
+}
+
+
+/*.dots:hover li {
     
-}
+    margin-left: 1em;
+    position: absolute;
+    animation: none;
+    width: 20px;
+    height: 20px;
+    
 
+}*/
 
-.inactiveLink {
-   pointer-events: none;
-   cursor: default;
-}
 
 
 .dots li {
@@ -1172,6 +1219,7 @@ TOP SECTION
   height: 12px;
   float: left;
   margin: 0 2px;
+    margin-right: .4em;
   -webkit-animation: float 1.8s infinite;
           animation: float 1.8s infinite;
   -webkit-transform-origin: center;
@@ -1219,74 +1267,74 @@ TOP SECTION
     font-weight: 100;
     color: black;
     display: inline-flex;
-    padding-top: .7em;
+    padding-top: 1em;
     font-size: 1em;
     letter-spacing: .1em;
 }
 
 
-
 /* -------------------------------- 
 
-Amazon
+ABOUT
 
 -------------------------------- */
 
 
-
-
-.amazon{
-    text-align: center;
-    padding-top: 3em;
-    margin-bottom: 10%;
-}
-.amazonwrite{
-    padding-top: 1em;
+.about {
+    position: fixed;
+    background: #1a1a1a;
+    z-index: -999;
     width: 100%;
-    margin: auto;
-    line-height: 2;
-    font-family: Montserrat;
-    font-weight: normal;
-    letter-spacing: 1px;
-    font-size: 1em;
-    padding-left: 20%;
-    padding-right: 20%;
+    opacity: 0;
+    transition: opacity .5s;
+    color: white
+}
+.about a {
+    visibility: hidden;
+}
+.about .about-wrap {
+    position: relative;
+    height: 100%;
+    text-align: left;
 }
 
-.amazonwrite h1 {
-    font-weight: 700;
-    font-size: 2em;
-    color: darkgray;
+.about-show {
+    opacity: 1;
+    transition: opacity .5s;
+    z-index: 1
+}
+.about-show a {
+    visibility: visible
+}
+.btn-about {
+    display: block;
+    z-index: 2;
 }
 
-.amazonwrite b {
-    font-family: "Open Sans";
-    color: orange;
-    font-weight: 900;
-}
-
-img.cart{
-    width: 25%;
-    padding-bottom: 1em;
-    padding-top: 1em;
-}
-
-a.show-button {
-    background-color: dodgerblue;
-    padding: .5em;
-    border-radius: 10px;
+.btn-about-show {
+    box-shadow: none;
+    transition: background .5s;
     color: white;
-    font-size: 2em;
+}
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden
 }
 
-.amazonwrite p {
-    font-size: 1.5em;
-    line-height: 1.5em;
+.black-nav{
+    transition: background .5s;
+    background: #1A1A1A;
+    color: white;
+    
 }
 
-a.show-button:hover {
-  opacity: 0.5;
+
+.white-dot{
+    background: white !important;
 }
+
+
+
 
 /* -------------------------------- 
 
