@@ -882,7 +882,7 @@ folding panel
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
-    width: 75%;
+    width: 70%;
   }
   .cd-folding-panel .fold-left,
   .cd-folding-panel .fold-right {
