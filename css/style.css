@@ -293,7 +293,8 @@ nav h2 b {
 
 ul.top-bar li {
     display: inline-block;
-    padding-left: 3em;
+    padding-left: 1em;
+    padding-right: 1em;
     font-family: Montserrat, monospace;
     font-weight: 200;
     letter-spacing: 4px;
