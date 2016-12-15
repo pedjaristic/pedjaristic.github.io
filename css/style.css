@@ -252,6 +252,11 @@ nav {
         
     }
     
+    img.title {
+        
+        width: 90% !important;
+    }
+    
     
     
 }
