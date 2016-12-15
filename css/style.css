@@ -231,6 +231,29 @@ nav {
     /*border-bottom: solid darkgray;*/
 }
 
+
+/* Responsive nav bar */
+
+@media only screen and (max-width: 575px){
+    
+    h1 a {
+        float: none !important;
+    }
+    
+    ul.top-bar {
+        text-align: center !important;
+        float: none !important;
+    }
+    
+    
+    
+    
+}
+
+
+
+
+
 h1 a {
 font-family: Montserrat, monospace;
   font-size: .9em;
