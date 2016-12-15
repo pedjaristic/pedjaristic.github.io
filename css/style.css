@@ -511,7 +511,7 @@ Main content
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4); 
+  /*background-color: rgba(0, 0, 0, 0.4);*/
   opacity: 0;
   visibility: hidden;
   -webkit-transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
@@ -577,13 +577,6 @@ Main content
 
 }
 
-/*.cd-item:nth-of-type(1):hover {
-    -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  -o-filter: blur(3px);
-  -ms-filter: blur(3px);
-  filter: blur(3px);
-}*/
 
 .cd-item:nth-of-type(2) {
   background-color: #222222;
@@ -611,7 +604,7 @@ Main content
     
 }
 
-.cd-item:nth-of-type(5) {
+/*.cd-item:nth-of-type(5) {
     background-color: black;
     background-image: url(images/unight-background.jpg);
     background-size: cover;
@@ -623,7 +616,7 @@ Main content
     background-image: url(images/cs-arcade.jpg);
     background-size: cover;
     background-position: center;
-}
+}*/
 
 
 .cd-item p {
