@@ -245,6 +245,12 @@ nav {
         float: none !important;
     }
     
+    nav {
+        
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        
+    }
     
     
     
@@ -293,8 +299,8 @@ nav h2 b {
 
 ul.top-bar li {
     display: inline-block;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
     font-family: Montserrat, monospace;
     font-weight: 200;
     letter-spacing: 4px;
