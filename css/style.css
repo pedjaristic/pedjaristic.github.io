@@ -132,42 +132,6 @@ img.logo {
     align-items: center; 
 }
 
-img.aboutimg1{
-    width: 12%;
-    position: absolute;
-    z-index: -10;
-    background: whitesmoke;
-    border-radius: 100%;
-    padding: 1em;
-    border: double #777777 3px;
-    min-width: 164px;
-}
-
-img.aboutimg2{
-    width: 12%;
-    opacity: 1;
-    background: black;
-    border-radius: 100%;
-    padding: 1em;
-          -webkit-transition: opacity 0.4s 0s;
-  -moz-transition: opacity 0.4s 0s;
-  transition: opacity 0.4s 0s;
-    border: double #777777 3px;
-    min-width: 164px;
-}
-
-img.aboutimg1:hover{
-    opacity:1;
-    
-
-}
-
-img.aboutimg2:hover{
-    opacity:0;
-      -webkit-transition: opacity 0.4s 0s;
-  -moz-transition: opacity 0.4s 0s;
-  transition: opacity 0.4s 0s;
-}
 
 .aboutwrite{
     padding-top: 1em;
@@ -1404,55 +1368,6 @@ TOP SECTION
 ABOUT animation
 
 -------------------------------- */
-
-
-/*.about {
-    position: fixed;
-    background: #1a1a1a;
-    z-index: -999;
-    width: 100%;
-    opacity: 0;
-    transition: opacity .5s;
-    color: white
-}
-.about a {
-    visibility: hidden;
-}
-.about .about-wrap {
-    position: relative;
-    height: 100%;
-    text-align: left;
-}
-
-.about-show {
-    opacity: 1;
-    transition: opacity .5s;
-    z-index: 1
-}
-.about-show a {
-    visibility: visible
-}
-.btn-about {
-    display: block;
-    z-index: 2;
-}
-
-.btn-about-show {
-    box-shadow: none;
-    transition: background .5s;
-    color: white;
-}
-.stop-scrolling {
-    height: 100%;
-    overflow: hidden
-}
-
-.black-nav{
-    transition: background .5s;
-    background: #1A1A1A;
-    color: white;
-    
-}*/
 
 
 .white-dot{
