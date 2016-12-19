@@ -18,14 +18,14 @@ $mail_status = mail($mail_to, $subject, $body_message, $headers);
 if ($mail_status) { ?>
 	<script language="javascript" type="text/javascript">
 		alert('Thanks for reaching out. :)');
-		window.location = 'contact_page.html';
+		window.location = 'contact.html';
 	</script>
 <?php
 }
 else { ?>
 	<script language="javascript" type="text/javascript">
 		alert('Hmm that wasnt right, shoot me an email at pedja.ristic@outlook.com instead.');
-		window.location = 'contact_page.html';
+		window.location = 'contact.html';
 	</script>
 <?php
 }
