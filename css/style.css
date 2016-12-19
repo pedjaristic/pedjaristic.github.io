@@ -4,7 +4,7 @@ Primary style
 
 -------------------------------- */
 
-::-webkit-scrollbar { width: 0 !important }
+/*::-webkit-scrollbar { width: 0 !important }
 
 ::-webkit-scrollbar
 {
@@ -20,7 +20,7 @@ Primary style
 ::-webkit-scrollbar-thumb
 {
   background-color: rgba(0, 0, 0, 1);
-}
+}*/
 
 
 @font-face {
@@ -72,11 +72,15 @@ body {
   background-color: white;
      -webkit-font-smoothing: antialiased;
     text-shadow: rgba(0,0,0,.01) 0 0 1px;
+    text-rendering: optimizeLegibility;
     
         animation: fadein 1.5s;
-    -moz-animation: fadein 1.5s; /* Firefox */
-    -webkit-animation: fadein 1.5s; /* Safari and Chrome */
-    -o-animation: fadein 1.5s; /* Opera */
+    -moz-animation: fadein 1.5s; 
+    -webkit-animation: fadein 1.5s; 
+    -o-animation: fadein 1.5s; 
+    
+    
+    
 }
 
 a {
@@ -110,10 +114,22 @@ About Page
 
 -------------------------------- */
 
+
+img.logo {
+    background: #222222;
+    width: 15%;
+    border-radius: 100px;
+    padding: .3em;
+    min-width: 50px;
+    max-width: 90px;
+}
+
 .aboutsection{
-    text-align: center;
-    padding-top: 3em;
-    margin-bottom: 10%;
+    padding-top: 6em;
+    margin-bottom: 6em;
+        display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 img.aboutimg1{
@@ -155,16 +171,15 @@ img.aboutimg2:hover{
 
 .aboutwrite{
     padding-top: 1em;
-    width: 100%;
-    margin: auto;
+    width: 50%;
     line-height: 2;
     color: #222222;
     font-family: Montserrat;
     font-weight: 200;
     letter-spacing: 1px;
-    font-size: 1em;
-    padding-left: 20%;
-    padding-right: 20%;
+    font-size: .8em;
+    text-align: left;
+
 }
 
 .aboutwrite h1 {
@@ -205,6 +220,89 @@ thanks
 
 .thanks img:hover{
     opacity:0.5;
+}
+
+
+
+
+/* -------------------------------- 
+
+CONTACT PAGE
+
+-------------------------------- */
+
+form {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 6em;
+    padding-bottom: 6em;
+        max-width: 1000px;
+    min-width: 300px;
+}
+
+form h1{
+    font-family: Montserrat;
+    font-size: 2em;
+    font-weight: 900;
+    color: #333333;
+}
+
+form input {
+    margin-top: 2em;
+    width: 60%;
+    height: 3em;
+    border: solid 1px #cccccc;
+}
+
+form .send{
+    background: white;
+    transition: background .5s;
+    -webkit-transition: background .5s;
+    -moz-transition: background .5s;
+}
+
+form .send:hover{
+    background: #333333;
+    color: white;
+}
+
+form textarea {
+    width: 60%;
+    margin-top: 2em;
+    height: 6em;
+    resize: none;
+    border: solid 1px #cccccc;
+}
+
+
+input:focus, textarea:focus {
+
+    border: solid 1px;
+    outline: none;
+    
+}
+
+
+p.contact {
+    padding-top: 6em;
+    font-size: .6em;
+    width: 70%;
+    margin: auto;
+    line-height: 2em;
+    font-family: montserrat;
+    color: #555555;
+    text-align: center;
+}
+
+p.contact a {
+    font-size: .9em;
+    font-weight: 700;
+}
+
+p.contact span{
+    font-weight: 700;
+    color: black;
 }
 
 
@@ -1186,6 +1284,8 @@ keyframes fadein {
 }
 
 
+
+
 /* -------------------------------- 
 
 TOP SECTION
@@ -1227,17 +1327,15 @@ TOP SECTION
 }
 
 
-/*.dots:hover li {
+.dots:hover li {
     
-    margin-left: 1em;
-    position: absolute;
-    animation: none;
-    width: 20px;
-    height: 20px;
+    -moz-animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    opacity: .7;
     
 
-}*/
-
+}
 
 
 .dots li {
@@ -1303,12 +1401,12 @@ TOP SECTION
 
 /* -------------------------------- 
 
-ABOUT
+ABOUT animation
 
 -------------------------------- */
 
 
-.about {
+/*.about {
     position: fixed;
     background: #1a1a1a;
     z-index: -999;
@@ -1354,7 +1452,7 @@ ABOUT
     background: #1A1A1A;
     color: white;
     
-}
+}*/
 
 
 .white-dot{

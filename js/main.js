@@ -81,11 +81,13 @@ jQuery(document).ready(function($){
     
     
     
-    
-    
     	//////////////////////////////////////////////////////////////////
 	/// MENU BUTTON
 	//////////////////////////////////////////////////////////////////
+    
+    
+    
+    
     
     
     	var taco = $(window).height()
@@ -102,7 +104,7 @@ jQuery(document).ready(function($){
 				$('.home').addClass('strike')
 
 
-		$('.btn-menu').on('click', function(e){
+		$('.btn-about').on('click', function(e){
 			e.preventDefault();
 			$('.about').toggleClass('about-show')
 			$('body').toggleClass('stop-scrolling')
