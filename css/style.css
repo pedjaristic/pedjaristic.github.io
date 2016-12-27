@@ -481,6 +481,16 @@ padding: .5em;
 }
 
 
+video.pv-site-demo{
+    width: 60%;
+    margin: auto;
+    display: flex;
+    min-width: 300px;
+    max-width: 600px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
 
 /* -------------------------------- 
 
