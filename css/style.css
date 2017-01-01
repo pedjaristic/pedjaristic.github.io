@@ -117,7 +117,7 @@ About Page
 
 img.logo {
     background: #222222;
-    width: 15%;
+    width: 13%;
     border-radius: 100px;
     padding: .3em;
     min-width: 50px;
@@ -143,6 +143,7 @@ img.logo {
     letter-spacing: 1px;
     font-size: .8em;
     text-align: left;
+    min-width: 250px;
 
 }
 
@@ -622,12 +623,12 @@ Main content
   left: 0;
   height: 100%;
   width: 100%;
-  /*background-color: rgba(0, 0, 0, 0.4);*/
+  background-color: rgba(0, 0, 0, 0.4);
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
-  -moz-transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
-  transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
+  -webkit-transition: opacity 0.5s 0.3s, visibility 0s 0.5s;
+  -moz-transition: opacity 0.5s 0.3s, visibility 0s 0.5s;
+  transition: opacity 0.5s 0.3s, visibility 0s 0.5s;
 }
 .fold-is-open .cd-gallery::before {
   visibility: visible;
@@ -986,7 +987,7 @@ folding panel
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
-    width: 70%;
+    width: 80%;
   }
   .cd-folding-panel .fold-left,
   .cd-folding-panel .fold-right {
@@ -1128,7 +1129,7 @@ padding-bottom: 1.5em;
   -moz-transition: -moz-transform 0.2s 0.2s, opacity 0.2s 0.2s;
   transition: transform 0.2s 0.2s, opacity 0.2s 0.2s;
     font-family: "Open Sans", sans-serif;
-    font-size: 1.3em !important;
+    font-size: 1.4em !important;
     font-weight:300;
     padding-top: 1em;
     padding-bottom: 1.5em;
