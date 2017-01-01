@@ -623,12 +623,12 @@ Main content
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  /*background-color: rgba(0, 0, 0, 0.4);*/
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: opacity 0.5s 0.3s, visibility 0s 0.5s;
-  -moz-transition: opacity 0.5s 0.3s, visibility 0s 0.5s;
-  transition: opacity 0.5s 0.3s, visibility 0s 0.5s;
+  -webkit-transition: opacity 0.5s 0.5s, visibility 0s 0.5s;
+  -moz-transition: opacity 0.5s 0.5s, visibility 0s 0.5s;
+  transition: opacity 0.5s 0.5s, visibility 0s 0.5s;
 }
 .fold-is-open .cd-gallery::before {
   visibility: visible;
@@ -987,7 +987,7 @@ folding panel
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
-    width: 80%;
+    width: 75%;
   }
   .cd-folding-panel .fold-left,
   .cd-folding-panel .fold-right {
