@@ -79,6 +79,7 @@ body {
     -webkit-animation: fadein 1.5s; 
     -o-animation: fadein 1.5s; 
     
+    text-rendering: optimizeLegibility;
     
     
 }
@@ -479,17 +480,6 @@ padding: .5em;
 
 .pvc-goals img{
     width: 30%;
-}
-
-
-video.pv-site-demo{
-    width: 60%;
-    margin: auto;
-    display: flex;
-    min-width: 300px;
-    max-width: 600px;
-    padding-top: 1em;
-    padding-bottom: 1em;
 }
 
 
@@ -1273,7 +1263,7 @@ TOP SECTION
 
 
 .top-section{
-    height: 20em;
+    height: 23em;
     max-height: 600px;
     min-height: 300px;
     display: flex;
@@ -1290,10 +1280,10 @@ TOP SECTION
 .top-section h2 {
     padding-bottom: .5em;
     font-family: Montserrat;
-    font-weight: 900;
-    letter-spacing: .2em;
-    font-size: 2em;
-    color: #555555;
+    font-weight: 500;
+    letter-spacing: .1em;
+    font-size: 2.1em;
+    color: #333333;
 
 }
 
