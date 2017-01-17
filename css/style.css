@@ -1263,7 +1263,7 @@ TOP SECTION
 
 
 .top-section{
-    height: 23em;
+    height: 22em;
     max-height: 600px;
     min-height: 300px;
     display: flex;
