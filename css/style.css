@@ -1295,6 +1295,12 @@ TOP SECTION
     z-index: 99999;
 }
 
+.dots .one-dot {
+    background: transparent;
+    border: black solid 1px;
+
+}
+
 
 .dots:hover li {
     
@@ -1355,10 +1361,9 @@ TOP SECTION
 .top-section p {
     
     
-    /*width: 60%;*/
     margin: auto;
     line-height: 1.8em;
-    font-family: montserrat;
+    font-family: Montserrat;
     font-weight: 100;
     color: black;
     display: inline-flex;
@@ -1375,9 +1380,9 @@ ABOUT animation
 -------------------------------- */
 
 
-.white-dot{
-    background: white !important;
-}
+
+
+
 
 
 
