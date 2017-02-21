@@ -127,7 +127,7 @@ img.logo {
 
 .aboutsection{
     padding-top: 6em;
-    margin-bottom: 6em;
+    padding-bottom: 5em;
         display: flex;
     justify-content: center;
     align-items: center; 
