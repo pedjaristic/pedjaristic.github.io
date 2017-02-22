@@ -165,6 +165,13 @@ img.logo {
     font-weight: 800;
 }
 
+.aboutwrite p a{
+    color: #333333;
+    font-weight: 700;
+    text-decoration: underline;
+    font-size: 1em;
+}
+
 
 /* -------------------------------- 
 
