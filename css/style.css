@@ -120,8 +120,8 @@ img.logo {
 .aboutwrite{
     padding-top: 1em;
     width: 50%;
-    line-height: 2;
-    color: #222222;
+    line-height: 1.8;
+    color: #333333;
     font-family: Montserrat;
     font-weight: 200;
     letter-spacing: 1px;
@@ -343,9 +343,7 @@ nav {
     }
     
     
-    
 }
-
 
 
 
@@ -551,6 +549,7 @@ footer h1 {
   footer h1 {
     font-size: 2rem;
   }
+    
 }
 
 
@@ -1490,7 +1489,7 @@ ul.landing-links li a {
     ul.landing-links li {
         display: block;
     }
-
+}
 
 /* -------------------------------- 
 
