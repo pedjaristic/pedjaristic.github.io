@@ -1,134 +1,91 @@
-jQuery(document).ready(function($){
-	var gallery = $('.cd-gallery'),
-		foldingPanel = $('.cd-folding-panel'),
-		mainContent = $('.cd-main');
-        pageContent = $('.cd-fold-content');
-	/* open folding content */
-	gallery.on('click', 'a', function(event){
-		event.preventDefault();
-		openItemInfo($(this).attr('href'));
-        
-	});
+jQuery(document).ready(function ($) {
+    //trigger the animation - open modal window
+    $('[data-type="modal-trigger"]').on('click', function () {
+        var actionBtn = $(this)
+            , scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+        actionBtn.addClass('to-circle');
+        actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+            animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+        });
+        //if browser doesn't support transitions...
+        if (actionBtn.parents('.no-csstransitions').length > 0) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
+    });
+    //trigger the animation - close modal window
+    $('.cd-section .cd-modal-close').on('click', function () {
+        closeModal();
+    });
+    $(document).keyup(function (event) {
+        if (event.which == '27') closeModal();
+    });
+    $(window).on('resize', function () {
+        //on window resize - update cover layer dimention and position
+        if ($('.cd-section.modal-is-visible').length > 0) window.requestAnimationFrame(updateLayer);
+    });
 
-	/* close folding content */
-	foldingPanel.on('click', '.cd-close', function(event){
-		event.preventDefault();
-		toggleContent('', false);
-	});
-	gallery.on('click', function(event){
-		/* detect click on .cd-gallery::before when the .cd-folding-panel is open */
-		if($(event.target).is('.cd-gallery') && $('.fold-is-open').length > 0 ) toggleContent('', false);
-	})
+    function retrieveScale(btn) {
+        var btnRadius = btn.width() / 2
+            , left = btn.offset().left + btnRadius
+            , top = btn.offset().top + btnRadius - $(window).scrollTop()
+            , scale = scaleValue(top, left, btnRadius, $(window).height(), $(window).width());
+        btn.css('position', 'fixed').velocity({
+            top: top - btnRadius
+            , left: left - btnRadius
+            , translateX: 0
+        , }, 0);
+        return scale;
+    }
 
-	function openItemInfo(url) {
-		var mq = viewportSize();
-		if( gallery.offset().top > $(window).scrollTop() && mq != 'mobile') {
-			/* if content is visible above the .cd-gallery - scroll before opening the folding panel */
-			$('body,html').animate({
-				'scrollTop': gallery.offset().top
-			}, 100, function(){ 
-	           	toggleContent(url, true);
-	        }); 
-	    } else if( gallery.offset().top + gallery.height() < $(window).scrollTop() + $(window).height()  && mq != 'mobile' ) {
-			/* if content is visible below the .cd-gallery - scroll before opening the folding panel */
-			$('body,html').animate({
-				'scrollTop': gallery.offset().top + gallery.height() - $(window).height()
-			}, 100, function(){ 
-	           	toggleContent(url, true);
-	        });
-		} else {
-			toggleContent(url, true);
-		}
-	}
-    
-    
+    function scaleValue(topValue, leftValue, radiusValue, windowW, windowH) {
+        var maxDistHor = (leftValue > windowW / 2) ? leftValue : (windowW - leftValue)
+            , maxDistVert = (topValue > windowH / 2) ? topValue : (windowH - topValue);
+        return Math.ceil(Math.sqrt(Math.pow(maxDistHor, 2) + Math.pow(maxDistVert, 2)) / radiusValue);
+    }
 
-	function toggleContent(url, bool) {
-		if( bool ) {
-			/* load and show new content */
-			var foldingContent = foldingPanel.find('.cd-fold-content');
-			foldingContent.load(url+' .cd-fold-content > *', function(event){
-				setTimeout(function(){
-					$('body').addClass('overflow-hidden');
-					foldingPanel.addClass('is-open');
-					mainContent.addClass('fold-is-open');
-				}, 100);
-				
-			});
-		} else {
-			/* close the folding panel */
-			var mq = viewportSize();
-            pageContent.scrollTop(0);
-			foldingPanel.removeClass('is-open');
-			mainContent.removeClass('fold-is-open');
-			
-			(mq == 'mobile' || $('.no-csstransitions').length > 0 ) 
-				/* according to the mq, immediately remove the .overflow-hidden or wait for the end of the animation */
-				? $('body').removeClass('overflow-hidden')
-				
-				: mainContent.find('.cd-item').eq(0).one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-					$('body').removeClass('overflow-hidden');
-					mainContent.find('.cd-item').eq(0).off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
-				});
-		}
-		
-	}
+    function animateLayer(layer, scaleVal, bool) {
+        layer.velocity({
+            scale: scaleVal * 2
+        }, 700, /*Scale val *2 makes it full size*/ function () {
+            $('body').toggleClass('overflow-hidden', bool);
+            (bool) ? layer.parents('.cd-section').addClass('modal-is-visible').end().off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend'): layer.removeClass('is-visible').removeAttr('style').siblings('[data-type="modal-trigger"]').removeClass('to-circle');
+        });
+    }
 
-	function viewportSize() {
-		/* retrieve the content value of .cd-main::before to check the actua mq */
-		return window.getComputedStyle(document.querySelector('.cd-main'), '::before').getPropertyValue('content').replace(/"/g, "").replace(/'/g, "");
-	}
-    
-    
-    
-    	//////////////////////////////////////////////////////////////////
-	/// MENU BUTTON
-	//////////////////////////////////////////////////////////////////
-    
-    
-    
-    
-//    	var taco = $(window).height()
-//	$('.hero').css('height', taco+'px')
-//	$('.about').css('height', taco+'px')
-//	$('.about-wrap').css('height', taco+'px')
-//	$('.head').css('height', taco+'px')
-//    
-//    
-//
-//	var fullPath = window.location.pathname;
-//	
-//	if(fullPath == "/") { 
-//				$('.home').addClass('strike')
-//
-//
-//		$('.btn-about').on('click', function(e){
-//			e.preventDefault();
-//			$('.about').toggleClass('about-show')
-//			$('body').toggleClass('stop-scrolling')
-//			$('.btn-about').toggleClass('btn-about-show')
-//            $('.one-dot').toggleClass('white-dot')
-//            
-//		});
-//
-//	
-//	} else {
-//
-//		$('.btn-about').on('click', function(e){
-//			e.preventDefault();
-//			$('.about').toggleClass('about-show')
-//			$('body').toggleClass('stop-scrolling')
-//			$('.btn-about').toggleClass('btn-about-show')
-//            //$('nav').toggleClass('black-nav')
-//            $('.one-dot').toggleClass('white-dot')
-//            
-//		});
-//
-//	}
-    
-    
-    
-    
-    
+    function updateLayer() {
+        var layer = $('.cd-section.modal-is-visible').find('.cd-modal-bg')
+            , layerRadius = layer.width() / 2
+            , layerTop = layer.siblings('.btn').offset().top + layerRadius - $(window).scrollTop()
+            , layerLeft = layer.siblings('.btn').offset().left + layerRadius
+            , scale = scaleValue(layerTop, layerLeft, layerRadius, $(window).height(), $(window).width());
+        layer.velocity({
+            top: layerTop - layerRadius
+            , left: layerLeft - layerRadius
+            , scale: scale
+        , }, 0);
+    }
 
+    function closeModal() {
+        var section = $('.cd-section.modal-is-visible');
+        section.removeClass('modal-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+            animateLayer(section.find('.cd-modal-bg'), 1, false);
+        });
+        //if browser doesn't support transitions...
+        if (section.parents('.no-csstransitions').length > 0) animateLayer(section.find('.cd-modal-bg'), 1, false);
+    }
+});
+$(window).bind('scroll', function () {
+    if ($(window).scrollTop() > 100) {
+        $('.scroll-anim').hide();
+    }
+    else {
+        $('.scroll-anim').show();
+    }
+});
+/* Clicking about at the top triggers 3 dot modal*/
+var clickThis = '.clickThis';
+var link = '.btn';
+$(clickThis).click(function () {
+    $(link).css({
+        "color": "red"
+    });
+    $(link)[0].click();
 });
