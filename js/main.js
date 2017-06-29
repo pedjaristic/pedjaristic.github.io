@@ -89,3 +89,13 @@ $(clickThis).click(function () {
     });
     $(link)[0].click();
 });
+
+
+
+$.preloadImages = function() {
+  for (var i = 0; i < arguments.length; i++) {
+    $("<img />").attr("src", arguments[i]);
+  }
+}
+
+$.preloadImages("../project-assets/z-launcher/logo-full.png","../project-assets/z-launcher/z-header.jpg","../project-assets/capacity-canada/capacity-logo.png","../project-assets/capacity-canada/capacity-head.jpg","../project-assets/hylo/hylo-logo.png","../project-assets/hylo/hylo-head.jpg","../project-assets/pvc/PVC-logo.png","../project-assets/pvc/pvcpic2.jpg");

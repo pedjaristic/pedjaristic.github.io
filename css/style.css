@@ -528,7 +528,7 @@ a:hover {
 }
 
 .cd-fold-content .title{
-    animation: fadeInUp 1.5s;
+    animation: fadeInUp 1s;
     width: 60%;
     max-width: 250px;
 }
@@ -537,13 +537,13 @@ a:hover {
     width: 100%;
 margin: auto;
 padding-bottom: 1.5em;
-    animation: fadeInUp 1.5s;
+    animation: fadeInUp 1s;
 }
 
 .cd-fold-content p {
   margin-bottom: 1em;
   font-size: 1em;
-    animation: fadeInUp 2s;
+    animation: fadeInUp 1.5s;
     
     
     line-height: 2em;
@@ -571,13 +571,13 @@ padding-bottom: 1.5em;
     text-rendering: geometricPrecision;
     border-left: solid;
     padding-left: 1em;
-    animation: fadeInUp 2s;
+    animation: fadeInUp 1.5s;
         
 }
 
 .cd-fold-content h3 {
     padding-top: 1em;
-    animation: fadeInUp 2s;
+    animation: fadeInUp 1.5s;
 }
 
 .cd-fold-content h2 {
@@ -589,7 +589,7 @@ padding-bottom: 1.5em;
     text-transform: uppercase;
     color: black;;
     letter-spacing: 1.3px;
-    animation: fadeInUp 2s;
+    animation: fadeInUp 1.5s;
 }
 
 .cd-fold-content a {
@@ -611,7 +611,7 @@ margin: auto;
 width: 100%;
     padding-bottom: 1em;
     padding-top: 1em;
-    animation: fadeInUp 1.5s;
+    animation: fadeInUp 1s;
 
 }
 
