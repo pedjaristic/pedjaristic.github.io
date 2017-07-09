@@ -97,6 +97,8 @@ Modal Components
 .cd-modal-content h1{
     color: #fff;
     letter-spacing: 2px;
+    border-left: solid white 5px;
+    padding-left: .5em;
     
 }
 
