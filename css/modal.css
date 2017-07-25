@@ -98,7 +98,9 @@ Modal Components
     color: #fff;
     letter-spacing: 2px;
     border-left: solid white 5px;
-    padding-left: .5em;
+    padding-left: 1em;
+    font-size: 1.5em;
+    margin-bottom: 2em;
     
 }
 
