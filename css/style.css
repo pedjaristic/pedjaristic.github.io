@@ -314,8 +314,8 @@ nav a {
   width: 1.1vw;
   height: 1.1vw;
   margin: 0 .5vw;
-  -webkit-animation: float 1.8s infinite;
-          animation: float 1.8s infinite;
+  -webkit-animation: float 3.5s infinite;
+          animation: float 3.5s infinite;
   -webkit-transform-origin: center;
           transform-origin: center;
     min-width: 12px;
