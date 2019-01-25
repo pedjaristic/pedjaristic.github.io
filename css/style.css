@@ -41,6 +41,14 @@ body{
    
 }
 
+body i {
+    color: #767676;
+}
+
+body b {
+    font-weight: bold;
+}
+
 .row {
 	position: relative;
 	width: 100%;
@@ -134,7 +142,7 @@ nav a {
 	font-family: Montserrat;
     line-height: 1em;
     margin-top: 30%;
-    margin-bottom: 3em;
+    margin-bottom: 5em;
     animation: fadeInUp 1s;
     
 }
@@ -291,11 +299,6 @@ nav a {
 }
 
 
-.dots .one-dot {
-    background: transparent;
-    border: white solid 1px;
-
-}
 
 
 .dots:hover li {
@@ -309,10 +312,11 @@ nav a {
 }
 
 .dots li {
-  background: white;
-  border-radius: 100%;
-  width: 1.1vw;
-  height: 1.1vw;
+
+    font-family: Montserrat;
+    font-weight: 300;
+    margin: auto
+
   margin: 0 .5vw;
   -webkit-animation: float 3.5s infinite;
           animation: float 3.5s infinite;
@@ -699,6 +703,9 @@ padding: .5em;
 	    margin: 22% 25% 10% 1%;
         
 	}
+    
+
+    
     
             .work b  {
             animation: none;
