@@ -267,9 +267,10 @@ html, body {
 	min-height: 400px;
 	top: 0;
 	left: 0;
-	background: #fff;
-    border-top: solid 10px;
+	background: #222222;
+    border-top: solid 10px #ffffff;
     overflow-y: auto;
+    color: #ffffff;
 }
 
 .form_content{
