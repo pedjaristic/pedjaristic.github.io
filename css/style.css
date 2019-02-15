@@ -166,6 +166,12 @@ h6{
     text-decoration: none;
 }
 
+
+.footer-content h6 a:hover{
+    text-decoration: none;
+}
+
+
 .section-header{
     padding-top: 8%;
 }
@@ -230,11 +236,20 @@ blockquote{
     max-width: 70px;
 }
 
+.footer-content h6 a:hover .about-anim{
+    animation: none;
+    transition: all 0.2s;
+    
+}
+
+
+
 a.btn:hover .about-anim{
     animation: none;
     transition: all 0.2s;
     
 }
+
 
 
 .selected-projects{
