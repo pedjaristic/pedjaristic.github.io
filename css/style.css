@@ -337,7 +337,7 @@ box-shadow: 0px 0px 0px 5px rgba(34,34,34,1);
   position:absolute;
     z-index: 99;
   width: 32%;
-  height: 5vw;
+  height: 3vw;
   bottom: 0;
   left: 36%;
   background-color: #f8f8f8;
@@ -368,7 +368,7 @@ border: solid 4px #222222;
   position:absolute;
     z-index: 99;
   width: 31%;
-  height: 5vw;
+  height: 3vw;
   bottom: 0;
   right: 36%;
   background-color: #f8f8f8;
@@ -408,6 +408,7 @@ border: solid 4px #222222;
 
 .label h1{
         letter-spacing: 0.2rem;
+        font-size: calc(25px + (80 - 25) * ((100vw - 300px) / (1600 - 300)));
 }
 
 
