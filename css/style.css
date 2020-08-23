@@ -537,6 +537,17 @@ a:hover:before{
     transform-origin: left;
 }
 
+a.about-links {
+    color:#fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a.about-links:hover {
+    opacity: 0.8;
+    text-decoration: none;
+}
+
 
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
