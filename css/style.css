@@ -538,7 +538,7 @@ a:hover:before{
 }
 
 a.about-links {
-    color:#fff;
+    color:#fff !important;
     text-decoration: none;
     font-weight: 500;
 }
