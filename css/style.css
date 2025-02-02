@@ -198,7 +198,7 @@ h6{
     min-width: inherit;
     width: 80%;
     padding-left: 5%;
-    
+    border-radius: 40px;
     
     animation: fadeInUp 1.3s;
 }
