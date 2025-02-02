@@ -282,14 +282,13 @@ a.btn:hover .about-anim{
 
 
 
-.work img{
+.work img {
     width: 35%;
     max-width: 1165px;
     filter: blur(6px);
     transition: all .4s ease-in-out;
-Border-radius: 40px;
-
-box-shadow: 0px 0px 10px 1px #ffffff inset;
+border-radius: 40px;
+box-shadow: 0px 0px 10px 10px #ffffff inset;
     
     
 }
