@@ -138,7 +138,7 @@ ul.perma-nav sup{
     
     animation: fadeInUp 1s;
 border-radius: 40px;
-box-shadow: 0px 0px 40px 5px rgba(240, 240, 240, 0.2);
+box-shadow: 0px 0px 50px 2px rgba(240, 240, 240, 0.2);
     
     
     width: 70%;
@@ -162,7 +162,7 @@ box-shadow: 0px 0px 40px 5px rgba(240, 240, 240, 0.2);
     flex-direction: column;
     padding-left: 8%;
 	border: none;
-box-shadow: 0px 0px 20px 0px rgba(240, 240, 240, 0.4) inset;
+box-shadow: 0px 0px 20px 1px rgba(240, 240, 240, 0.4) inset;
 border-radius: 40px;
 }
 
