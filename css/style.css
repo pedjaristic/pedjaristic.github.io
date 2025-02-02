@@ -20,7 +20,7 @@ body {
 
 
 body{
-    color: #222222;
+    color: #ffffff;
     -webkit-font-smoothing: antialiased;
     
 }
@@ -327,7 +327,7 @@ box-shadow: 0px 0px 0px 5px rgba(34,34,34,1);
 
 
 .work a .label b{
-    color: #222222;
+    color: #ffffff;
     opacity: 0;
     position: relative;
     z-index: 999;
@@ -350,7 +350,6 @@ box-shadow: 0px 0px 0px 5px rgba(34,34,34,1);
   bottom: 0;
   left: 36%;
   background-color: #f8f8f8;
-border: solid 3px #222222;
   visibility: hidden;
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
@@ -381,7 +380,6 @@ border: solid 3px #222222;
   bottom: 0;
   right: 36%;
   background-color: #f8f8f8;
-    border: solid 3px #222222;
   visibility: hidden;
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
@@ -423,7 +421,6 @@ border: solid 3px #222222;
     
     width: 25%;
     margin-left: 25%;
-    border: solid 1px #222222;
     text-align: right;
     display: inline-flex;
     vertical-align: middle;
@@ -436,7 +433,6 @@ border: solid 3px #222222;
  
     width: 25%;
     margin-right: 20%;
-    border: solid 1px #222222;
     text-align: left;
     display: inline-flex;
     vertical-align: middle;
