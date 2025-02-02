@@ -29,7 +29,7 @@ h1{
     letter-spacing: 0.2rem;
     
     font-size: calc(25px + (80 - 25) * ((100vw - 300px) / (1600 - 300)));
-    font-family: Libre Baskerville, serif;
+    font-family: serif;
     
 }
 
