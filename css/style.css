@@ -59,7 +59,7 @@ h6{
 Color: #ACACAC;
 }
 
-.libre {
+H2 .libre {
     font-family: Kode Mono, serif;
 	font-size: calc(25px + (40 - 25) * ((100vw - 300px) / (1600 - 300)));
     
@@ -138,14 +138,14 @@ ul.perma-nav sup{
     
     animation: fadeInUp 1s;
 border-radius: 40px;
-box-shadow: 0px 0px 50px 2px rgba(240, 240, 240, 0.2);
+box-shadow: 0px 0px 40px 5px rgba(240, 240, 240, 0.2);
     
     
     width: 70%;
     height: 70%;
     max-width: 105rem;
     min-width: 30rem;
-    min-height: 35rem;
+    min-height: 30rem;
     max-height: 260rem;
 }
 
@@ -155,14 +155,14 @@ box-shadow: 0px 0px 50px 2px rgba(240, 240, 240, 0.2);
 
 .about-block {
     height: 60vw;
-    min-height: 35rem;
+    min-height: 30rem;
     max-height: 70rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding-left: 8%;
 	border: none;
-box-shadow: 0px 0px 20px 1px rgba(240, 240, 240, 0.4) inset;
+box-shadow: 0px 0px 20px 0px rgba(240, 240, 240, 0.4) inset;
 border-radius: 40px;
 }
 
@@ -198,7 +198,7 @@ h6{
     min-width: inherit;
     width: 80%;
     padding-left: 5%;
-    border-radius: 40px;
+    
     
     animation: fadeInUp 1.3s;
 }
