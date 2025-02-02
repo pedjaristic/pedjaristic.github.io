@@ -296,7 +296,7 @@ box-shadow: 0px 0px 0px 5px rgba(34,34,34,1);
 }
 
 
-.work:nth-child(even){
+/* .work:nth-child(even){
     flex-direction: row-reverse;
     text-align: right;
 }
@@ -321,7 +321,7 @@ box-shadow: 0px 0px 0px 5px rgba(34,34,34,1);
     padding-left: 15%;
 }
 
-
+*/
 
 
 
@@ -341,7 +341,7 @@ box-shadow: 0px 0px 0px 5px rgba(34,34,34,1);
 
 
 
-.work:nth-child(odd) a .label div h5:before{
+/* .work:nth-child(odd) a .label div h5:before{
     content: "";
   position:absolute;
     z-index: 99;
@@ -401,6 +401,7 @@ border: solid 3px #222222;
     
 }
 
+*/
 
 
 
@@ -416,6 +417,7 @@ border: solid 3px #222222;
 }
 
 
+/*
 
 .work:nth-child(odd) .label hr{
     
@@ -442,7 +444,7 @@ border: solid 3px #222222;
     
 }
 
-
+*/
 
 .footer{
     margin-top: 10%;
