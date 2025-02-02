@@ -8,14 +8,15 @@
 
 
 html {
-  font-size: 62.5%; }
+  font-size: 62.5%; 
+    background-color:#111111;}
 
 body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 300;
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
-  color: #222; }
+  font-family: "Kode Mono", Helvetica, Arial, sans-serif;
+  color: #ffffff; }
 
 
 body{
@@ -29,7 +30,7 @@ h1{
     letter-spacing: 0.2rem;
     
     font-size: calc(25px + (80 - 25) * ((100vw - 300px) / (1600 - 300)));
-    font-family: serif;
+    font-family: Oxanium;
     
 }
 
@@ -46,7 +47,7 @@ h3{
 
 
 h5{
-    font-family: Montserrat, sans-serif;
+    font-family: Oxanium, sans-serif;
     font-weight: 500;
     font-size: calc(12px + (30 - 25) * ((100vw - 300px) / (1600 - 300)));
 }
@@ -57,7 +58,7 @@ h6{
 }
 
 .libre {
-    font-family: Libre Baskerville, serif;
+    font-family: Kode Mono, serif;
     
 }
 
@@ -71,7 +72,7 @@ b.libre{
 }
 
 em{
-    color: #888;
+    color: #ffffff;
     font-size: calc(10px + (12 - 10) * ((100vw - 300px) / (1600 - 300)));
 }
 
@@ -80,8 +81,8 @@ em{
 nav{
     padding-top: 4.5rem;
     width: 90%;
-    background-color: #fff;
-    font-family: Montserrat, sans-serif;
+    background-color: #111111;
+    font-family: Oxanium, sans-serif;
     font-size: calc(10px + (15 - 10) * ((100vw - 300px) / (1600 - 300)));
     letter-spacing: 0.2rem;
     margin: auto;
@@ -107,7 +108,7 @@ ul.perma-nav li a{
 
 
 ul li{
-    font-family: Montserrat;
+    font-family: Kode Mono;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 1.2rem;
@@ -115,7 +116,7 @@ ul li{
 }
 
 ul.perma-nav sup{
-    font-family: Libre Baskerville;
+    font-family: Kode Mono;
     font-size: calc(8px + (10 - 8) * ((100vw - 300px) / (1600 - 300)));
     font-weight: bold;
     padding-right: 0.5rem;
@@ -131,7 +132,7 @@ ul.perma-nav sup{
     margin-right: 5%;
     z-index: 999999;
     position: relative;
-    background-color: #fff;
+    background-color: #222222;
     
     animation: fadeInUp 1s;
     
@@ -184,7 +185,7 @@ h6{
     padding-top: 15%;
     padding-bottom: 11%;
     height: 100%;
-    background-color: #f8f8f8;
+    background-color: #000000;
     float: right;
     margin-top: -5%;
     min-width: inherit;
@@ -209,7 +210,7 @@ blockquote{
     text-transform: uppercase;
     font-weight: 600;
     font-size: calc(10px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
-    border-left: solid 2px #222222;
+    border-left: solid 2px #ffffff;
     padding-left: 2%;
     letter-spacing: 0.2rem;
     margin-left: 0;
@@ -446,7 +447,7 @@ border: solid 3px #222222;
 .footer{
     margin-top: 10%;
     padding-bottom: 15%;
-    background-color: #fff;
+    background-color: #111111;
     float: right;
     width: 85%;
     
@@ -502,14 +503,14 @@ border: solid 3px #222222;
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: #222222; 
+  color: #ffffff; 
 text-decoration: none;
     position: relative;
 
 }
 
 a:hover {
-    color: #222222;
+    color: #acacac;
     text-decoration: none;
 }
 
@@ -600,7 +601,7 @@ ul.center-nav li {
     padding-bottom: 20%;
     
     height: 100%;
-    background-color: #fff;
+    background-color: #111111;
     float: right;
     min-width: inherit;
     width: 85%;
