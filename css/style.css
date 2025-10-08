@@ -162,24 +162,8 @@ box-shadow: 0px 0px 40px 5px rgba(240, 240, 240, 0.2);
     flex-direction: column;
     padding-left: 8%;
 	border: none;
-box-shadow: 0px 0px 20px 0px rgba(240, 240, 240, 0.4) inset;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-border-radius: 40px;
-=======
-border-radius: 50px;
->>>>>>> Stashed changes
-=======
-border-radius: 50px;
->>>>>>> Stashed changes
-=======
-border-radius: 50px;
->>>>>>> Stashed changes
-=======
-border-radius: 50px;
->>>>>>> Stashed changes
+    box-shadow: 0px 0px 20px 0px rgba(240, 240, 240, 0.4) inset;
+    border-radius: 50px;
 }
 
 
@@ -214,25 +198,7 @@ h6{
     min-width: inherit;
     width: 80%;
     padding-left: 5%;
-<<<<<<< Updated upstream
     border-radius: 40px;
-    
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-    
-    border-radius: 40px;
->>>>>>> Stashed changes
-=======
-    border-radius: 40px;
->>>>>>> Stashed changes
-=======
-    border-radius: 40px;
->>>>>>> Stashed changes
-=======
-    border-radius: 40px;
->>>>>>> Stashed changes
     animation: fadeInUp 1.3s;
 }
 
@@ -320,26 +286,7 @@ a.btn:hover .about-anim{
     max-width: 1165px;
     filter: blur(6px);
     transition: all .4s ease-in-out;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-border-radius: 40px;
-box-shadow: 0px 0px 10px 10px #ffffff inset;
-=======
-Border-radius: 40px;
->>>>>>> Stashed changes
-=======
-Border-radius: 40px;
->>>>>>> Stashed changes
-=======
-Border-radius: 40px;
->>>>>>> Stashed changes
-=======
-Border-radius: 40px;
->>>>>>> Stashed changes
-    
-    
+    border-radius: 40px;box-shadow: 0px 0px 10px 10px #ffffff inset;
 }
 
 
@@ -365,8 +312,6 @@ filter: blur(0px);
 .work:nth-child(even) .label{
     padding-right: 20%;
 }
-
-
 
 
 
@@ -1023,20 +968,4 @@ ul.center-nav li {
         width: 80%;
     }
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 */
-=======
-*/
->>>>>>> Stashed changes
-=======
-*/
->>>>>>> Stashed changes
-=======
-*/
->>>>>>> Stashed changes
-=======
-*/
->>>>>>> Stashed changes
