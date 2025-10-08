@@ -164,7 +164,11 @@ box-shadow: 0px 0px 40px 5px rgba(240, 240, 240, 0.2);
 	border: none;
 box-shadow: 0px 0px 20px 0px rgba(240, 240, 240, 0.4) inset;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 border-radius: 40px;
+=======
+border-radius: 50px;
+>>>>>>> Stashed changes
 =======
 border-radius: 50px;
 >>>>>>> Stashed changes
@@ -205,8 +209,12 @@ h6{
 <<<<<<< Updated upstream
     border-radius: 40px;
     
+<<<<<<< Updated upstream
 =======
     
+    border-radius: 40px;
+>>>>>>> Stashed changes
+=======
     border-radius: 40px;
 >>>>>>> Stashed changes
     animation: fadeInUp 1.3s;
@@ -297,8 +305,12 @@ a.btn:hover .about-anim{
     filter: blur(6px);
     transition: all .4s ease-in-out;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 border-radius: 40px;
 box-shadow: 0px 0px 10px 10px #ffffff inset;
+=======
+Border-radius: 40px;
+>>>>>>> Stashed changes
 =======
 Border-radius: 40px;
 >>>>>>> Stashed changes
@@ -988,7 +1000,11 @@ ul.center-nav li {
     }
 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 */
+=======
+*/
+>>>>>>> Stashed changes
 =======
 */
 >>>>>>> Stashed changes
