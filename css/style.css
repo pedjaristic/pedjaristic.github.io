@@ -528,7 +528,7 @@ a.btn:hover .about-anim{
 .work .label hr {
     border: none;
     height: 1px;
-    background-color: #f8f8f8;
+    background-color: #333333;
 }
 
 .work:nth-child(odd) .label hr{
