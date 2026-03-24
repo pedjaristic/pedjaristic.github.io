@@ -520,7 +520,7 @@ a.btn:hover .about-anim{
 
 
 .work .label h5 {
-    width: 100%;
+    width: 50%;
     display: flex;
     align-items: center;
 }
@@ -532,7 +532,7 @@ a.btn:hover .about-anim{
 }
 
 .work:nth-child(odd) .label hr{
-    width: 50%;
+    width: 100%;
     display: inline-flex;
     vertical-align: middle;
     margin-right: 2%;
@@ -540,7 +540,7 @@ a.btn:hover .about-anim{
 }
 
 .work:nth-child(even) .label hr{
-    width: 50%;
+    width: 100%;
     display: inline-flex;
     vertical-align: middle;
     margin-left: 2%;
@@ -550,6 +550,7 @@ a.btn:hover .about-anim{
 .work:nth-child(odd) .label h5 {
     flex-direction: row;
     justify-content: flex-start;
+    margin-left: 40%;
 }
 
 .work:nth-child(even) .label h5 {
@@ -1196,6 +1197,8 @@ ul.center-nav li {
     .work:nth-child(even) .label h5 {
         flex-direction: column-reverse;
         justify-content: center;
+        margin: 0;
+        width: 100%;
     }
     
     .work .label h5 span {
