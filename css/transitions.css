@@ -1,0 +1,112 @@
+/* ============================================================================
+   transitions.css — FLIP proxy + project entry animations.
+   ========================================================================= */
+
+#project-view {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0;
+  overflow-y: auto;
+  background: transparent;
+  scrollbar-width: none;
+}
+
+#project-view::-webkit-scrollbar {
+  display: none;
+}
+
+/* -- FLIP proxy ---------------------------------------------------------- */
+
+.flip-proxy {
+  position: fixed;
+  z-index: 60;
+  overflow: hidden;
+  border-radius: 2px;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.flip-proxy img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* -- During FLIP entry: hero hidden so proxy covers it, content staggers - */
+
+.project-page--entering .project-page__hero {
+  visibility: hidden;
+}
+
+.project-page--entering .project-page__header,
+.project-page--entering .project-page__body,
+.project-page--entering .project-page__supporting,
+.project-page--entering .project-page__beat,
+.project-page--entering .project-page__next {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: content-enter 350ms var(--ease-spatial) forwards;
+}
+
+.project-page--entering .project-page__header     { animation-delay: 750ms; }
+.project-page--entering .project-page__body       { animation-delay: 830ms; }
+.project-page--entering .project-page__supporting { animation-delay: 910ms; }
+.project-page--entering .project-page__beat       { animation-delay: 990ms; }
+.project-page--entering .project-page__next       { animation-delay: 1070ms; }
+
+@keyframes content-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -- Project-to-project entry (no FLIP, shorter delays) ------------------ */
+
+.project-page--entering-from-project .project-page__hero,
+.project-page--entering-from-project .project-page__header,
+.project-page--entering-from-project .project-page__body,
+.project-page--entering-from-project .project-page__supporting,
+.project-page--entering-from-project .project-page__beat,
+.project-page--entering-from-project .project-page__next {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: content-enter 350ms var(--ease-spatial) forwards;
+}
+
+.project-page--entering-from-project .project-page__hero {
+  animation-duration: 250ms;
+  animation-timing-function: ease;
+  animation-delay: 50ms;
+}
+
+.project-page--entering-from-project .project-page__header     { animation-delay: 100ms; }
+.project-page--entering-from-project .project-page__body       { animation-delay: 170ms; }
+.project-page--entering-from-project .project-page__supporting { animation-delay: 240ms; }
+.project-page--entering-from-project .project-page__beat       { animation-delay: 310ms; }
+.project-page--entering-from-project .project-page__next       { animation-delay: 380ms; }
+
+/* -- Reduced-motion ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-proxy { transition: none !important; }
+
+  #project-view,
+  .project-page--entering .project-page__hero,
+  .project-page--entering .project-page__header,
+  .project-page--entering .project-page__body,
+  .project-page--entering .project-page__supporting,
+  .project-page--entering .project-page__beat,
+  .project-page--entering .project-page__next,
+  .project-page--entering-from-project .project-page__hero,
+  .project-page--entering-from-project .project-page__header,
+  .project-page--entering-from-project .project-page__body,
+  .project-page--entering-from-project .project-page__supporting,
+  .project-page--entering-from-project .project-page__beat,
+  .project-page--entering-from-project .project-page__next {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}

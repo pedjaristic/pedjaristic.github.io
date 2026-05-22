@@ -1,0 +1,423 @@
+/* ============================================================================
+   depth-gallery.css — homepage canvas + DOM overlay styles.
+   All sizing viewport-relative, calibrated to 1920px reference.
+   ========================================================================= */
+
+.gallery-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+.gallery-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Horizontal vignette */
+.gallery-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.15) 22%,
+    transparent 35%,
+    transparent 65%,
+    rgba(0, 0, 0, 0.15) 78%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* ============================================================================
+   Project card — viewport-anchored pair of panels (left + right)
+   Left: 88px padding @1920 = 4.583vw.  Right: 88px padding @1920 = 4.583vw.
+   ========================================================================= */
+
+.project-card {
+  position: fixed;
+  inset: 0;
+  z-index: 11;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.project-card__left,
+.project-card__right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.project-card__left {
+  width: max(12vw, 120px);
+  justify-content: flex-end;
+  left: var(--panel-gutter);
+  text-align: left;
+  align-items: flex-start;
+}
+
+.project-card__right {
+  width: max(28vw, 240px);
+  justify-content: flex-start;
+  right: var(--panel-gutter);
+  text-align: left;
+  align-items: flex-start;
+}
+
+.project-card__left > *,
+.project-card__right > * {
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.65);
+}
+
+/* ----------------------------------------------------------------------------
+   LEFT panel — index + label + company
+   Number and project title: 16px @1920 = var(--size-micro)
+   ------------------------------------------------------------------------- */
+.project-card__index {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--size-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.project-card__label {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--size-micro);
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-tight);
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+  white-space: nowrap;
+}
+
+.project-card__company {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.project-card__company-logo {
+  height: var(--size-md);
+  width: auto;
+  opacity: 0.7;
+}
+
+.project-card__company-name {
+  display: none;
+}
+
+/* ----------------------------------------------------------------------------
+   RIGHT panel — tagline (Tecnica) + metadata
+   Tecnica: 32px @1920 = var(--size-md).  Inter labels: 16px = var(--size-micro).
+   ------------------------------------------------------------------------- */
+.project-card__tagline {
+  font-family: var(--font-accent);
+  font-size: var(--size-md);
+  line-height: var(--leading-accent);
+  letter-spacing: var(--tracking-accent);
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.project-card__meta {
+  font-family: var(--font-body);
+  font-size: var(--size-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}
+
+.project-card__meta dt {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--size-micro);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.project-card__meta dt:not(:first-child) {
+  margin-top: var(--space-2);
+}
+
+.project-card__meta dd {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+}
+
+/* ----------------------------------------------------------------------------
+   Image hit area — click target over the WebGL plane
+   ------------------------------------------------------------------------- */
+.project-card__hit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  pointer-events: none;
+  z-index: 12;
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+}
+
+/* ============================================================================
+   Hover chrome — corner brackets, inner border/shadow, status, year
+   Hover Tecnica (year): 48px @1920 = var(--size-lg)
+   Hover Kode Mono (status): 16px @1920 = var(--size-micro)
+   ========================================================================= */
+
+.project-card__hover-chrome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 13;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-default);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 0 80px 25px rgba(0, 0, 0, 0.4);
+}
+
+.project-card:has(.project-card__hit:hover) .project-card__hover-chrome,
+.project-card:has(.project-card__hit:focus-visible) .project-card__hover-chrome {
+  opacity: 1;
+}
+
+/* Corner brackets — L-shaped marks at each corner, well outside image */
+.hover-chrome__corner {
+  position: absolute;
+  width: var(--space-5);
+  height: var(--space-5);
+  pointer-events: none;
+}
+
+.hover-chrome__corner--tl {
+  top: calc(var(--space-3) * -1);
+  left: calc(var(--space-3) * -1);
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+}
+
+.hover-chrome__corner--tr {
+  top: calc(var(--space-3) * -1);
+  right: calc(var(--space-3) * -1);
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+
+.hover-chrome__corner--bl {
+  bottom: calc(var(--space-3) * -1);
+  left: calc(var(--space-3) * -1);
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
+}
+
+.hover-chrome__corner--br {
+  bottom: calc(var(--space-3) * -1);
+  right: calc(var(--space-3) * -1);
+  border-bottom: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+
+/* Status text — top-left of image, 16px @1920 */
+.hover-chrome__status {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--size-micro);
+  font-weight: 700;
+  letter-spacing: var(--tracking-mono);
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+}
+
+/* Vertical year — bottom-right of image, 48px @1920 */
+.hover-chrome__year {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-3);
+  font-family: var(--font-accent);
+  font-size: var(--size-lg);
+  letter-spacing: var(--tracking-accent);
+  color: rgba(255, 255, 255, 0.85);
+  white-space: pre-line;
+  text-align: right;
+  line-height: var(--leading-accent);
+}
+
+/* ============================================================================
+   Scroll indicator — "(scroll)" text, bottom-right
+   Padding right: 64px @1920 = var(--layout-gutter-desktop).  Size: 120px @1920.
+   ========================================================================= */
+
+.scroll-indicator {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--layout-gutter-desktop);
+  z-index: 20;
+  pointer-events: none;
+  transition: opacity var(--dur-medium) var(--ease-default);
+}
+
+.scroll-indicator__text {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: var(--size-scroll);
+  color: rgba(255, 255, 255, 0.15);
+  text-transform: lowercase;
+  line-height: 0.95;
+  letter-spacing: var(--tracking-heading);
+}
+
+/* ============================================================================
+   Intro layer — name + positioning + about, shown at scroll=0
+   Padding left: 64px @1920 = var(--layout-gutter-desktop)
+   Name: 64px @1920.  Tecnica: 48px.  Kode Mono: 24px.
+   ========================================================================= */
+
+.intro-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  padding:
+    calc(var(--status-bar-height) + var(--space-6))
+    var(--layout-gutter-desktop)
+    var(--space-6);
+  transition: opacity var(--dur-medium) var(--ease-default);
+  will-change: opacity;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(10, 10, 12, 0.5);
+}
+
+.intro-layer__name {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: var(--size-display);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-heading);
+  line-height: 0.95;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.intro-layer__positioning {
+  font-family: var(--font-accent);
+  font-size: var(--size-lg);
+  line-height: var(--leading-accent);
+  letter-spacing: var(--tracking-accent);
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+  text-transform: none;
+  font-weight: 400;
+  max-width: max(58vw, 550px);
+}
+
+.intro-layer__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--size-sm);
+  letter-spacing: var(--tracking-mono);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.intro-layer__about {
+  font-family: var(--font-body);
+  font-size: var(--size-sm);
+  line-height: var(--leading-base);
+  color: var(--color-text-secondary);
+  max-width: 58ch;
+  margin-bottom: var(--space-2);
+}
+
+.intro-layer__resume {
+  font-family: var(--font-body);
+  font-size: var(--size-sm);
+  letter-spacing: var(--tracking-mono);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  pointer-events: auto;
+  transition: color var(--dur-fast) var(--ease-default);
+  margin-top: var(--space-2);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+}
+
+.intro-layer__icon {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.intro-layer__resume:hover {
+  color: var(--color-accent);
+}
+
+/* ============================================================================
+   Mobile
+   ========================================================================= */
+
+@media (max-width: 720px) {
+  .project-card__left,
+  .project-card__right {
+    position: absolute;
+    width: calc(100vw - var(--layout-gutter-mobile) * 2);
+    left: var(--layout-gutter-mobile);
+    right: var(--layout-gutter-mobile);
+    transform: none;
+    text-align: left;
+  }
+
+  .project-card__left {
+    top: 12%;
+  }
+
+  .project-card__right {
+    top: auto;
+    bottom: 12%;
+    text-align: left;
+  }
+
+  .project-card__tagline {
+    font-size: var(--size-sm);
+  }
+
+  .project-card__meta dt:not(:first-child) {
+    margin-top: var(--space-1);
+  }
+}

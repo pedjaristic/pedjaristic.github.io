@@ -1,0 +1,90 @@
+/* ============================================================================
+   status-bar.css — persistent top strip used on every page.
+   Nav bar: 32px padding all around, name 24px, links 16px (at 1920px).
+   ========================================================================= */
+
+.status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  height: var(--status-bar-height);
+  padding: 0 var(--nav-padding);
+
+  font-family: var(--font-body);
+  font-size: var(--size-micro);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.status-bar__home {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: var(--size-micro);
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-heading);
+  text-transform: uppercase;
+}
+
+.status-bar__home:hover {
+  color: var(--color-accent);
+}
+
+.status-bar__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.status-bar__link {
+  font-family: var(--font-body);
+  font-size: var(--size-micro);
+  letter-spacing: var(--tracking-mono);
+  color: var(--color-text-secondary);
+  transition: color var(--dur-fast) var(--ease-default);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+}
+
+.status-bar__icon {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.status-bar__link:hover {
+  color: var(--color-accent);
+}
+
+/* ----------------------------------------------------------------------------
+   Mobile
+   ------------------------------------------------------------------------- */
+@media (max-width: 720px) {
+  .status-bar {
+    gap: var(--space-1);
+  }
+
+  .status-bar__right {
+    gap: var(--space-1);
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Hidden state (during zoom-to-project transition).
+   ------------------------------------------------------------------------- */
+.status-bar.is-fading {
+  opacity: 0;
+  transition: opacity var(--dur-medium) var(--ease-default);
+  pointer-events: none;
+}

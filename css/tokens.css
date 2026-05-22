@@ -1,0 +1,141 @@
+/* ============================================================================
+   tokens.css — single source of truth for design decisions.
+   Change a value here and the entire site re-skins.
+
+   All sizing is viewport-relative, calibrated to 1920px reference width.
+   Formula: (target_px / 1920) * 100 = vw value.
+   min() floors prevent text from becoming unreadable at small viewports.
+   ========================================================================= */
+
+:root {
+  /* --------------------------------------------------------------------------
+     Canvas + foreground colors
+     ----------------------------------------------------------------------- */
+  --color-canvas-base: #0a0a0c;
+  --color-canvas-soft: #14141a;
+  --color-text-primary: #f4f3ef;
+  --color-text-secondary: #b6b4ac;
+  --color-text-muted: #6e6c66;
+  --color-accent: #66FF00;
+  --color-border-subtle: rgba(244, 243, 239, 0.12);
+
+  /* --------------------------------------------------------------------------
+     Per-project mood palettes (background + two blobs)
+     ----------------------------------------------------------------------- */
+
+  /* Ray-Ban Display — cooler steel-blue to match product imagery */
+  --mood-rayban-bg:    #0f1620;
+  --mood-rayban-blob1: #4a6f8f;
+  --mood-rayban-blob2: #2a3d52;
+
+  /* Orion — cool slate, electric blue */
+  --mood-orion-bg:     #0f1620;
+  --mood-orion-blob1:  #4f86c6;
+  --mood-orion-blob2:  #2a3848;
+
+  /* Meta Quest — MR passthrough teal, warm punctuation */
+  --mood-quest-bg:     #0c1c1c;
+  --mood-quest-blob1:  #4ca996;
+  --mood-quest-blob2:  #9c5a36;
+
+  /* Facebook — deep aubergine, social warmth */
+  --mood-facebook-bg:    #1a0f1c;
+  --mood-facebook-blob1: #c44a7a;
+  --mood-facebook-blob2: #3a2240;
+
+  /* --------------------------------------------------------------------------
+     Typography
+     Three fonts: heading (Inter Black), accent (Tecnica), body (Kode Mono).
+     ----------------------------------------------------------------------- */
+  --font-heading:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-accent:
+    "Tecnica", "Kode Mono", ui-monospace, monospace;
+  --font-body:
+    "Kode Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    Monaco, Consolas, monospace;
+
+  /* Type scale — viewport-relative, referenced to 1920px
+     16px  → 0.833vw    24px  → 1.25vw     32px  → 1.667vw
+     48px  → 2.5vw      64px  → 3.333vw    120px → 6.25vw           */
+  --size-micro:   max(0.833vw, 11px);   /* 16px @1920 */
+  --size-sm:      max(1.25vw, 13px);    /* 24px @1920 */
+  --size-base:    max(0.833vw, 11px);   /* 16px @1920 — alias, same as micro */
+  --size-md:      max(1.667vw, 16px);   /* 32px @1920 */
+  --size-lg:      max(2.5vw, 20px);     /* 48px @1920 */
+  --size-xl:      max(1.667vw, 16px);   /* 32px @1920 — alias for project-page compat */
+  --size-2xl:     max(2.5vw, 20px);     /* 48px @1920 — alias for project-page compat */
+  --size-display: max(3.333vw, 28px);   /* 64px @1920 */
+  --size-scroll:  max(6.25vw, 40px);    /* 120px @1920 */
+
+  --leading-tight: 1.05;
+  --leading-snug:  1.2;
+  --leading-base:  1.5;
+  --leading-loose: 1.7;
+  --leading-accent: 1.25;
+
+  --tracking-tight: -0.02em;
+  --tracking-heading: 0.05em;
+  --tracking-base:   0;
+  --tracking-wide:   0.04em;
+  --tracking-mono:   0.06em;
+  --tracking-accent: 0.10em;
+
+  /* --------------------------------------------------------------------------
+     Spacing — viewport-relative 8px grid, referenced to 1920px
+     ----------------------------------------------------------------------- */
+  --space-1:  max(0.417vw, 4px);    /*   8px @1920 */
+  --space-2:  max(0.833vw, 8px);    /*  16px @1920 */
+  --space-3:  max(1.25vw, 12px);    /*  24px @1920 */
+  --space-4:  max(1.667vw, 16px);   /*  32px @1920 */
+  --space-5:  max(2.5vw, 24px);     /*  48px @1920 */
+  --space-6:  max(3.333vw, 32px);   /*  64px @1920 */
+  --space-7:  max(5vw, 48px);       /*  96px @1920 */
+  --space-8:  max(6.667vw, 64px);   /* 128px @1920 */
+
+  /* --------------------------------------------------------------------------
+     Layout
+     ----------------------------------------------------------------------- */
+  --layout-max-width:        1440px;
+  --layout-prose-max-width:  68ch;
+  --nav-padding:             max(1.667vw, 16px);   /* 32px @1920 */
+  --layout-gutter-desktop:   max(3.333vw, 32px);   /* 64px @1920 — intro */
+  --panel-gutter:            max(4.583vw, 44px);    /* 88px @1920 — project cards */
+  --layout-gutter-mobile:    var(--space-3);
+  --status-bar-height:       max(4.583vw, 48px);   /* ~88px @1920 */
+
+  /* --------------------------------------------------------------------------
+     Motion
+     ----------------------------------------------------------------------- */
+  --ease-default:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spatial:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-emphasis: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-flip:     cubic-bezier(0.4, 0, 0.2, 1);
+
+  --dur-instant: 80ms;
+  --dur-fast:    200ms;
+  --dur-medium:  400ms;
+  --dur-slow:    640ms;
+  --dur-zoom:    800ms;
+  --dur-pulse:   3200ms;
+
+  /* --------------------------------------------------------------------------
+     Effects
+     ----------------------------------------------------------------------- */
+  --shadow-hover:  0 10px 40px -10px rgba(0, 0, 0, 0.4);
+  --blur-backdrop: blur(8px);
+}
+
+/* ----------------------------------------------------------------------------
+   Reduced-motion preference — kill ambient and decorative motion.
+   ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 0ms;
+    --dur-fast:    0ms;
+    --dur-medium:  0ms;
+    --dur-slow:    0ms;
+    --dur-zoom:    0ms;
+    --dur-pulse:   0ms;
+  }
+}

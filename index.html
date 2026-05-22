@@ -1,246 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Pedja</title>
-  <meta name="description" content="Pedja Ristic">
-  <meta name="author" content="Pedja Ristic">
-<link rel="image_src" href="images/thumbnail.png" />
+    <title>Pedja Ristic — Portfolio</title>
+    <meta name="description" content="Staff product designer at Meta. Spatial design, AR glasses, and wearable AI. Designing how people show up to each other across surfaces." />
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Kode+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/status-bar.css" />
+    <link rel="stylesheet" href="css/depth-gallery.css" />
+    <link rel="stylesheet" href="css/project-page.css" />
+    <link rel="stylesheet" href="css/transitions.css" />
+  </head>
+  <body>
+    <!-- ====================================================================
+         Persistent status bar (same markup on every page).
+         ================================================================ -->
+    <header class="status-bar">
+      <a class="status-bar__home" href="index.html">PEDJA RISTIC</a>
+      <nav class="status-bar__right">
+        <a class="status-bar__link" href="https://www.instagram.com/pedj_a_/" target="_blank" rel="noopener noreferrer">[<span class="status-bar__icon" style="--icon:url('/assets/icons/white/Photo.svg')"></span>] IG</a>
+        <a class="status-bar__link" href="https://www.linkedin.com/in/pedjaristic/" target="_blank" rel="noopener noreferrer">[<span class="status-bar__icon" style="--icon:url('/assets/icons/white/Work.svg')"></span>] IN</a>
+        <a class="status-bar__link status-bar__email" href="#" data-email="pedja.ristic@outlook.com">[<span class="status-bar__icon" style="--icon:url('/assets/icons/white/Add_Messages.svg')"></span>] <span class="status-bar__email-label">EMAIL</span></a>
+      </nav>
+    </header>
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/revealer.css">
-    <link rel="stylesheet" href="css/demo.css">
+    <!-- ====================================================================
+         Three.js canvas — depth gallery background + project planes.
+         ================================================================ -->
+    <canvas class="gallery-canvas"></canvas>
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Horizontal vignette — dims the canvas at the left and right edges
+         so the text panels stay readable when planes overflow toward them. -->
+    <div class="gallery-vignette" aria-hidden="true"></div>
 
+    <!-- Ambient grain layer above the canvas, below DOM content. -->
+    <div class="grain-overlay" aria-hidden="true"></div>
 
+    <!-- ====================================================================
+         Intro layer — shown at scroll=0, fades out as user scrolls forward.
+         ================================================================ -->
+    <section class="intro-layer" aria-label="Introduction">
+      <h1 class="intro-layer__name">Pedja Ristic</h1>
+      <h2 class="intro-layer__positioning">
+        Staff product designer &amp; AI builder creating future-facing experiences across surfaces and devices.
+      </h2>
+      <span class="intro-layer__label">[WELCOME]</span>
+      <div class="intro-layer__about">
+        <p>
+          I specialize in designing for connection—across screens, headsets, glasses, and AI. The selected work below is a curated preview. I'd love to walk you through the details. Grab my email above or resume below.
+        </p>
+      </div>
+      <a class="intro-layer__resume" href="assets/Pedja%20Ristic%20Resume.pdf" target="_blank" rel="noopener noreferrer">[<span class="intro-layer__icon" style="--icon:url('/assets/icons/white/Copy_Document.svg')"></span>] RESUME</a>
+    </section>
 
-<script>document.documentElement.className = 'js';</script>
-</head>
-<body>
+    <!-- ====================================================================
+         DOM overlay — one positioned card per 3D plane.
+         ================================================================ -->
+    <div class="gallery-overlay" aria-label="Projects"></div>
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-    <div class="container">
-
-
-          <nav>
-          <a class="left-nav" href="index.html"><b>Pedja</b>  Ristic</a>
-          <a class="right-nav" href="mailto:pedja.ristic@outlook.com?Subject=Saying%20Hello" target="_top">CONTACT</a>
-          </nav>
-
-
-    <div class="section-header">
-
- <div class="left-content">
-       <ul class="perma-nav">
-           <!--<li><a href="#"><sup>00</sup><b>About</b></a></li>-->
-           <li><a target="_blank" href="https://www.meta.com/blog/meta-ray-ban-display-ai-glasses-connect-2025/?srsltid=AfmBOoop-OHcHEveMB7jmp4JjtgGfwjT5HTlD6feEO-oJ7kzdczAhMpR"><b>01 RAY-BAN META DISPLAY</b></a></li>
-           <li><a target="_blank" href="https://about.fb.com/news/2024/09/introducing-orion-our-first-true-augmented-reality-glasses/"><b>02 PROJECT ORION</b></a></li>
-           <li><a target="_blank" href="https://about.fb.com/news/2023/07/introducing-threads-new-app-text-sharing/"><b>03 THREADS</b></a></li>
-           <li><a target="_blank" href="https://pay.amazon.com/"><b>04 AMAZON PAY</b></a></li>
-
-        </ul>
-
-
-            <div class="scroll-anim">
-                <div class="scroll-content">
-                    <img src="images/line-down.png">
-                </div>
-            </div>
-
-        </div>
-
-
-            <div id="rev-1" class="about-block-wrapper">
-                <div class="about-block">
-                <h2>Hi, I'm Pedja.</h2>
-                <h2 class="libre">XR Product Designer</h2>
-		<br>
-		<br>
-		<br>
-                    <h6>Crafting immersive AR experiences @ Meta.</h6>
-                </div>
-            </div>
-
+    <!-- Scroll prompt (bottom-right, visible at scroll=0). -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <span class="scroll-indicator__text">(scroll)</span>
     </div>
-        <section class="form">
-				<button class="btn btn--close"></button>
-				<div class="form__inner flexy flexy--center" action="">
 
-                    <div class="form_content">
-					<h2 class="form__section form__section--title libre">About...</h2>
-					<div class="form__section">
+    <!-- ====================================================================
+         Project view — SPA container for individual project pages.
+         Hidden by default; the router populates and reveals it.
+         ================================================================ -->
+    <main class="project-page" id="project-view" hidden></main>
 
-                        <p><i>I'm Currently a Product Designer at Facebook, working on products like news feed and stories.</i></p>
-                        &nbsp;
-                        <p></p>
+    <!-- ====================================================================
+         Project card template — cloned for each project in card-overlay.js.
+         A card is a pair of viewport-anchored panels (left + right) that
+         flank the 3D plane. Card-overlay.js cross-fades pairs by project.
+         ================================================================ -->
+    <template id="project-card-template">
+      <article class="project-card">
+        <div class="project-card__left">
+          <span class="project-card__index"></span>
+          <h2 class="project-card__label"></h2>
+          <div class="project-card__company">
+            <img class="project-card__company-logo" src="" alt="" />
+            <span class="project-card__company-name"></span>
+          </div>
+        </div>
+        <div class="project-card__right">
+          <p class="project-card__tagline"></p>
+          <dl class="project-card__meta">
+            <dt>ROLE</dt>
+            <dd class="project-card__role"></dd>
+            <dt>SCOPE</dt>
+            <dd class="project-card__scope"></dd>
+          </dl>
+        </div>
+        <!-- Hover chrome: positioned over the hit area, revealed on hover -->
+        <div class="project-card__hover-chrome" aria-hidden="true">
+          <span class="hover-chrome__corner hover-chrome__corner--tl"></span>
+          <span class="hover-chrome__corner hover-chrome__corner--tr"></span>
+          <span class="hover-chrome__corner hover-chrome__corner--bl"></span>
+          <span class="hover-chrome__corner hover-chrome__corner--br"></span>
+          <span class="hover-chrome__status"></span>
+          <span class="hover-chrome__year"></span>
+        </div>
+        <button class="project-card__hit" type="button" aria-label="Open project"></button>
+      </article>
+    </template>
 
-                        <p></p>
-                        &nbsp;
-                        <h3 class="libre">- Thanks for reading.</h3>
-
-					</div>
-
-					<div class="form__section form__section--right">
-						<span class="form__close">X Close this</span>
-					</div>
-                    </div>
-				</div>
-			</section>
-
-
-
-
-              <div class="main-block">
-                  <blockquote>Past Work</blockquote>
-
-                  <div class="selected-projects">
-
-                        <div class="work" id="one">
-                        <a target="_blank" href="https://www.meta.com/blog/meta-ray-ban-display-ai-glasses-connect-2025/?srsltid=AfmBOoop-OHcHEveMB7jmp4JjtgGfwjT5HTlD6feEO-oJ7kzdczAhMpR">
-                            <div class="label">
-                            <h1>RAY-BAN META DISPLAY</h1>
-
-                                <div><h5><hr><span>01</span></h5></div>
-
-                            </div> <div class="work-img"> <img src="images/rayban-img.png"></div> </a>
-                        </div>
-
-
-                        <div class="work" id="two">
-                        <a target="_blank" href="https://about.fb.com/news/2024/09/introducing-orion-our-first-true-augmented-reality-glasses/">
-                            <div class="label"> <h1>PROJECT ORION</h1>
-
-
-                                <div><h5><span>02</span><hr></h5></div>
-                            </div> <div class="work-img"> <img src="images/orion-img.png"> </div> </a>
-                        </div>
-
-
-                        <div class="work" id="three">
-                        <a target="_blank" href="https://about.fb.com/news/2023/07/introducing-threads-new-app-text-sharing/">
-                            <div class="label"> <h1>THREADS</h1>
-
-                                <div><h5><hr><span>03</span></h5></div>
-
-                            </div> <div class="work-img"> <img src="images/threads-img.png"> </div> </a>
-                        </div>
-
-
-                        <div class="work" id="four">
-                        <a target="_blank" href="https://pay.amazon.com/">
-
-                            <div class="label"> <h1>AMAZON PAY</h1>
-
-                                <div><h5><span>04</span><hr></h5></div>
-
-
-                            </div> <div class="work-img"> <img src="images/Ap-img.png"> </div> </a>
-                        </div>
-
-
-
-                  </div>
-
-
-</div>
-
-            <div class="footer">
-
-            <div class="footer-content">
-            <h3 class="libre">- Thanks for visiting...</h3>
-
-            <p>Connect with me if you have any questions.
-            </p>
-
-            <p>...</p>
-
-
-            <ul>
-
-            <li><a target="_blank" href="https://www.instagram.com/pedj_a_/">INSTAGRAM</a></li>
-           <li><a target="_blank" href="https://www.linkedin.com/in/pedjaristic">LINKEDIN</a></li>
-           <li><a target="_blank" href="https://soundcloud.com/p_e_d_j_a">SOUNDCLOUD</a></li>
-
-            </ul>
-
-            </div>
-            </div>
-
-
-
-
-  </div>
-
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-    <script src="js/jquery-2.1.1.js"></script>
-    <script src="js//anime.min.js"></script>
-    <script src="js/main.js"></script>
-
-
-    <script>
-		(function() {
-			var formEl = document.querySelector('section.form'),
-				revealer = new RevealFx(formEl),
-				closeCtrl = formEl.querySelector('.form__close');
-
-			document.querySelector('.btn--form-open').addEventListener('click', function() {
-				revealer.reveal({
-					bgcolor: '#ffffff',
-					direction: 'bt',
-					duration: 500,
-					onCover: function(contentEl, revealerEl) {
-						formEl.classList.add('form--open');
-						contentEl.style.opacity = 1;
-					},
-					onComplete: function() {
-						closeCtrl.addEventListener('click', closeForm);
-					}
-				});
-			});
-
-			function closeForm() {
-				closeCtrl.removeEventListener('click', closeForm);
-				formEl.classList.remove('form--open');
-				revealer.reveal({
-					bgcolor: '#222222',
-					direction: 'tb',
-					duration: 500,
-					onCover: function(contentEl, revealerEl) {
-						formEl.classList.remove('form--open');
-						contentEl.style.opacity = 0;
-					}
-				});
-			}
-
-			formEl.addEventListener('submit', function(ev) {ev.preventDefault();});
-		})();
-		</script>
-
-
-
-</body>
+    <!-- ====================================================================
+         Module entry point.
+         ================================================================ -->
+    <script type="module" src="js/app.js"></script>
+  </body>
 </html>
