@@ -81,6 +81,12 @@ export class IntroLayer {
     this.element.style.pointerEvents = "none";
   }
 
+  /** Subtle staggered fade-in on first paint (home / intro only). */
+  playEntrance() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    this.element.classList.add("intro-layer--entering");
+  }
+
   /** Re-enable the intro (used when bringing the home page back after
    *  the user navigates back via the browser, not via reverse-zoom). */
   reset() {

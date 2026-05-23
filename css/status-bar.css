@@ -23,6 +23,25 @@
   color: var(--color-text-secondary);
 }
 
+/* Top scrim — gradient fades to transparent so no hard edge at bar bottom. */
+.status-bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(var(--status-bar-height) + var(--nav-scrim-fade));
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / var(--nav-scrim-opacity)) 0%,
+    rgb(0 0 0 / calc(var(--nav-scrim-opacity) * 0.62)) 22%,
+    rgb(0 0 0 / calc(var(--nav-scrim-opacity) * 0.22)) 52%,
+    transparent 100%
+  );
+}
+
 .status-bar__home {
   font-family: var(--font-heading);
   font-weight: 900;
@@ -72,11 +91,11 @@
    ------------------------------------------------------------------------- */
 @media (max-width: 720px) {
   .status-bar {
-    gap: var(--space-1);
+    gap: var(--space-2);
   }
 
   .status-bar__right {
-    gap: var(--space-1);
+    gap: var(--space-3);
   }
 }
 

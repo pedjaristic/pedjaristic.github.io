@@ -27,6 +27,16 @@ body.body--project {
   min-height: 100vh;
 }
 
+/* Tecnica accent type — subtle green glow (not gallery hover chrome) */
+.intro-layer__positioning,
+.project-card__tagline,
+.intro-layer__positioning-line,
+.project-page__tagline,
+.project-page__tagline-line,
+.project-section__quote {
+  text-shadow: var(--text-glow-accent);
+}
+
 /* ----------------------------------------------------------------------------
    Type defaults
    ------------------------------------------------------------------------- */

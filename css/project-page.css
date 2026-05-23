@@ -19,6 +19,12 @@
   align-items: center;
   color: var(--color-text-primary);
   transition: color var(--dur-fast) var(--ease-default);
+  -webkit-filter:
+    drop-shadow(0 0 1px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+  filter:
+    drop-shadow(0 0 1px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
 }
 
 .project-page__back-icon {
@@ -65,6 +71,43 @@
   object-position: center;
 }
 
+.project-page__hero-chrome {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-chrome-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 0 80px 25px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity var(--dur-medium) var(--ease-default);
+}
+
+.hero-chrome-scrim--visible {
+  opacity: 1;
+}
+
+.flip-chrome-floater__content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-chrome-scrim {
+    transition: none;
+  }
+}
+
 /* ----------------------------------------------------------------------------
    Header (title, eyebrow, tagline)
    ------------------------------------------------------------------------- */
@@ -88,7 +131,7 @@
 
 .project-page__company-logo {
   display: block;
-  height: max(1.25vw, 18px);
+  height: max(1.85vw, 26px);
   width: auto;
 }
 
@@ -696,14 +739,17 @@
   text-overflow: unset;
 }
 
-/* -- Video controls: play/pause + timeline only, hidden until hover ----- */
-.project-video::-webkit-media-controls-enclosure {
+/* -- Video controls: click/tap to reveal, fade out after idle ---------------- */
+.project-video {
+  cursor: pointer;
+}
+
+.project-video[controls]::-webkit-media-controls-enclosure {
   opacity: 0;
   transition: opacity var(--dur-fast) var(--ease-default);
 }
 
-.project-video:hover::-webkit-media-controls-enclosure,
-.project-video:focus-within::-webkit-media-controls-enclosure {
+.project-video.project-video--controls-visible[controls]::-webkit-media-controls-enclosure {
   opacity: 1;
 }
 
@@ -847,6 +893,11 @@
 
   .project-page__hero {
     max-width: calc(60vh * 0.75);
+  }
+
+  .project-page__tagline,
+  .project-section__quote {
+    font-size: max(4.5vw, 24px);
   }
 
   .project-page__meta--compact,

@@ -8,6 +8,12 @@
 import { renderProject, clearProject } from "./project-view.js";
 import { getProjectById } from "./data.js";
 import { fadeStatusBar } from "./status-bar.js";
+import {
+  applyRect,
+  renderFloaterChromeHTML,
+  settleHeroChrome,
+  trackChromeToProxy,
+} from "./hero-chrome.js";
 
 const FLIP_MS = 700;
 
@@ -24,6 +30,8 @@ export class Router {
     this._currentProjectId = null;
     this._transitioning = false;
     this._proxy = null;
+    this._chromeFloater = null;
+    this._stopChromeTrack = null;
   }
 
   init() {
@@ -52,9 +60,13 @@ export class Router {
 
     document.querySelector(".status-bar__home").addEventListener("click", (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      if (!this._currentProjectId) return;
       e.preventDefault();
-      this.showGallery(this._currentProjectId);
+      if (this._currentProjectId) {
+        this.showGallery(this._currentProjectId);
+        return;
+      }
+      this.scroll.goToIntro();
+      this.intro.reset();
     });
 
     window.addEventListener("popstate", () => {
@@ -84,6 +96,7 @@ export class Router {
   showProject(projectId, fromProject = false) {
     if (this._transitioning) return;
     this._transitioning = true;
+    this._removeChromeFloater();
 
     const project = getProjectById(projectId);
     if (!project) { this._transitioning = false; return; }
@@ -100,12 +113,15 @@ export class Router {
         this._projectView.scrollTop = 0;
         this._projectView.classList.add("project-page--entering-from-project");
 
+        const heroEl = this._projectView.querySelector(".project-page__hero");
+        if (heroEl) settleHeroChrome(heroEl);
+
         this._projectView.style.transition = "opacity 200ms ease";
         this._projectView.style.opacity = "1";
 
         this._currentProjectId = projectId;
         history.pushState({ projectId }, "", `#${projectId}`);
-        document.title = `${project.label} — Pedja Ristic`;
+        document.title = `${project.label} | Pedja Ristic`;
 
         this._transitioning = false;
         this.navigation.isTransitioning = false;
@@ -151,13 +167,16 @@ export class Router {
     proxy.style.transformOrigin = "center center";
     proxy.style.transform = `translate(${fromCx - toCx}px, ${fromCy - toCy}px) scale(${scaleX}, ${scaleY})`;
 
+    const chromeFloater = this._createChromeFloater(project, fromRect);
+    applyRect(chromeFloater, proxy.getBoundingClientRect());
+
     // 4. Hide gallery (project view's background already covers it visually)
     this._hideGallery();
 
     // 5. Update state
     this._currentProjectId = projectId;
     history.pushState({ projectId }, "", `#${projectId}`);
-    document.title = `${project.label} — Pedja Ristic`;
+    document.title = `${project.label} | Pedja Ristic`;
 
     // 6. Animate to identity transform (proxy lands at hero position).
     //    Completion timeout inside the double-rAF so it's synchronized with
@@ -167,12 +186,22 @@ export class Router {
         proxy.style.transition = `transform ${FLIP_MS}ms var(--ease-flip)`;
         proxy.style.transform = "translate(0, 0) scale(1, 1)";
 
-        // 7. When FLIP finishes: reveal real hero, remove proxy.
+        this._stopChromeTrack = trackChromeToProxy(
+          chromeFloater,
+          proxy,
+          FLIP_MS + 40
+        );
+
+        // 7. When FLIP finishes: reveal real hero, remove proxy + floater.
         //    Content stagger animations are already playing (CSS delays from frame 0).
         setTimeout(() => {
+          this._stopChromeTrack?.();
+          this._stopChromeTrack = null;
+          heroEl.style.visibility = "visible";
+          settleHeroChrome(heroEl);
           proxy.remove();
           this._proxy = null;
-          heroEl.style.visibility = "visible";
+          this._removeChromeFloater();
           this.navigation.isTransitioning = false;
           this._transitioning = false;
         }, FLIP_MS + 20);
@@ -193,6 +222,7 @@ export class Router {
   showGallery(fromProjectId) {
     if (this._transitioning) return;
     this._transitioning = true;
+    this._removeChromeFloater();
 
     const project = fromProjectId ? getProjectById(fromProjectId) : null;
 
@@ -261,9 +291,16 @@ export class Router {
       proxy.style.transformOrigin = "center center";
       proxy.style.transform = "translate(0, 0) scale(1, 1)";
 
+      const chromeFloater = this._createChromeFloater(project, fromRect);
+      applyRect(chromeFloater, proxy.getBoundingClientRect());
+
       // 5. Hide project view immediately (proxy covers the hero)
       this._projectView.hidden = true;
       this._projectView.style.opacity = "0";
+      this._projectView.classList.remove(
+        "project-page--entering",
+        "project-page--entering-from-project"
+      );
       clearProject();
 
       // 6. Animate proxy to gallery plane position (shrinks + moves).
@@ -282,6 +319,12 @@ export class Router {
           proxy.style.transition = `transform ${dynamicMs}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
           proxy.style.transform = `translate(${endDx}px, ${endDy}px) scale(${endScaleX}, ${endScaleY})`;
 
+          this._stopChromeTrack = trackChromeToProxy(
+            chromeFloater,
+            proxy,
+            dynamicMs + 40
+          );
+
           this._setGalleryOpacity(1, dynamicMs);
 
           const HANDOFF_MS = 120;
@@ -293,17 +336,25 @@ export class Router {
               focalPlane.material.uniforms.uBlur.value = 0;
             }
 
+            // Resume gallery rendering under the fading proxy (prevents pop-in flicker).
+            this._currentProjectId = null;
+
+            this._stopChromeTrack?.();
+            this._stopChromeTrack = null;
+
             proxy.style.transition = `opacity ${HANDOFF_MS}ms ease`;
             proxy.style.opacity = "0";
+            chromeFloater.style.transition = `opacity ${HANDOFF_MS}ms ease`;
+            chromeFloater.style.opacity = "0";
 
             setTimeout(() => {
               this._setGalleryOpacity(1);
               proxy.remove();
               this._proxy = null;
+              this._removeChromeFloater();
 
-              this._currentProjectId = null;
               history.pushState(null, "", window.location.pathname);
-              document.title = "Pedja Ristic — Portfolio";
+              document.title = "Pedja Ristic | Portfolio";
               fadeStatusBar(false);
 
               this.gallery.releaseForcedPlane();
@@ -330,9 +381,11 @@ export class Router {
     this._projectView.style.opacity = "1";
     this._projectView.hidden = false;
     this._projectView.scrollTop = 0;
+    const heroEl = this._projectView.querySelector(".project-page__hero");
+    if (heroEl) settleHeroChrome(heroEl);
     this._hideGallery();
     this._currentProjectId = projectId;
-    document.title = `${getProjectById(projectId).label} — Pedja Ristic`;
+    document.title = `${getProjectById(projectId).label} | Pedja Ristic`;
   }
 
   _showGalleryImmediate() {
@@ -346,7 +399,7 @@ export class Router {
     this.navigation.isTransitioning = false;
     this._transitioning = false;
     this._currentProjectId = null;
-    document.title = "Pedja Ristic — Portfolio";
+    document.title = "Pedja Ristic | Portfolio";
   }
 
   /* -- Proxy --------------------------------------------------------------- */
@@ -364,6 +417,24 @@ export class Router {
     document.body.appendChild(proxy);
     this._proxy = proxy;
     return proxy;
+  }
+
+  _createChromeFloater(project, rect) {
+    this._removeChromeFloater();
+    const floater = document.createElement("div");
+    floater.className = "flip-chrome-floater";
+    floater.innerHTML = renderFloaterChromeHTML(project);
+    applyRect(floater, rect);
+    document.body.appendChild(floater);
+    this._chromeFloater = floater;
+    return floater;
+  }
+
+  _removeChromeFloater() {
+    this._stopChromeTrack?.();
+    this._stopChromeTrack = null;
+    this._chromeFloater?.remove();
+    this._chromeFloater = null;
   }
 
   /* -- Gallery visibility -------------------------------------------------- */

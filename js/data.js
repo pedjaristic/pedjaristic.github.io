@@ -52,7 +52,7 @@ export const projects = [
   {
     id: "rayban",
     label: "Ray-Ban Display",
-    year: "2024–2026",
+    year: "2024 - 2026",
     tagline: "Native messaging on the first pair of Ray-Ban glasses with a display.",
     taglineLines: [
       "Native messaging on the first",
@@ -245,7 +245,7 @@ export const projects = [
         title: "Instagram",
         layout: "cinematic",
         description: [
-          "Owned Reels and IG AR—Meta's first AR Instagram experience on Orion. Feed, Reels, comments, and sharing, translated in the most intuitive way for glasses.",
+          "Owned Reels and IG AR, Meta's first AR Instagram experience on Orion. Feed, Reels, comments, and sharing, translated in the most intuitive way for glasses.",
         ],
         backdrop: {
           type: "video",
@@ -290,7 +290,7 @@ export const projects = [
   {
     id: "quest",
     label: "Spatial Music",
-    year: "2022–2023",
+    year: "2022 - 2023",
     tagline: "Your music, in the room with you.",
     taglineLines: [
       "Your music, in the",
@@ -392,7 +392,7 @@ export const projects = [
     thumb: "assets/Images/Care Reaction/thumb-care.png",
     bodyLabel: "[IMPACT]",
     body: [
-      "Conceptualized and led the design of the Care reaction. Facebook's first new reaction in <strong>five years</strong>—shipped to <strong>2.9B+ users</strong> in <strong>six weeks</strong> during the first months of COVID-19.",
+      "Conceptualized and led the design of the Care reaction. Facebook's first new reaction in <strong>five years</strong>, shipped to <strong>2.9B+ users</strong> in <strong>six weeks</strong> during the first months of COVID-19.",
       "Designed the system-wide propagation strategy across Feed, Comments, Stories, Live, and Messenger. NUX built on social proof rather than a tutorial; let people discover the reaction by seeing others use it. Originally planned as temporary for COVID, it is now a mainstay.",
     ],
     sections: [
@@ -418,7 +418,7 @@ export const projects = [
           alt: "Early Care reaction concept sketches",
         },
         quote:
-          "We need something that says 'I'm here for you'—the Love reaction feels too heavy but Like feels like not enough. - MZ",
+          "We need something that says 'I'm here for you.' The Love reaction feels too heavy but Like feels like not enough. - MZ",
       },
       {
         title: "Visual Refinement",
@@ -453,12 +453,12 @@ export const projects = [
           {
             type: "image",
             src: "assets/Images/Care Reaction/V1.png",
-            alt: "Care reaction testing — purple heart variant",
+            alt: "Care reaction testing, purple heart variant",
           },
           {
             type: "image",
             src: "assets/Images/Care Reaction/V2.png",
-            alt: "Care reaction testing — hugging face variant",
+            alt: "Care reaction testing, hugging face variant",
           },
         ],
       },

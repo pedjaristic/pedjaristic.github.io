@@ -70,6 +70,10 @@ async function bootstrap() {
   navigation.setRouter(router);
   router.init();
 
+  if (!router.getCurrentProjectId()) {
+    intro.playEntrance();
+  }
+
   for (let i = 1; i < projects.length; i++) {
     const project = projects[i];
     engine.loadTexture(project.hero).then((texture) => {

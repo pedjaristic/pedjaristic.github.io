@@ -4,6 +4,7 @@
    ========================================================================= */
 
 import { getProjectById, getNextProject } from "./data.js";
+import { renderHeroChromeHTML } from "./hero-chrome.js";
 
 const ARROW_ICON = "url('/assets/icons/white/Arrow 2.svg')";
 const EXTERNAL_LINK_ICON = "url('/assets/icons/white/external-link-sharp.svg')";
@@ -24,7 +25,7 @@ const videoPaused = new WeakSet();
 function renderMediaItem(m) {
   if (m.type === "video") {
     const poster = m.poster ? ` poster="${m.poster}"` : "";
-    return `<video class="project-video" data-src="${m.src}"${poster} muted loop playsinline controls controlsList="nofullscreen nodownload noremoteplayback noplaybackrate" disablePictureInPicture disableRemotePlayback preload="none" data-autoplay-on-scroll aria-label="${m.alt || ""}"></video>`;
+    return `<video class="project-video" data-src="${m.src}"${poster} muted loop playsinline controlsList="nofullscreen nodownload noremoteplayback noplaybackrate" disablePictureInPicture disableRemotePlayback preload="none" data-autoplay-on-scroll aria-label="${m.alt || ""}"></video>`;
   }
   return `<img src="${m.src}" alt="${m.alt || ""}" loading="lazy" />`;
 }
@@ -200,6 +201,10 @@ function renderHeroMeta(project) {
         </div>`;
 }
 
+function renderHeroChrome(project) {
+  return renderHeroChromeHTML(project);
+}
+
 function renderHeroBrand(project) {
   if (project.companyLogo) {
     return `<img class="project-page__company-logo" src="${project.companyLogo}" alt="${project.companyName || ""}" />`;
@@ -242,6 +247,7 @@ export function renderProject(projectId) {
     <div class="project-page__hero-band">
       <figure class="project-page__hero">
         <img src="${project.hero}" alt="${project.heroAlt}" />
+        ${renderHeroChrome(project)}
       </figure>
 
       <header class="project-page__header">
@@ -279,7 +285,7 @@ export function renderProject(projectId) {
         ${project.workstreams
           .map(
             (w) =>
-              `<li><strong>${w.name}</strong> — ${w.description}</li>`
+              `<li><strong>${w.name}</strong>: ${w.description}</li>`
           )
           .join("\n        ")}
       </ol>
@@ -310,8 +316,134 @@ export function renderProject(projectId) {
   el.scrollTop = 0;
 
   initVideoAutoplay(el);
+  initVideoControls(el);
 
   return project;
+}
+
+const CONTROLS_FADE_MS = 300;
+
+function controlsAreActive(video) {
+  return video?.dataset.controlsActive === "true";
+}
+
+function clearVideoControlTimers(video) {
+  clearTimeout(video._controlsHideTimer);
+  clearTimeout(video._controlsRemoveTimer);
+}
+
+function hideVideoControls(video) {
+  if (!video) return;
+  clearVideoControlTimers(video);
+  video.classList.remove("project-video--controls-visible");
+  video._controlsRemoveTimer = setTimeout(() => {
+    if (!video.classList.contains("project-video--controls-visible")) {
+      video.removeAttribute("controls");
+      delete video.dataset.controlsActive;
+    }
+  }, CONTROLS_FADE_MS);
+}
+
+function hideVideoControlsImmediate(video) {
+  if (!video) return;
+  clearVideoControlTimers(video);
+  video.classList.remove("project-video--controls-visible");
+  video.removeAttribute("controls");
+  delete video.dataset.controlsActive;
+}
+
+function showVideoControls(video) {
+  clearVideoControlTimers(video);
+  video.dataset.controlsActive = "true";
+  if (!video.hasAttribute("controls")) {
+    video.setAttribute("controls", "");
+    video.classList.remove("project-video--controls-visible");
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        video.classList.add("project-video--controls-visible");
+      });
+    });
+  } else {
+    video.classList.add("project-video--controls-visible");
+  }
+}
+
+function toggleVideoPlayPause(video) {
+  if (video.paused) {
+    videoPaused.delete(video);
+    video.play().catch(() => {});
+  } else {
+    if (!video.ended) videoPaused.add(video);
+    video.pause();
+  }
+}
+
+function initVideoControls(root) {
+  if (root._videoControlsAbort) {
+    root._videoControlsAbort.abort();
+  }
+  const ac = new AbortController();
+  root._videoControlsAbort = ac;
+  const { signal } = ac;
+
+  const videos = root.querySelectorAll("video.project-video");
+  if (!videos.length) return;
+
+  const useHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  videos.forEach((video) => {
+    hideVideoControlsImmediate(video);
+
+    video.addEventListener(
+      "click",
+      (e) => {
+        if (e.target !== video) return;
+
+        if (!controlsAreActive(video)) {
+          showVideoControls(video);
+          return;
+        }
+
+        toggleVideoPlayPause(video);
+      },
+      { signal }
+    );
+
+    if (useHover) {
+      video.addEventListener(
+        "mouseenter",
+        () => {
+          if (!controlsAreActive(video)) return;
+          clearVideoControlTimers(video);
+          video.classList.add("project-video--controls-visible");
+        },
+        { signal }
+      );
+
+      video.addEventListener(
+        "mouseleave",
+        () => {
+          if (!controlsAreActive(video)) return;
+          hideVideoControls(video);
+        },
+        { signal }
+      );
+    }
+  });
+
+  if (!useHover) {
+    document.addEventListener(
+      "click",
+      (e) => {
+        videos.forEach((video) => {
+          if (controlsAreActive(video) && !video.contains(e.target)) {
+            hideVideoControls(video);
+          }
+        });
+      },
+      { signal }
+    );
+  }
 }
 
 function loadVideoSource(video) {
@@ -365,9 +497,10 @@ function initVideoAutoplay(root) {
         const v = entry.target;
         if (entry.isIntersecting) {
           loadVideoSource(v).then(() => playVideoIfAllowed(v));
-        } else if (!v.paused) {
-          v.pause();
+        } else {
+          if (!v.paused) v.pause();
           videoPaused.delete(v);
+          hideVideoControlsImmediate(v);
         }
       });
     },
@@ -390,7 +523,13 @@ function releaseProjectVideos(root) {
     videoObserver = null;
   }
 
+  if (root._videoControlsAbort) {
+    root._videoControlsAbort.abort();
+    root._videoControlsAbort = null;
+  }
+
   root.querySelectorAll("video").forEach((v) => {
+    hideVideoControlsImmediate(v);
     v.pause();
     v.removeAttribute("src");
     delete v.dataset.loaded;

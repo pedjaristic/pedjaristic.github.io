@@ -21,24 +21,26 @@
 
   /* --------------------------------------------------------------------------
      Per-project mood palettes (background + two blobs)
+     Same structure as Facebook: dark tinted base, saturated accent blob1,
+     dark secondary blob2. Only the hue family changes per project.
      ----------------------------------------------------------------------- */
 
-  /* Ray-Ban Display — cooler steel-blue to match product imagery */
+  /* Ray-Ban Display — core blue (#49AFFF family) */
   --mood-rayban-bg:    #0f1620;
-  --mood-rayban-blob1: #4a6f8f;
-  --mood-rayban-blob2: #2a3d52;
+  --mood-rayban-blob1: #4190c4;
+  --mood-rayban-blob2: #2a3848;
 
-  /* Orion — cool slate, electric blue */
-  --mood-orion-bg:     #0f1620;
-  --mood-orion-blob1:  #4f86c6;
-  --mood-orion-blob2:  #2a3848;
+  /* Orion — core green (#51C666 family, darker) */
+  --mood-orion-bg:     #0c0e0c;
+  --mood-orion-blob1:  #327a46;
+  --mood-orion-blob2:  #222c26;
 
-  /* Meta Quest — MR passthrough teal, warm punctuation */
-  --mood-quest-bg:     #0c1c1c;
-  --mood-quest-blob1:  #4ca996;
-  --mood-quest-blob2:  #9c5a36;
+  /* Spatial Music — core fuchsia (#DF76FF family, darker) */
+  --mood-quest-bg:     #120810;
+  --mood-quest-blob1:  #884898;
+  --mood-quest-blob2:  #281830;
 
-  /* Facebook — deep aubergine, social warmth */
+  /* Facebook — deep aubergine, social warmth (reference palette) */
   --mood-facebook-bg:    #1a0f1c;
   --mood-facebook-blob1: #c44a7a;
   --mood-facebook-blob2: #3a2240;
@@ -103,6 +105,8 @@
   --panel-gutter:            max(4.583vw, 44px);    /* 88px @1920 — project cards */
   --layout-gutter-mobile:    var(--space-3);
   --status-bar-height:       max(4.583vw, 48px);   /* ~88px @1920 */
+  --nav-scrim-opacity:       0.68;
+  --nav-scrim-fade:          max(2.5vw, 32px);    /* gradient extension below bar */
 
   /* --------------------------------------------------------------------------
      Motion
@@ -118,12 +122,18 @@
   --dur-slow:    640ms;
   --dur-zoom:    800ms;
   --dur-pulse:   3200ms;
+  --dur-intro-enter:   1200ms;
+  --dur-intro-stagger: 200ms;
 
   /* --------------------------------------------------------------------------
      Effects
      ----------------------------------------------------------------------- */
   --shadow-hover:  0 10px 40px -10px rgba(0, 0, 0, 0.4);
   --blur-backdrop: blur(8px);
+  --text-glow-accent:
+    0 0 2px rgba(102, 255, 0, 0.55),
+    0 0 4px rgba(102, 255, 0, 0.35),
+    0 0 6px rgba(102, 255, 0, 0.18);
 }
 
 /* ----------------------------------------------------------------------------

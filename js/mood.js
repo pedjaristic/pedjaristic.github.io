@@ -32,10 +32,10 @@ export class MoodBackground {
     this._currBlob1 = new THREE.Color();
     this._currBlob2 = new THREE.Color();
 
-    this.baseBlobRadius = 0.65;
-    this.secondaryBlobRadiusRatio = 0.78;
-    this.baseBlobStrength = 0.9;
-    this.noiseStrength = 0.04;
+    this.baseBlobRadius = 0.58;
+    this.secondaryBlobRadiusRatio = 0.62;
+    this.baseBlobStrength = 0.80;
+    this.noiseStrength = 0.035;
 
     this.material = new THREE.ShaderMaterial({
       vertexShader: bgVertexShader,

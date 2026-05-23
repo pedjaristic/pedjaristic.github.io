@@ -226,6 +226,12 @@ export class ScrollController {
     };
   }
 
+  goToIntro() {
+    if (this.isLocked) return;
+    this._currentFocalIndex = -1;
+    this._tweenToFocal(-1);
+  }
+
   /** Re-derive focal index from current camera position (after zoom transitions). */
   _syncFocalIndex() {
     const currentZ = this.camera.position.z;

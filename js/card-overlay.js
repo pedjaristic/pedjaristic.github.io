@@ -11,6 +11,7 @@
    ========================================================================= */
 
 import { scrambleText } from "./text-scramble.js";
+import { formatVerticalYear } from "./format-vertical-year.js";
 
 const CARD_TEMPLATE_ID = "project-card-template";
 
@@ -139,19 +140,8 @@ export class CardOverlay {
       r.hoverStatus.textContent = `Status: ${project.status}`;
     }
     if (r.hoverYear) {
-      r.hoverYear.textContent = this._formatVerticalYear(project.year);
+      r.hoverYear.textContent = formatVerticalYear(project.year);
     }
-  }
-
-  _formatVerticalYear(yearStr) {
-    if (!yearStr) return "";
-    const parts = yearStr.split(/([–—\-])/);
-    return parts
-      .map((part) => {
-        if (/[–—\-]/.test(part)) return "—";
-        return part.match(/.{1,2}/g)?.join("\n") || part;
-      })
-      .join("\n");
   }
 
   _runHoverScramble() {
@@ -164,7 +154,7 @@ export class CardOverlay {
     if (this._refs.hoverYear) {
       scrambleText(
         this._refs.hoverYear,
-        this._formatVerticalYear(project.year),
+        formatVerticalYear(project.year),
         500
       );
     }

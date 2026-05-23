@@ -34,6 +34,20 @@
   object-position: center;
 }
 
+/* FLIP companion — fixed-size chrome tracks the proxy without scaling type */
+.flip-chrome-floater {
+  position: fixed;
+  z-index: 61;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.flip-chrome-floater .hero-chrome-scrim {
+  opacity: 0;
+  transition: none;
+}
+
 /* -- During FLIP entry: hero hidden so proxy covers it, content staggers - */
 
 .project-page--entering .project-page__hero {
