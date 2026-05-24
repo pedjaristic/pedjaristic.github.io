@@ -71,7 +71,7 @@ export const projects = [
     thumb: "assets/Images/Ray Ban/thumb-rayban.png",
     bodyLabel: "[IMPACT]",
     body: [
-      "Led design on over <strong>eleven</strong> core product features shipped across the messaging surface, defining how threads, replies, and notifications behave on a <strong>600×600-pixel</strong> display.",
+      "Owned messaging end-to-end on Ray-Ban Meta Display. <strong>11+ features shipped for Day 1</strong>, including Contact Search which was added on as a C-suite level ask a month before release. <strong>It shipped on time.</strong> Designed against a glasses-native input model: look, tap, pinch, on a 600×600-pixel display.",
     ],
     sections: [
       {
@@ -97,7 +97,7 @@ export const projects = [
         layout: "media-grid",
         columns: 2,
         description: [
-          "Bundled multi-photo and multi-video message primitive, decluttering the thread for ease of use. Prioritized and shipped for <strong>Day 1</strong> product launch.",
+          "Bundled multi-photo and multi-video message primitive, decluttering the thread for ease of use. <strong>Prioritized and shipped for Day 1</strong> product launch.",
         ],
         media: [
           { type: "video", src: "assets/Images/Ray Ban/before.mp4", alt: "Single media in message threads" },
@@ -110,7 +110,7 @@ export const projects = [
         layout: "cinematic",
         description: [
           "An initial limitation of the glasses was displaying only one recent thread per contact.",
-          "I conceptualized and shipped Contact Search which enabled users to search not only their contacts but also their message threads. This feature was prioritized by <strong>Mark Zuckerberg</strong> after seeing my proposal, to ensure it made it into the product for <strong>Day 1</strong>.",
+          "I conceptualized and shipped Contact Search which enabled users to search not only their contacts but also their message threads. This feature was <strong>prioritized by Mark Zuckerberg after seeing my proposal</strong>, to ensure it made it into the product for Day 1.",
         ],
         backdrop: {
           type: "video",
@@ -164,7 +164,7 @@ export const projects = [
     thumb: "assets/Images/Orion/thumb-orion.png",
     bodyLabel: "[IMPACT]",
     body: [
-      "Led design across <strong>3 workstreams</strong> for Meta's <strong>first true AR glasses</strong>, revealed at <strong>Connect 2024</strong>. <strong>Local and Remote Co-presence, Calling, and Instagram</strong> were all flagship press demos, presented on stage by <strong>Mark Zuckerberg</strong>. I defined the system-level experiences end-to-end.",
+      "Led design across <strong>3 workstreams</strong> on Meta's first true AR glasses, revealed at Connect 2024. <strong>Co-presence, Calling, and Instagram in AR</strong> all shipped as flagship press demos, <strong>presented on stage by Mark Zuckerberg</strong> to a live global audience. Defined system patterns adopted across the platform: exclusive mode apps, shared origin, spatial grabber logic.",
     ],
     sections: [
       {
@@ -309,8 +309,8 @@ export const projects = [
     thumb: "assets/Images/Spatial Music/thumb-music.png",
     bodyLabel: "[IMPACT]",
     body: [
-      "Led design in partnership with <strong>iHeartRadio</strong>. Owned the end-to-end redesign from the ground up to create a more spatial listening experience.",
-      "The app was approved at executive review with <strong>Mark Zuckerberg</strong> in addition to the <strong>CEO and CTO of iHeartRadio</strong>. The MR experience as a whole was deprioritized leading up to launch. The system-level concept behind a componentized app was later used in <strong>over 20 VR experiences</strong>.",
+      "Led design solo on Spatial Music for Meta Quest, <strong>in partnership with iHeartRadio</strong>. End-to-end redesign approved at executive level with <strong>Mark Zuckerberg and the CEO and CTO of iHeartRadio.</strong>",
+      "The MR experience was deprioritized before launch as Meta shifted from MR to AR glasses. The system-level concept of a componentized spatial app was later adopted across <strong>20+ VR experiences</strong>.",
     ],
     sections: [
       {
@@ -356,7 +356,7 @@ export const projects = [
           src: "assets/Images/Spatial Music/visualizer proto.mp4",
           alt: "Spatial visualizer on Meta Quest mixed reality",
         },
-        caption: "Modeled, prototyped, and implemented the spatial visualizer component. This was called out as the <strong>standout feature</strong> by <strong>C-suite leadership</strong>.",
+        caption: "Modeled, prototyped, and implemented the spatial visualizer component. This was called out as <strong>the standout feature by C-suite leadership</strong>.",
       },
     ],
     artifacts: [],
@@ -372,7 +372,7 @@ export const projects = [
   },
   {
     id: "facebook",
-    label: "Facebook App",
+    label: "Facebook News Feed",
     year: "2020",
     tagline: "The care reaction; a new gesture for 2.9B people.",
     taglineLines: [
@@ -392,15 +392,15 @@ export const projects = [
     thumb: "assets/Images/Care Reaction/thumb-care.png",
     bodyLabel: "[IMPACT]",
     body: [
-      "Conceptualized and led the design of the Care reaction. Facebook's first new reaction in <strong>five years</strong>, shipped to <strong>2.9B+ users</strong> in <strong>six weeks</strong> during the first months of COVID-19.",
-      "Designed the system-wide propagation strategy across Feed, Comments, Stories, Live, and Messenger. NUX built on social proof rather than a tutorial; let people discover the reaction by seeing others use it. Originally planned as temporary for COVID, it is now a mainstay.",
+      "Conceptualized and led the design of the <strong>Care reaction.</strong> <strong>Facebook's first new reaction in five years,</strong> shipped to <strong>2.9B+ users in six weeks</strong> during the first months of COVID-19.",
+      "Designed system-wide propagation across <strong>Feed, Comments, Stories, Live, and Messenger.</strong> NUX built on social proof, people discovered the reaction by seeing others use it. Planned as a temporary COVID response; <strong>now a permanent fixture.</strong>",
     ],
     sections: [
       {
         title: "Care Reaction",
         layout: "cinematic",
         description: [
-          "First new primitive in a system trained on the existing five for five years. Appeared correctly across <strong>Feed, Comments, Stories, Live, Messenger</strong>, and dozens of lesser-known surfaces.",
+          "First new primitive in a system trained on the existing five for five years. Appeared correctly across Feed, Comments, Stories, Live, Messenger, and dozens of lesser-known surfaces.",
           "Designed every engineering diff for pixel-level fidelity across all surfaces.",
         ],
         backdrop: {
@@ -426,7 +426,7 @@ export const projects = [
         columns: 2,
         mediaFit: "contain",
         description: [
-          "I created a range of variations which led us to two final outcomes vetted by <strong>Mark Zuckerberg</strong>.",
+          "I created a range of variations which led us to two final outcomes vetted by Mark Zuckerberg.",
         ],
         media: [
           {
@@ -447,7 +447,7 @@ export const projects = [
         columns: 2,
         mediaFit: "contain",
         description: [
-          "In Feed, the reaction had to read at a glance. Between design and rollout, after rigorously testing two contenders the hugging face was overwhelmingly preferred by <strong>71% of users</strong>.",
+          "In Feed, the reaction had to read at a glance. Between design and rollout, after rigorously testing two contenders the hugging face was <strong>overwhelmingly preferred by 71% of users</strong>.",
         ],
         media: [
           {

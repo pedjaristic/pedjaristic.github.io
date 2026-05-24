@@ -13,6 +13,7 @@ import { IntroLayer } from "./intro.js";
 import { Navigation } from "./navigation.js";
 import { Router } from "./router.js";
 import { projects } from "./data.js";
+import { preloadHeroImages } from "./hero-images.js";
 import { scrambleText } from "./text-scramble.js";
 
 async function bootstrap() {
@@ -27,7 +28,12 @@ async function bootstrap() {
 
   const textures = new Map();
   const firstHero = projects[0].hero;
-  const firstTexture = await engine.loadTexture(firstHero);
+  const heroUrls = projects.map((p) => p.hero);
+
+  const [firstTexture] = await Promise.all([
+    engine.loadTexture(firstHero),
+    preloadHeroImages(heroUrls),
+  ]);
   if (firstTexture) textures.set(firstHero, firstTexture);
 
   const gallery = new Gallery(projects, textures);

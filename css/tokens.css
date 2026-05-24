@@ -58,11 +58,11 @@
     Monaco, Consolas, monospace;
 
   /* Type scale — viewport-relative, referenced to 1920px
-     16px  → 0.833vw    24px  → 1.25vw     32px  → 1.667vw
+     18px  → 0.938vw    27px  → 1.406vw    32px  → 1.667vw
      48px  → 2.5vw      64px  → 3.333vw    120px → 6.25vw           */
-  --size-micro:   max(0.833vw, 11px);   /* 16px @1920 */
-  --size-sm:      max(1.25vw, 13px);    /* 24px @1920 */
-  --size-base:    max(0.833vw, 11px);   /* 16px @1920 — alias, same as micro */
+  --size-micro:   max(0.938vw, 12px);   /* 18px @1920 */
+  --size-sm:      max(1.406vw, 14px);   /* 27px @1920 */
+  --size-base:    max(0.938vw, 12px);   /* 18px @1920 — alias, same as micro */
   --size-md:      max(1.667vw, 16px);   /* 32px @1920 */
   --size-lg:      max(2.5vw, 20px);     /* 48px @1920 */
   --size-xl:      max(1.667vw, 16px);   /* 32px @1920 — alias for project-page compat */

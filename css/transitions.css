@@ -70,6 +70,24 @@
 .project-page--entering .project-page__beat       { animation-delay: 990ms; }
 .project-page--entering .project-page__next       { animation-delay: 1070ms; }
 
+/* Back arrow — hidden during FLIP; fades in once hero lands (FLIP_MS + buffer). */
+.project-page--entering .project-page__back {
+  opacity: 0;
+  pointer-events: none;
+  animation: back-enter 400ms var(--ease-default) forwards;
+  animation-delay: 780ms;
+}
+
+@keyframes back-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 @keyframes content-enter {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -112,6 +130,7 @@
   .project-page--entering .project-page__supporting,
   .project-page--entering .project-page__beat,
   .project-page--entering .project-page__next,
+  .project-page--entering .project-page__back,
   .project-page--entering-from-project .project-page__hero,
   .project-page--entering-from-project .project-page__header,
   .project-page--entering-from-project .project-page__body,

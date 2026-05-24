@@ -14,6 +14,7 @@ import {
   settleHeroChrome,
   trackChromeToProxy,
 } from "./hero-chrome.js";
+import { acquireHeroImage, reclaimHeroImage } from "./hero-images.js";
 
 const FLIP_MS = 700;
 
@@ -155,7 +156,7 @@ export class Router {
     // 3. Position proxy at the FINAL rect (hero), then apply inverse transform
     //    so it visually appears at the START rect (gallery plane).
     //    Animating transform is GPU-composited = buttery smooth.
-    const proxy = this._createProxy(project.hero, toRect);
+    const proxy = this._createProxyShell(toRect);
 
     const scaleX = fromRect.width / toRect.width;
     const scaleY = fromRect.height / toRect.height;
@@ -168,43 +169,49 @@ export class Router {
     proxy.style.transform = `translate(${fromCx - toCx}px, ${fromCy - toCy}px) scale(${scaleX}, ${scaleY})`;
 
     const chromeFloater = this._createChromeFloater(project, fromRect);
-    applyRect(chromeFloater, proxy.getBoundingClientRect());
+    applyRect(chromeFloater, fromRect);
 
-    // 4. Hide gallery (project view's background already covers it visually)
-    this._hideGallery();
+    proxy.style.opacity = "0";
 
-    // 5. Update state
-    this._currentProjectId = projectId;
-    history.pushState({ projectId }, "", `#${projectId}`);
-    document.title = `${project.label} | Pedja Ristic`;
+    // 4. Keep gallery plane until the cached <img> is mounted, then swap in one beat.
+    acquireHeroImage(project.hero).then((img) => {
+      if (!proxy.isConnected || !img) return;
 
-    // 6. Animate to identity transform (proxy lands at hero position).
-    //    Completion timeout inside the double-rAF so it's synchronized with
-    //    when the CSS transition actually starts (same fix as the reverse path).
-    requestAnimationFrame(() => {
+      proxy.appendChild(img);
+
+      this._hideGallery();
+      proxy.style.opacity = "1";
+
+      this._currentProjectId = projectId;
+      history.pushState({ projectId }, "", `#${projectId}`);
+      document.title = `${project.label} | Pedja Ristic`;
+
       requestAnimationFrame(() => {
-        proxy.style.transition = `transform ${FLIP_MS}ms var(--ease-flip)`;
-        proxy.style.transform = "translate(0, 0) scale(1, 1)";
+        requestAnimationFrame(() => {
+          if (!proxy.isConnected) return;
 
-        this._stopChromeTrack = trackChromeToProxy(
-          chromeFloater,
-          proxy,
-          FLIP_MS + 40
-        );
+          proxy.style.transition = `transform ${FLIP_MS}ms var(--ease-flip)`;
+          proxy.style.transform = "translate(0, 0) scale(1, 1)";
 
-        // 7. When FLIP finishes: reveal real hero, remove proxy + floater.
-        //    Content stagger animations are already playing (CSS delays from frame 0).
-        setTimeout(() => {
-          this._stopChromeTrack?.();
-          this._stopChromeTrack = null;
-          heroEl.style.visibility = "visible";
-          settleHeroChrome(heroEl);
-          proxy.remove();
-          this._proxy = null;
-          this._removeChromeFloater();
-          this.navigation.isTransitioning = false;
-          this._transitioning = false;
-        }, FLIP_MS + 20);
+          this._stopChromeTrack = trackChromeToProxy(
+            chromeFloater,
+            proxy,
+            FLIP_MS + 40
+          );
+
+          setTimeout(() => {
+            this._stopChromeTrack?.();
+            this._stopChromeTrack = null;
+            heroEl.style.visibility = "visible";
+            settleHeroChrome(heroEl);
+            reclaimHeroImage(project.hero, img);
+            proxy.remove();
+            this._proxy = null;
+            this._removeChromeFloater();
+            this.navigation.isTransitioning = false;
+            this._transitioning = false;
+          }, FLIP_MS + 20);
+        });
       });
     });
 
@@ -404,7 +411,7 @@ export class Router {
 
   /* -- Proxy --------------------------------------------------------------- */
 
-  _createProxy(src, rect) {
+  _createProxyShell(rect) {
     const proxy = document.createElement("div");
     proxy.className = "flip-proxy";
     const x = rect.left ?? rect.x ?? 0;
@@ -413,9 +420,24 @@ export class Router {
     proxy.style.top = `${y}px`;
     proxy.style.width = `${rect.width}px`;
     proxy.style.height = `${rect.height}px`;
-    proxy.innerHTML = `<img src="${src}" alt="" />`;
     document.body.appendChild(proxy);
     this._proxy = proxy;
+    return proxy;
+  }
+
+  _createProxy(src, rect) {
+    const proxy = this._createProxyShell(rect);
+
+    const img = document.createElement("img");
+    img.alt = "";
+    img.src = src;
+
+    const textureImg = this.gallery.textures.get(src)?.image;
+    if (textureImg instanceof HTMLImageElement && textureImg.src) {
+      img.src = textureImg.currentSrc || textureImg.src;
+    }
+
+    proxy.appendChild(img);
     return proxy;
   }
 

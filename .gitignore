@@ -5,3 +5,4 @@ reference/
 assets/originals/
 assets/Images/*/extra/
 *.mov
+.claude/
