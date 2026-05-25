@@ -58,11 +58,11 @@
     Monaco, Consolas, monospace;
 
   /* Type scale — viewport-relative, referenced to 1920px
-     18px  → 0.938vw    27px  → 1.406vw    32px  → 1.667vw
+     20px  → 1.042vw    30px  → 1.563vw    32px  → 1.667vw
      48px  → 2.5vw      64px  → 3.333vw    120px → 6.25vw           */
-  --size-micro:   max(0.938vw, 12px);   /* 18px @1920 */
-  --size-sm:      max(1.406vw, 14px);   /* 27px @1920 */
-  --size-base:    max(0.938vw, 12px);   /* 18px @1920 — alias, same as micro */
+  --size-micro:   max(1.042vw, 13px);   /* 20px @1920 */
+  --size-sm:      max(1.563vw, 16px);   /* 30px @1920 */
+  --size-base:    max(1.042vw, 13px);   /* 20px @1920 — alias, same as micro */
   --size-md:      max(1.667vw, 16px);   /* 32px @1920 */
   --size-lg:      max(2.5vw, 20px);     /* 48px @1920 */
   --size-xl:      max(1.667vw, 16px);   /* 32px @1920 — alias for project-page compat */
@@ -99,7 +99,7 @@
      Layout
      ----------------------------------------------------------------------- */
   --layout-max-width:        1440px;
-  --layout-prose-max-width:  68ch;
+  --layout-prose-max-width:  78ch;
   --nav-padding:             max(1.667vw, 16px);   /* 32px @1920 */
   --layout-gutter-desktop:   max(3.333vw, 32px);   /* 64px @1920 — intro */
   --panel-gutter:            max(4.583vw, 44px);    /* 88px @1920 — project cards */

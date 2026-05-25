@@ -148,7 +148,7 @@
 
 .project-page__tagline {
   font-family: var(--font-accent);
-  font-size: clamp(16px, 1.667vw, 32px);
+  font-size: max(2.083vw, 18px);
   line-height: var(--leading-accent);
   letter-spacing: var(--tracking-accent);
   color: var(--color-accent);
@@ -223,7 +223,7 @@
   line-height: var(--leading-loose);
   color: var(--color-text-primary);
   margin-bottom: var(--space-5);
-  max-width: 65ch;
+  max-width: 78ch;
 }
 
 .project-page__body strong {
@@ -335,8 +335,10 @@
    ------------------------------------------------------------------------- */
 .project-section {
   background: transparent;
-  --section-copy-width: min(75%, 960px);
-  --section-copy-text: 68ch;
+  --section-copy-width: min(85%, 1080px);
+  --section-copy-text: 78ch;
+  --section-overlay-width: min(75%, 960px);
+  --section-overlay-text: 68ch;
 }
 
 .project-section__title {
@@ -350,7 +352,7 @@
 }
 
 .project-section__text {
-  max-width: 48ch;
+  max-width: 60ch;
 }
 
 .project-section__text p {
@@ -367,7 +369,7 @@
 }
 
 .project-section__text--overlay {
-  max-width: var(--section-copy-text);
+  max-width: var(--section-overlay-text);
 }
 
 .project-section__text--overlay p {
@@ -476,7 +478,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: var(--section-copy-width);
+  width: var(--section-overlay-width);
   padding: var(--space-7) var(--layout-gutter-desktop);
   padding-left: max(6.25vw, 80px);
   pointer-events: none;
@@ -583,10 +585,9 @@
 }
 
 .project-section__captions--3 .project-section__caption {
+  white-space: normal;
   overflow: visible;
   text-overflow: unset;
-  font-size: clamp(9px, 0.729vw, 14px);
-  letter-spacing: 0.02em;
 }
 
 /* -- Labeled grid (Remote / Local columns) -------------------------------- */
@@ -688,7 +689,7 @@
 
 .project-section__quote {
   font-family: var(--font-accent);
-  font-size: clamp(16px, 1.667vw, 32px);
+  font-size: max(2.083vw, 18px);
   line-height: var(--leading-accent);
   letter-spacing: var(--tracking-accent);
   color: var(--color-accent);
@@ -767,7 +768,7 @@
    ------------------------------------------------------------------------- */
 .project-page__workstreams {
   padding: var(--space-6) var(--layout-gutter-desktop);
-  max-width: 720px;
+  max-width: min(85%, 1080px);
   margin: 0 auto;
 }
 
@@ -792,7 +793,7 @@
   font-size: var(--size-sm);
   line-height: var(--leading-snug);
   color: var(--color-text-secondary);
-  max-width: 60ch;
+  max-width: 78ch;
 }
 
 .project-page__workstreams-list strong {
@@ -802,7 +803,7 @@
 
 .project-page__beat {
   padding: var(--space-6) var(--layout-gutter-desktop);
-  max-width: 720px;
+  max-width: min(85%, 1080px);
   margin: 0 auto;
 }
 
@@ -897,7 +898,7 @@
 
   .project-page__tagline,
   .project-section__quote {
-    font-size: max(4.5vw, 24px);
+    font-size: max(5.5vw, 28px);
   }
 
   .project-page__meta--compact,

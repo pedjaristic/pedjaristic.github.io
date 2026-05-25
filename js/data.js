@@ -53,10 +53,10 @@ export const projects = [
     id: "rayban",
     label: "Ray-Ban Display",
     year: "2024 - 2026",
-    tagline: "Native messaging on the first pair of Ray-Ban glasses with a display.",
+    tagline: "Native messaging on the first pair of Ray-Ban's with a display.",
     taglineLines: [
       "Native messaging on the first",
-      "pair of Ray-Ban glasses with a display.",
+      "pair of Ray-Ban's with a display.",
     ],
     role: "Design Lead",
     scope: "Messaging / Calling",
@@ -71,7 +71,7 @@ export const projects = [
     thumb: "assets/Images/Ray Ban/thumb-rayban.png",
     bodyLabel: "[IMPACT]",
     body: [
-      "Owned messaging end-to-end on Ray-Ban Meta Display. <strong>11+ features shipped for Day 1</strong>, including Contact Search which was added on as a C-suite level ask a month before release. <strong>It shipped on time.</strong> Designed against a glasses-native input model: look, tap, pinch, on a 600×600-pixel display.",
+      "Owned end-to-end design across <strong>11+ high-impact messaging features,</strong> shaping core thread, reply, search, and notification experiences. Designed against a glasses-native input model: look, tap, pinch, on a 600×600-pixel display to <strong>ship for Day 1.</strong>",
     ],
     sections: [
       {
@@ -180,7 +180,7 @@ export const projects = [
         },
         sourceLink: {
           credit: "The Verge",
-          href: "https://www.youtube.com/watch?v=mpKKcqWnTus",
+          href: "https://www.theverge.com/24253908/meta-orion-ar-glasses-demo-mark-zuckerberg-interview",
         },
       },
       {
