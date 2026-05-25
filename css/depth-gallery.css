@@ -273,7 +273,7 @@
 
 /* ============================================================================
    Scroll indicator — "(scroll)" text, bottom-right
-   Padding right: 64px @1920 = var(--layout-gutter-desktop).  Size: 120px @1920.
+   Padding right: 64px @1920 = var(--layout-gutter-desktop).  Size: 132px @1920.
    ========================================================================= */
 
 .scroll-indicator {
@@ -288,7 +288,7 @@
 .scroll-indicator__text {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: var(--size-scroll);
+  font-size: max(6.875vw, 42px); /* 132px @1920; was --size-scroll 120px */
   color: rgba(255, 255, 255, 0.15);
   text-transform: lowercase;
   line-height: 0.95;
@@ -315,9 +315,9 @@
     var(--space-6);
   transition: opacity var(--dur-medium) var(--ease-default);
   will-change: opacity;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  background: rgba(10, 10, 12, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(10, 10, 12, 0.05);
 }
 
 .intro-layer__name {
@@ -497,5 +497,13 @@
 
   .intro-layer__positioning-line::after {
     content: " ";
+  }
+
+  .scroll-indicator {
+    right: var(--layout-gutter-mobile);
+  }
+
+  .scroll-indicator__text {
+    font-size: max(12vw, 56px);
   }
 }
