@@ -5,6 +5,8 @@
 .project-page {
   padding-top: var(--status-bar-height);
   background: transparent;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* ----------------------------------------------------------------------------
@@ -743,6 +745,7 @@
 /* -- Video controls: click/tap to reveal, fade out after idle ---------------- */
 .project-video {
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .project-video[controls]::-webkit-media-controls-enclosure {
@@ -890,15 +893,26 @@
     gap: var(--space-6);
     padding: var(--space-4) var(--layout-gutter-mobile) var(--space-6);
     min-height: auto;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .project-page__hero {
     max-width: calc(60vh * 0.75);
   }
 
+  .project-page__title {
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  .project-page__tagline-line {
+    white-space: normal;
+  }
+
   .project-page__tagline,
   .project-section__quote {
-    font-size: max(5.5vw, 28px);
+    font-size: clamp(18px, 5.5vw, 28px);
   }
 
   .project-page__meta--compact,

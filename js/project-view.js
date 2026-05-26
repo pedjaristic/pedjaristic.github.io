@@ -322,6 +322,7 @@ export function renderProject(projectId) {
 }
 
 const CONTROLS_FADE_MS = 300;
+const CONTROLS_IDLE_MS = 3000;
 
 function controlsAreActive(video) {
   return video?.dataset.controlsActive === "true";
@@ -330,6 +331,21 @@ function controlsAreActive(video) {
 function clearVideoControlTimers(video) {
   clearTimeout(video._controlsHideTimer);
   clearTimeout(video._controlsRemoveTimer);
+}
+
+function scheduleControlsIdleHide(video) {
+  clearTimeout(video._controlsHideTimer);
+  video._controlsHideTimer = setTimeout(() => {
+    if (controlsAreActive(video)) {
+      hideVideoControls(video);
+    }
+  }, CONTROLS_IDLE_MS);
+}
+
+function bumpControlsIdle(video) {
+  if (controlsAreActive(video)) {
+    scheduleControlsIdleHide(video);
+  }
 }
 
 function hideVideoControls(video) {
@@ -389,27 +405,29 @@ function initVideoControls(root) {
   const videos = root.querySelectorAll("video.project-video");
   if (!videos.length) return;
 
-  const useHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const useHover =
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(pointer: coarse)").matches;
 
   videos.forEach((video) => {
     hideVideoControlsImmediate(video);
 
-    video.addEventListener(
-      "click",
-      (e) => {
-        if (e.target !== video) return;
-
-        if (!controlsAreActive(video)) {
-          showVideoControls(video);
-          return;
-        }
-
-        toggleVideoPlayPause(video);
-      },
-      { signal }
-    );
-
     if (useHover) {
+      video.addEventListener(
+        "click",
+        (e) => {
+          if (e.target !== video) return;
+
+          if (!controlsAreActive(video)) {
+            showVideoControls(video);
+            return;
+          }
+
+          toggleVideoPlayPause(video);
+        },
+        { signal }
+      );
+
       video.addEventListener(
         "mouseenter",
         () => {
@@ -428,6 +446,48 @@ function initVideoControls(root) {
         },
         { signal }
       );
+    } else {
+      // Touch: tap video to reveal native controls; play/pause via control buttons.
+      // Idle timer hides controls; iOS uses its own overlay timing when visible.
+      let suppressClick = false;
+
+      video.addEventListener(
+        "touchend",
+        (e) => {
+          if (e.target !== video) return;
+          if (!controlsAreActive(video)) {
+            e.preventDefault();
+            suppressClick = true;
+            showVideoControls(video);
+            scheduleControlsIdleHide(video);
+            return;
+          }
+          bumpControlsIdle(video);
+        },
+        { passive: false, signal }
+      );
+
+      video.addEventListener(
+        "click",
+        (e) => {
+          if (e.target !== video) return;
+          if (suppressClick) {
+            suppressClick = false;
+            return;
+          }
+          if (!controlsAreActive(video)) {
+            showVideoControls(video);
+            scheduleControlsIdleHide(video);
+          } else {
+            bumpControlsIdle(video);
+          }
+        },
+        { signal }
+      );
+
+      for (const ev of ["play", "pause", "seeking", "seeked"]) {
+        video.addEventListener(ev, () => bumpControlsIdle(video), { signal });
+      }
     }
   });
 
