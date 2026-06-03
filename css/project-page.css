@@ -87,8 +87,8 @@
   pointer-events: none;
   border-radius: 2px;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-    inset 0 0 80px 25px rgba(0, 0, 0, 0.4);
+    inset 0 0 0 1px var(--hover-chrome-inset-ring),
+    inset 0 0 80px 25px var(--hover-chrome-inset-glow);
   opacity: 0;
   transition: opacity var(--dur-medium) var(--ease-default);
 }
@@ -376,7 +376,21 @@
 
 .project-section__text--overlay p {
   font-size: var(--size-micro);
-  color: var(--color-text-primary);
+}
+
+/* Text on hero images / cinematic video — always white, both themes */
+.project-section__overlay,
+.project-section__overlay .project-section__title,
+.project-section__overlay .project-section__text--overlay p,
+.project-section__overlay .project-section__text strong {
+  color: var(--color-on-media);
+}
+
+.project-page__hero-chrome .hover-chrome__status,
+.project-page__hero-chrome .hover-chrome__year,
+.flip-chrome-floater__content .hover-chrome__status,
+.flip-chrome-floater__content .hover-chrome__year {
+  color: var(--color-hover-chrome-label);
 }
 
 .project-section__text strong,

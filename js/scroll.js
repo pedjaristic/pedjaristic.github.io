@@ -38,7 +38,14 @@ export class ScrollController {
     this._currentFocalIndex = -1;
     this._snapTween = null;
 
-    // Wheel gesture debounce — multiple wheel events per physical scroll
+    // Trackpad — accumulate delta per swipe; impulse gate after snap (v9b).
+    this.wheelAdvanceThreshold = options.wheelAdvanceThreshold ?? 80;
+    this.wheelImpulseMin = options.wheelImpulseMin ?? 50;
+    this.wheelNoiseFloor = options.wheelNoiseFloor ?? 12;
+    this._wheelAccum = 0;
+    this._wheelAwaitingImpulse = false;
+
+    // Mouse — matches live (pedja.design): one notch advances, 180ms debounce.
     this._wheelGestureTimer = null;
 
     // Touch gesture tracking
@@ -51,17 +58,42 @@ export class ScrollController {
     this._onWheel = (event) => {
       if (this.isLocked) return;
       event.preventDefault();
-      if (this._snapTween || this._wheelGestureTimer) return;
 
       const delta = this._normalizeWheelDelta(event);
-      if (Math.abs(delta) < 2) return;
 
-      if (delta > 0) this._advanceToNext();
-      else this._advanceToPrev();
+      if (this._isMouseWheel(event)) {
+        // Live behavior — immediate advance per notch, debounce repeats.
+        if (this._snapTween || this._wheelGestureTimer) return;
+        if (Math.abs(delta) < 2) return;
 
-      this._wheelGestureTimer = setTimeout(() => {
-        this._wheelGestureTimer = null;
-      }, 180);
+        if (delta > 0) this._tryAdvanceNext();
+        else this._tryAdvancePrev();
+
+        this._wheelGestureTimer = setTimeout(() => {
+          this._wheelGestureTimer = null;
+        }, 180);
+        return;
+      }
+
+      // Trackpad — accumulate to threshold; block during snap.
+      if (this._snapTween) return;
+      if (Math.abs(delta) < this.wheelNoiseFloor) return;
+
+      if (this._wheelAwaitingImpulse) {
+        if (Math.abs(delta) < this.wheelImpulseMin) return;
+        this._wheelAwaitingImpulse = false;
+        this._wheelAccum = 0;
+      } else {
+        this._wheelAccum += delta;
+      }
+
+      if (Math.abs(this._wheelAccum) < this.wheelAdvanceThreshold) return;
+
+      const direction = this._wheelAccum > 0 ? 1 : -1;
+      this._wheelAccum = 0;
+
+      if (direction > 0) this._tryAdvanceNext();
+      else this._tryAdvancePrev();
     };
 
     this._onTouchStart = (event) => {
@@ -122,25 +154,83 @@ export class ScrollController {
   }
 
   bindEvents() {
-    window.addEventListener("wheel", this._onWheel, { passive: false });
+    document.addEventListener("wheel", this._onWheel, {
+      passive: false,
+      capture: true,
+    });
     window.addEventListener("touchstart", this._onTouchStart, { passive: true });
     window.addEventListener("touchmove", this._onTouchMove, { passive: false });
     window.addEventListener("keydown", this._onKeyDown);
   }
 
   unbindEvents() {
-    window.removeEventListener("wheel", this._onWheel);
+    document.removeEventListener("wheel", this._onWheel, { capture: true });
     window.removeEventListener("touchstart", this._onTouchStart);
     window.removeEventListener("touchmove", this._onTouchMove);
     window.removeEventListener("keydown", this._onKeyDown);
+    if (this._wheelGestureTimer) {
+      clearTimeout(this._wheelGestureTimer);
+      this._wheelGestureTimer = null;
+    }
+  }
+
+  /** Line/page mode or legacy ±120 wheelDeltaY — not trackpad momentum. */
+  _isMouseWheel(event) {
+    if (event.deltaMode === 1 || event.deltaMode === 2) return true;
+    if (
+      typeof event.wheelDeltaY === "number" &&
+      Math.abs(event.wheelDeltaY) >= 120
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  _tryAdvanceNext() {
+    const maxIdx = this.gallery.planes.length - 1;
+    if (this._currentFocalIndex >= maxIdx) return false;
+    this._currentFocalIndex++;
+    this._tweenToFocal(this._currentFocalIndex);
+    return true;
+  }
+
+  _tryAdvancePrev() {
+    if (this._currentFocalIndex <= -1) return false;
+    this._currentFocalIndex--;
+    this._tweenToFocal(this._currentFocalIndex);
+    return true;
   }
 
   lock() {
     this.isLocked = true;
+    this._snapTween = null;
+    const scroll = this._scrollFromCameraZ(this.camera.position.z);
+    this.scrollTarget = scroll;
+    this.scrollCurrent = scroll;
+    this.previousScrollCurrent = scroll;
+    this.velocity = 0;
+    this.rawVelocity = 0;
+    this._wheelAccum = 0;
   }
 
   unlock() {
     this.isLocked = false;
+    this._wheelAccum = 0;
+    this._wheelAwaitingImpulse = false;
+    this._syncFocalIndex();
+  }
+
+  /** Align scroll state to the camera after external repositioning (e.g. return FLIP). */
+  syncToCamera() {
+    const scroll = this._scrollFromCameraZ(this.camera.position.z);
+    this.scrollTarget = scroll;
+    this.scrollCurrent = scroll;
+    this.previousScrollCurrent = scroll;
+    this.velocity = 0;
+    this.rawVelocity = 0;
+    this._snapTween = null;
+    this._wheelAccum = 0;
+    this._wheelAwaitingImpulse = false;
     this._syncFocalIndex();
   }
 
@@ -153,6 +243,8 @@ export class ScrollController {
   }
 
   update() {
+    if (this.isLocked) return;
+
     this._updateBounds();
 
     // Tween drives both scrollTarget and scrollCurrent directly —
@@ -170,6 +262,9 @@ export class ScrollController {
         this.scrollTarget = this._snapTween.endScroll;
         this.scrollCurrent = this._snapTween.endScroll;
         this._snapTween = null;
+        this._syncFocalIndex();
+        this._wheelAccum = 0;
+        this._wheelAwaitingImpulse = true;
       }
     } else {
       this.scrollCurrent = lerp(
@@ -191,10 +286,8 @@ export class ScrollController {
     if (Math.abs(this.velocity) < 0.0001) this.velocity = 0;
     this.previousScrollCurrent = this.scrollCurrent;
 
-    if (!this.isLocked) {
-      const nextZ = this._cameraZFromScroll(this.scrollCurrent);
-      this.camera.position.z = clamp(nextZ, this.minCameraZ, this.maxCameraZ);
-    }
+    const nextZ = this._cameraZFromScroll(this.scrollCurrent);
+    this.camera.position.z = clamp(nextZ, this.minCameraZ, this.maxCameraZ);
   }
 
   getVelocityIntensity() {
@@ -202,16 +295,11 @@ export class ScrollController {
   }
 
   _advanceToNext() {
-    const maxIdx = this.gallery.planes.length - 1;
-    if (this._currentFocalIndex >= maxIdx) return;
-    this._currentFocalIndex++;
-    this._tweenToFocal(this._currentFocalIndex);
+    this._tryAdvanceNext();
   }
 
   _advanceToPrev() {
-    if (this._currentFocalIndex <= -1) return;
-    this._currentFocalIndex--;
-    this._tweenToFocal(this._currentFocalIndex);
+    this._tryAdvancePrev();
   }
 
   _tweenToFocal(index) {

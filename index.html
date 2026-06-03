@@ -14,6 +14,16 @@
       rel="stylesheet"
     />
 
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("portfolio-theme") === "light") {
+            document.documentElement.dataset.theme = "light";
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/tokens.css" />
     <link rel="stylesheet" href="css/reset.css" />
@@ -28,7 +38,15 @@
          Persistent status bar (same markup on every page).
          ================================================================ -->
     <header class="status-bar">
-      <a class="status-bar__home" href="index.html">PEDJA RISTIC</a>
+      <div class="status-bar__left">
+        <a class="status-bar__home" href="index.html">PEDJA RISTIC</a>
+        <button
+          class="status-bar__theme-toggle"
+          type="button"
+          aria-label="Switch to light mode"
+          aria-pressed="false"
+        ></button>
+      </div>
       <nav class="status-bar__right">
         <a class="status-bar__link" href="https://www.instagram.com/pedj_a_/" target="_blank" rel="noopener noreferrer">[<span class="status-bar__icon" style="--icon:url('/assets/icons/white/Photo.svg')"></span>] IG</a>
         <a class="status-bar__link" href="https://www.linkedin.com/in/pedjaristic/" target="_blank" rel="noopener noreferrer">[<span class="status-bar__icon" style="--icon:url('/assets/icons/white/Work.svg')"></span>] IN</a>

@@ -17,6 +17,11 @@ import {
 import { acquireHeroImage, reclaimHeroImage } from "./hero-images.js";
 
 const FLIP_MS = 700;
+/** Fade project page before reverse FLIP when user scrolled into case study. */
+const RETURN_SCROLL_FADE_MS = 400;
+const RETURN_SCROLL_TOP_THRESHOLD = 12;
+/** Gallery canvas fade-in after project dismiss (scrolled path). */
+const RETURN_GALLERY_FADE_MS = 400;
 
 export class Router {
   constructor({ scroll, gallery, cardOverlay, intro, navigation }) {
@@ -63,7 +68,7 @@ export class Router {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
       if (this._currentProjectId) {
-        this.showGallery(this._currentProjectId);
+        this.showIntroFromProject(this._currentProjectId);
         return;
       }
       this.scroll.goToIntro();
@@ -222,8 +227,60 @@ export class Router {
   }
 
   /* -------------------------------------------------------------------------
+     Status bar name → welcome intro.
+     From project at top: reverse FLIP then camera pull (overlapped).
+     From project scrolled: fade out → gallery fade in + camera pull (overlapped).
+     From gallery: camera tween only.
+     ------------------------------------------------------------------------- */
+
+  showIntroFromProject(fromProjectId) {
+    if (this._transitioning) return;
+    this._transitioning = true;
+    this._removeChromeFloater();
+
+    const needsScrollFade =
+      this._projectView.scrollTop > RETURN_SCROLL_TOP_THRESHOLD;
+
+    if (needsScrollFade) {
+      this._fadeProjectOut(() => {
+        this._returnToGalleryFade(fromProjectId, { thenIntro: true });
+      });
+      return;
+    }
+
+    this._projectView.scrollTop = 0;
+    this._beginReverseFlip(fromProjectId, { thenIntro: true });
+  }
+
+  _fadeProjectOut(onComplete) {
+    this.navigation.isTransitioning = true;
+    this._projectView.style.transition =
+      `opacity ${RETURN_SCROLL_FADE_MS}ms ease`;
+    this._projectView.style.opacity = "0";
+
+    let finished = false;
+    const afterFade = () => {
+      if (finished) return;
+      finished = true;
+      this._projectView.removeEventListener("transitionend", onTransitionEnd);
+      this._projectView.scrollTop = 0;
+      this._projectView.style.transition = "none";
+      onComplete();
+    };
+
+    const onTransitionEnd = (event) => {
+      if (event.target !== this._projectView) return;
+      if (event.propertyName !== "opacity") return;
+      afterFade();
+    };
+
+    this._projectView.addEventListener("transitionend", onTransitionEnd);
+    setTimeout(afterFade, RETURN_SCROLL_FADE_MS + 50);
+  }
+
+  /* -------------------------------------------------------------------------
      Reverse: project → gallery
-     One motion: image shrinks from hero rect back to gallery plane rect.
+     At top: reverse FLIP. Scrolled: fade out → gallery plane fade in.
      ------------------------------------------------------------------------- */
 
   showGallery(fromProjectId) {
@@ -231,14 +288,120 @@ export class Router {
     this._transitioning = true;
     this._removeChromeFloater();
 
+    const needsScrollFade =
+      this._projectView.scrollTop > RETURN_SCROLL_TOP_THRESHOLD;
+
+    if (needsScrollFade) {
+      this._fadeProjectOut(() => {
+        this._returnToGalleryFade(fromProjectId);
+      });
+      return;
+    }
+
+    this._projectView.scrollTop = 0;
+    this._beginReverseFlip(fromProjectId);
+  }
+
+  /** Scrolled return — no FLIP; fade gallery plane in, then card text or intro. */
+  _returnToGalleryFade(fromProjectId, { thenIntro = false } = {}) {
+    this.navigation.isTransitioning = true;
+    this.scroll.lock();
+
+    const planeIndex = fromProjectId
+      ? this.gallery.planes.findIndex((p) => p.userData.project.id === fromProjectId)
+      : -1;
+
+    if (planeIndex === -1) {
+      this._showGalleryImmediate();
+      return;
+    }
+
+    const focalZ = this.gallery.getPlaneFocalZ(planeIndex);
+    this.scroll.setCameraX(0);
+    this.scroll.setCameraZ(focalZ);
+    this.scroll.syncToCamera();
+    this.intro.snapHide();
+    this.cardOverlay.setAllOpacity(0);
+
+    this.gallery.forceVisiblePlane(planeIndex);
+    const focalPlane = this.gallery.planes[planeIndex];
+    if (focalPlane.material.uniforms) {
+      focalPlane.material.uniforms.uOpacity.value = 1;
+      focalPlane.material.uniforms.uBlur.value = 0;
+    }
+    this.gallery.pointerCurrent.set(0, 0);
+    this.gallery.updatePlaneMotion(0);
+
+    this._revealGallery();
+    this._setGalleryOpacity(0);
+
+    this._projectView.hidden = true;
+    this._projectView.style.transition = "none";
+    this._projectView.style.opacity = "0";
+    this._projectView.classList.remove(
+      "project-page--entering",
+      "project-page--entering-from-project"
+    );
+    clearProject();
+    this._currentProjectId = null;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this._setGalleryOpacity(1, RETURN_GALLERY_FADE_MS);
+        if (thenIntro) {
+          this._pullToIntroAfterPlane();
+        } else {
+          setTimeout(() => {
+            this._setGalleryOpacity(1);
+            this._finishGalleryReturn();
+          }, RETURN_GALLERY_FADE_MS + 20);
+        }
+      });
+    });
+  }
+
+  _finishGalleryReturn() {
+    history.pushState(null, "", window.location.pathname);
+    document.title = "Pedja Ristic | Portfolio";
+    fadeStatusBar(false);
+    this.gallery.releaseForcedPlane();
+    this.scroll.syncToCamera();
+    this.scroll.unlock();
+    this.intro.snapHide();
+    this.intro.forceHide(false);
+    this.navigation._returnFadeStart = performance.now();
+    this.navigation.isTransitioning = false;
+    this._transitioning = false;
+  }
+
+  /** Camera snap to intro — no card reveal (pass-through from project). */
+  _pullToIntroAfterPlane() {
+    history.pushState(null, "", window.location.pathname);
+    document.title = "Pedja Ristic | Portfolio";
+    fadeStatusBar(false);
+    this.gallery.releaseForcedPlane();
+    this.scroll.syncToCamera();
+    this.scroll.unlock();
+    this.cardOverlay.setAllOpacity(0);
+    this.intro.snapHide();
+    this.navigation.isTransitioning = true;
+    this.scroll.goToIntro();
+
+    setTimeout(() => {
+      this.navigation._introWelcomeFadeStart = performance.now();
+    }, this.scroll.snapDurationMs + 20);
+  }
+
+  completeIntroWelcomeFade() {
+    this.navigation.isTransitioning = false;
+    this._transitioning = false;
+  }
+
+  _beginReverseFlip(fromProjectId, { thenIntro = false } = {}) {
     const project = fromProjectId ? getProjectById(fromProjectId) : null;
 
-    // 1. Scroll to top so the hero is in-viewport, then measure its rect
-    this._projectView.scrollTop = 0;
     const heroEl = this._projectView.querySelector(".project-page__hero");
     const fromRect = heroEl ? heroEl.getBoundingClientRect() : null;
-
-    // 2. Position gallery at focal view (hidden) so we can measure target
     this.navigation.isTransitioning = true;
     this.scroll.lock();
 
@@ -250,10 +413,7 @@ export class Router {
       const focalZ = this.gallery.getPlaneFocalZ(planeIndex);
       this.scroll.setCameraX(0);
       this.scroll.setCameraZ(focalZ);
-      const focalScroll = this.scroll._scrollFromCameraZ(focalZ);
-      this.scroll.scrollTarget = focalScroll;
-      this.scroll.scrollCurrent = focalScroll;
-      this.scroll.previousScrollCurrent = focalScroll;
+      this.scroll.syncToCamera();
       this.intro.snapHide();
       this.cardOverlay.setAllOpacity(0);
 
@@ -274,8 +434,8 @@ export class Router {
     this._revealGallery();
     this._setGalleryOpacity(0);
 
-    // 3. Get the plane's screen rect (where the proxy will land).
-    //    Camera was just repositioned — update matrices before projecting.
+    // Plane screen rect (where the proxy will land). Camera was just
+    // repositioned — update matrices before projecting.
     this.scroll.camera.updateMatrixWorld();
     const toRect = planeIndex !== -1
       ? this.gallery.getPlaneScreenRect(planeIndex, this.scroll.camera)
@@ -310,71 +470,67 @@ export class Router {
       );
       clearProject();
 
-      // 6. Animate proxy to gallery plane position (shrinks + moves).
-      //    Simultaneously fade the gallery in behind the proxy so the
-      //    canvas is already visible when the proxy is removed — no snap.
-      //    The completion timeout lives INSIDE the double-rAF so it starts
-      //    counting from when the CSS transition actually begins — not from
-      //    when showGallery was called. Without this, the ~33ms rAF delay
-      //    causes the timeout to fire before the transition finishes,
-      //    removing the proxy mid-animation and creating a visible snap.
       const distance = Math.sqrt(endDx * endDx + endDy * endDy);
       const dynamicMs = Math.max(500, Math.min(900, FLIP_MS * (distance / 400)));
 
-      requestAnimationFrame(() => {
+      const runFlip = () => {
         requestAnimationFrame(() => {
-          proxy.style.transition = `transform ${dynamicMs}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
-          proxy.style.transform = `translate(${endDx}px, ${endDy}px) scale(${endScaleX}, ${endScaleY})`;
+          requestAnimationFrame(() => {
+            proxy.style.transition = `transform ${dynamicMs}ms cubic-bezier(0.25, 0.1, 0.25, 1)`;
+            proxy.style.transform = `translate(${endDx}px, ${endDy}px) scale(${endScaleX}, ${endScaleY})`;
 
-          this._stopChromeTrack = trackChromeToProxy(
-            chromeFloater,
-            proxy,
-            dynamicMs + 40
-          );
+            chromeFloater.style.opacity = "1";
+            applyRect(chromeFloater, proxy.getBoundingClientRect());
+            this._stopChromeTrack = trackChromeToProxy(
+              chromeFloater,
+              proxy,
+              dynamicMs + 40
+            );
 
-          this._setGalleryOpacity(1, dynamicMs);
+            this._setGalleryOpacity(1, dynamicMs);
 
-          const HANDOFF_MS = 120;
-          setTimeout(() => {
-            this.gallery.forceVisiblePlane(planeIndex);
-            const focalPlane = this.gallery.planes[planeIndex];
-            if (focalPlane.material.uniforms) {
-              focalPlane.material.uniforms.uOpacity.value = 1;
-              focalPlane.material.uniforms.uBlur.value = 0;
-            }
-
-            // Resume gallery rendering under the fading proxy (prevents pop-in flicker).
-            this._currentProjectId = null;
-
-            this._stopChromeTrack?.();
-            this._stopChromeTrack = null;
-
-            proxy.style.transition = `opacity ${HANDOFF_MS}ms ease`;
-            proxy.style.opacity = "0";
-            chromeFloater.style.transition = `opacity ${HANDOFF_MS}ms ease`;
-            chromeFloater.style.opacity = "0";
-
+            const HANDOFF_MS = 120;
             setTimeout(() => {
-              this._setGalleryOpacity(1);
-              proxy.remove();
-              this._proxy = null;
-              this._removeChromeFloater();
+              this.gallery.forceVisiblePlane(planeIndex);
+              const focalPlane = this.gallery.planes[planeIndex];
+              if (focalPlane.material.uniforms) {
+                focalPlane.material.uniforms.uOpacity.value = 1;
+                focalPlane.material.uniforms.uBlur.value = 0;
+              }
 
-              history.pushState(null, "", window.location.pathname);
-              document.title = "Pedja Ristic | Portfolio";
-              fadeStatusBar(false);
+              this._currentProjectId = null;
 
-              this.gallery.releaseForcedPlane();
-              this.scroll.unlock();
-              this.intro.snapHide();
-              this.intro.forceHide(false);
-              this.navigation._returnFadeStart = performance.now();
-              this.navigation.isTransitioning = false;
-              this._transitioning = false;
-            }, HANDOFF_MS + 20);
-          }, dynamicMs + 20);
+              this._stopChromeTrack?.();
+              this._stopChromeTrack = null;
+
+              proxy.style.transition = `opacity ${HANDOFF_MS}ms ease`;
+              proxy.style.opacity = "0";
+              chromeFloater.style.transition = `opacity ${HANDOFF_MS}ms ease`;
+              chromeFloater.style.opacity = "0";
+
+              if (thenIntro) {
+                this._pullToIntroAfterPlane();
+                setTimeout(() => {
+                  this._setGalleryOpacity(1);
+                  proxy.remove();
+                  this._proxy = null;
+                  this._removeChromeFloater();
+                }, HANDOFF_MS + 20);
+              } else {
+                setTimeout(() => {
+                  this._setGalleryOpacity(1);
+                  proxy.remove();
+                  this._proxy = null;
+                  this._removeChromeFloater();
+                  this._finishGalleryReturn();
+                }, HANDOFF_MS + 20);
+              }
+            }, dynamicMs + 20);
+          });
         });
-      });
+      };
+
+      runFlip();
     } else {
       this._showGalleryImmediate();
     }

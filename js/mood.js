@@ -23,6 +23,10 @@ export class MoodBackground {
     this.backgroundColor = new THREE.Color("#000000");
     this.blob1Color = new THREE.Color("#000000");
     this.blob2Color = new THREE.Color("#000000");
+    this.canvasColor = new THREE.Color("#000000");
+
+  /** When false (light mode), render() is a no-op — white body shows through the canvas. */
+  this.active = true;
 
     // Scratch colors for blending — avoids per-frame allocations.
     this._nextBg = new THREE.Color();
@@ -46,6 +50,9 @@ export class MoodBackground {
         uBackgroundColor: { value: this.backgroundColor },
         uBlob1Color: { value: this.blob1Color },
         uBlob2Color: { value: this.blob2Color },
+        uCanvasColor: { value: this.canvasColor },
+        uGlowScale: { value: 1.0 },
+        uEdgeVignette: { value: 1.0 },
         uNoiseStrength: { value: this.noiseStrength },
         uBlobRadius: { value: this.baseBlobRadius },
         uBlobRadiusSecondary: {
@@ -104,6 +111,18 @@ export class MoodBackground {
     this._syncUniforms();
   }
 
+  /** Dark: full mood field. Light: off — flat white canvas via body background. */
+  setRenderMode(theme) {
+    const isLight = theme === "light";
+    this.active = !isLight;
+    if (isLight) return;
+
+    this.canvasColor.setHex(0x000000);
+    this.material.uniforms.uCanvasColor.value.copy(this.canvasColor);
+    this.material.uniforms.uGlowScale.value = 1.0;
+    this.material.uniforms.uEdgeVignette.value = 1.0;
+  }
+
   /** Set the velocity intensity target [0, 1]. Smoothed in update(). */
   setVelocityIntensity(intensity) {
     if (Number.isFinite(intensity)) {
@@ -120,6 +139,7 @@ export class MoodBackground {
 
   /** Render the background. Called by the Engine's tick before the scene. */
   render(renderer) {
+    if (!this.active) return;
     renderer.render(this.scene, this.camera);
   }
 

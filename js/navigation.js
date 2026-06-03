@@ -18,6 +18,8 @@ export class Navigation {
     this.intro = intro;
     this.isTransitioning = false;
     this._returnFadeStart = null;
+    this._introWelcomeFadeStart = null;
+    this._introWelcomeFadeFrom = null;
     this._router = null;
 
     this._unsubscribe = this.cardOverlay.onCardClick((project, cardElement) => {
@@ -72,11 +74,7 @@ export class Navigation {
 
     this.scroll.setCameraX(startX);
     this.scroll.setCameraZ(startZ);
-
-    const focalScroll = this.scroll._scrollFromCameraZ(focalZ);
-    this.scroll.scrollTarget = focalScroll;
-    this.scroll.scrollCurrent = focalScroll;
-    this.scroll.previousScrollCurrent = focalScroll;
+    this.scroll.syncToCamera();
 
     const startTime = performance.now();
     const animate = () => {
@@ -91,6 +89,7 @@ export class Navigation {
       } else {
         this.scroll.setCameraX(0);
         this.scroll.setCameraZ(focalZ);
+        this.scroll.syncToCamera();
         this.gallery.releaseForcedPlane();
         this.scroll.unlock();
         this.intro.forceHide(false);

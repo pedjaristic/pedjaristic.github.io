@@ -27,13 +27,18 @@
   z-index: 9;
   background: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.55) 0%,
-    rgba(0, 0, 0, 0.15) 22%,
+    rgb(var(--vignette-rgb) / var(--vignette-strong)) 0%,
+    rgb(var(--vignette-rgb) / var(--vignette-soft)) 22%,
     transparent 35%,
     transparent 65%,
-    rgba(0, 0, 0, 0.15) 78%,
-    rgba(0, 0, 0, 0.55) 100%
+    rgb(var(--vignette-rgb) / var(--vignette-soft)) 78%,
+    rgb(var(--vignette-rgb) / var(--vignette-strong)) 100%
   );
+}
+
+html[data-theme="light"] .gallery-vignette,
+html[data-theme="light"] .grain-overlay {
+  display: none;
 }
 
 /* ============================================================================
@@ -77,7 +82,7 @@
 
 .project-card__left > *:not(.project-card__company),
 .project-card__right > *:not(.project-card__tagline) {
-  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.65);
+  text-shadow: var(--text-shadow-panel);
 }
 
 /* ----------------------------------------------------------------------------
@@ -199,8 +204,8 @@
   opacity: 0;
   transition: opacity var(--dur-fast) var(--ease-default);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-    inset 0 0 80px 25px rgba(0, 0, 0, 0.4);
+    inset 0 0 0 1px var(--hover-chrome-inset-ring),
+    inset 0 0 80px 25px var(--hover-chrome-inset-glow);
 }
 
 .project-card:has(.project-card__hit:hover) .project-card__hover-chrome,
@@ -219,29 +224,29 @@
 .hover-chrome__corner--tl {
   top: calc(var(--space-3) * -1);
   left: calc(var(--space-3) * -1);
-  border-top: 3px solid #fff;
-  border-left: 3px solid #fff;
+  border-top: var(--hover-chrome-corner-weight) solid var(--color-hover-chrome-corner);
+  border-left: var(--hover-chrome-corner-weight) solid var(--color-hover-chrome-corner);
 }
 
 .hover-chrome__corner--tr {
   top: calc(var(--space-3) * -1);
   right: calc(var(--space-3) * -1);
-  border-top: 3px solid #fff;
-  border-right: 3px solid #fff;
+  border-top: var(--hover-chrome-corner-weight) solid var(--color-hover-chrome-corner);
+  border-right: var(--hover-chrome-corner-weight) solid var(--color-hover-chrome-corner);
 }
 
 .hover-chrome__corner--bl {
   bottom: calc(var(--space-3) * -1);
   left: calc(var(--space-3) * -1);
-  border-bottom: 3px solid #fff;
-  border-left: 3px solid #fff;
+  border-bottom: var(--hover-chrome-corner-weight) solid var(--color-hover-chrome-corner);
+  border-left: var(--hover-chrome-corner-weight) solid var(--color-hover-chrome-corner);
 }
 
 .hover-chrome__corner--br {
   bottom: calc(var(--space-3) * -1);
   right: calc(var(--space-3) * -1);
-  border-bottom: 3px solid #fff;
-  border-right: 3px solid #fff;
+  border-bottom: var(--hover-chrome-corner-weight) solid var(--color-hover-chrome-corner);
+  border-right: var(--hover-chrome-corner-weight) solid var(--color-hover-chrome-corner);
 }
 
 /* Status text — top-left of image, 16px @1920 */
@@ -253,7 +258,7 @@
   font-size: var(--size-micro);
   font-weight: 700;
   letter-spacing: var(--tracking-mono);
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-hover-chrome-label);
   text-transform: uppercase;
 }
 
@@ -265,7 +270,7 @@
   font-family: var(--font-accent);
   font-size: var(--size-lg);
   letter-spacing: var(--tracking-accent);
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-hover-chrome-label);
   white-space: pre-line;
   text-align: right;
   line-height: var(--leading-accent);
@@ -289,7 +294,7 @@
   font-family: var(--font-heading);
   font-weight: 400;
   font-size: max(6.875vw, 42px); /* 132px @1920; was --size-scroll 120px */
-  color: rgba(255, 255, 255, 0.15);
+  color: var(--color-scroll-indicator);
   text-transform: lowercase;
   line-height: 0.95;
   letter-spacing: var(--tracking-heading);
@@ -315,9 +320,14 @@
     var(--space-6);
   transition: opacity var(--dur-medium) var(--ease-default);
   will-change: opacity;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: rgba(10, 10, 12, 0.05);
+  backdrop-filter: var(--intro-layer-blur);
+  -webkit-backdrop-filter: var(--intro-layer-blur);
+  background: var(--intro-layer-bg);
+}
+
+html[data-theme="light"] .project-card__company-logo,
+html[data-theme="light"] .project-page__company-logo {
+  filter: brightness(0);
 }
 
 .intro-layer__name {

@@ -1,8 +1,6 @@
 .DS_Store
-.idea/
-.cursor/
+node_modules/
 reference/
-assets/originals/
-assets/Images/*/extra/
-*.mov
-.claude/
+*.log
+.vscode/
+.idea/

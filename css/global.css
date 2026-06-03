@@ -7,6 +7,10 @@ html {
   color-scheme: dark;
 }
 
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--size-base);
@@ -96,7 +100,7 @@ a:hover {
    ------------------------------------------------------------------------- */
 ::selection {
   background: var(--color-accent);
-  color: var(--color-canvas-base);
+  color: var(--color-selection-fg);
 }
 
 /* ----------------------------------------------------------------------------
@@ -109,7 +113,7 @@ a:hover {
   pointer-events: none;
   z-index: 2;
   mix-blend-mode: overlay;
-  opacity: 0.06;
+  opacity: var(--grain-opacity);
   background-image:
     radial-gradient(
       rgba(255, 255, 255, 0.4) 1px,

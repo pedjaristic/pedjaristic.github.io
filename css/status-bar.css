@@ -23,6 +23,43 @@
   color: var(--color-text-secondary);
 }
 
+.status-bar__left {
+  display: flex;
+  align-items: center;
+}
+
+.status-bar__theme-toggle {
+  display: none; /* hidden until light-mode design is ready */
+  flex-shrink: 0;
+  width: 0.9em;
+  height: 0.9em;
+  margin-left: var(--space-3);
+  padding: 0;
+  box-sizing: border-box;
+  background: var(--color-canvas-base);
+  border: 1px solid var(--color-text-primary);
+  cursor: pointer;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  align-self: center;
+}
+
+.status-bar__home {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: var(--size-micro);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-heading);
+  text-transform: uppercase;
+}
+
+.status-bar__home:hover {
+  color: var(--color-accent);
+}
+
 /* Top scrim — gradient fades to transparent so no hard edge at bar bottom. */
 .status-bar::before {
   content: "";
@@ -35,24 +72,11 @@
   z-index: -1;
   background: linear-gradient(
     180deg,
-    rgb(0 0 0 / var(--nav-scrim-opacity)) 0%,
-    rgb(0 0 0 / calc(var(--nav-scrim-opacity) * 0.62)) 22%,
-    rgb(0 0 0 / calc(var(--nav-scrim-opacity) * 0.22)) 52%,
+    rgb(var(--nav-scrim-rgb) / var(--nav-scrim-opacity)) 0%,
+    rgb(var(--nav-scrim-rgb) / calc(var(--nav-scrim-opacity) * 0.62)) 22%,
+    rgb(var(--nav-scrim-rgb) / calc(var(--nav-scrim-opacity) * 0.22)) 52%,
     transparent 100%
   );
-}
-
-.status-bar__home {
-  font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: var(--size-micro);
-  color: var(--color-text-primary);
-  letter-spacing: var(--tracking-heading);
-  text-transform: uppercase;
-}
-
-.status-bar__home:hover {
-  color: var(--color-accent);
 }
 
 .status-bar__right {

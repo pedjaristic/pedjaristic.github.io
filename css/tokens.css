@@ -18,6 +18,24 @@
   --color-text-muted: #6e6c66;
   --color-accent: #66FF00;
   --color-border-subtle: rgba(244, 243, 239, 0.12);
+  --color-selection-fg: var(--color-canvas-base);
+
+  /* Theme-aware chrome (hover brackets vs text on images/video) */
+  --color-hover-chrome-corner: #ffffff;
+  --color-hover-chrome-label: rgba(255, 255, 255, 0.85);
+  --hover-chrome-corner-weight: 5px;
+  --hover-chrome-inset-ring: rgba(255, 255, 255, 0.15);
+  --hover-chrome-inset-glow: rgba(0, 0, 0, 0.4);
+  --color-on-media: rgba(255, 255, 255, 0.85);
+  --color-scroll-indicator: rgba(255, 255, 255, 0.15);
+  --nav-scrim-rgb: 0 0 0;
+  --vignette-rgb: 0 0 0;
+  --vignette-strong: 0.55;
+  --vignette-soft: 0.15;
+  --text-shadow-panel: 0 1px 18px rgba(0, 0, 0, 0.65);
+  --grain-opacity: 0.06;
+  --intro-layer-bg: rgba(10, 10, 12, 0.05);
+  --intro-layer-blur: blur(14px);
 
   /* --------------------------------------------------------------------------
      Per-project mood palettes (background + two blobs)
@@ -148,4 +166,33 @@
     --dur-zoom:    0ms;
     --dur-pulse:   0ms;
   }
+}
+
+/* ----------------------------------------------------------------------------
+   Light mode — white canvas, blue accent, mood blob hues unchanged.
+   ------------------------------------------------------------------------- */
+[data-theme="light"] {
+  --color-canvas-base: #ffffff;
+  --color-canvas-soft: #f5f5f5;
+  --color-text-primary: #000000;
+  --color-text-secondary: #333333;
+  --color-text-muted: #888888;
+  --color-accent: #002FFF;
+  --color-border-subtle: rgba(0, 0, 0, 0.12);
+  --color-selection-fg: #ffffff;
+  --color-hover-chrome-corner: #000000;
+  --color-hover-chrome-label: rgba(0, 0, 0, 0.85);
+  --hover-chrome-inset-ring: rgba(255, 255, 255, 0.55);
+  --hover-chrome-inset-glow: rgba(255, 255, 255, 0.45);
+  --color-on-media: rgba(255, 255, 255, 0.85);
+  --color-scroll-indicator: rgba(0, 0, 0, 0.12);
+  --nav-scrim-rgb: 255 255 255;
+  --nav-scrim-opacity: 0;
+  --text-shadow-panel: none;
+  --grain-opacity: 0.025;
+  --vignette-strong: 0;
+  --vignette-soft: 0;
+  --text-glow-accent: none;
+  --intro-layer-bg: rgba(255, 255, 255, 0.45);
+  --intro-layer-blur: blur(14px);
 }
