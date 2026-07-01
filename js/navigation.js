@@ -33,6 +33,12 @@ export class Navigation {
 
   openProject(project, cardElement) {
     if (this.isTransitioning) return;
+    if (
+      this.gallery.isForwardWrapActive() ||
+      this.scroll._snapTween?.isForwardWrap
+    ) {
+      return;
+    }
     this.isTransitioning = true;
     this.scroll.lock();
 

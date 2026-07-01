@@ -188,9 +188,30 @@ export class ScrollController {
 
   _tryAdvanceNext() {
     const maxIdx = this.gallery.planes.length - 1;
-    if (this._currentFocalIndex >= maxIdx) return false;
+    if (this._currentFocalIndex >= maxIdx) {
+      return this._wrapForward();
+    }
     this._currentFocalIndex++;
     this._tweenToFocal(this._currentFocalIndex);
+    return true;
+  }
+
+  _wrapForward() {
+    const maxIdx = this.gallery.planes.length - 1;
+    if (maxIdx < 0 || this._currentFocalIndex < maxIdx) return false;
+
+    this.gallery.prepareForwardWrap();
+    this._currentFocalIndex = 0;
+
+    const targetZ = this.gallery.getWrapTargetCameraZ();
+    const targetScroll = this._scrollFromCameraZ(targetZ);
+    this._snapTween = {
+      startScroll: this.scrollCurrent,
+      endScroll: targetScroll,
+      startTime: performance.now(),
+      duration: this.snapDurationMs,
+      isForwardWrap: true,
+    };
     return true;
   }
 
@@ -259,10 +280,24 @@ export class ScrollController {
       this.scrollTarget = pos;
       this.scrollCurrent = pos;
       if (t >= 1) {
+        const wasForwardWrap = this._snapTween.isForwardWrap === true;
         this.scrollTarget = this._snapTween.endScroll;
         this.scrollCurrent = this._snapTween.endScroll;
         this._snapTween = null;
-        this._syncFocalIndex();
+
+        if (wasForwardWrap) {
+          const correction = this.gallery.commitForwardWrap(this.camera.position.z);
+          this.camera.position.z += correction;
+          const scroll = this._scrollFromCameraZ(this.camera.position.z);
+          this.scrollTarget = scroll;
+          this.scrollCurrent = scroll;
+          this.previousScrollCurrent = scroll;
+          this._currentFocalIndex = 0;
+          this._updateBounds();
+        } else {
+          this._syncFocalIndex();
+        }
+
         this._wheelAccum = 0;
         this._wheelAwaitingImpulse = true;
       }
@@ -322,6 +357,8 @@ export class ScrollController {
 
   /** Re-derive focal index from current camera position (after zoom transitions). */
   _syncFocalIndex() {
+    if (this.gallery.isForwardWrapActive()) return;
+
     const currentZ = this.camera.position.z;
     const firstFocalZ = this.gallery.getPlaneFocalZ(0);
     if (currentZ > firstFocalZ + this.gallery.planeGap * 0.3) {

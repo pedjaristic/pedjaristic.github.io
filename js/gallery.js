@@ -136,6 +136,13 @@ export class Gallery {
     this.breathIntensity = 0;
     this.targetBreathIntensity = 0;
 
+    // Forward wrap — plane 0 temporarily sits one gap past the last plane.
+    this._forwardWrapActive = false;
+    this._forwardWrapFromIndex = -1;
+    this._wrapStartCameraZ = null;
+    this._wrapEndCameraZ = null;
+    this.forcedVisibleIndex = null;
+
     this._onPointerMove = (event) => {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = (event.clientY / window.innerHeight) * 2 - 1;
@@ -255,6 +262,66 @@ export class Gallery {
     return this.planes[safeIndex].position.z + this.planeGap; // viewed from +Z
   }
 
+  isForwardWrapActive() {
+    return this._forwardWrapActive;
+  }
+
+  /** Place plane 0 one gap past the last plane for a seamless forward loop. */
+  prepareForwardWrap() {
+    const lastIdx = this.planes.length - 1;
+    if (lastIdx < 0) return;
+
+    this._forwardWrapFromIndex = lastIdx;
+    this._forwardWrapActive = true;
+
+    const lastPlane = this.planes[lastIdx];
+    const plane0 = this.planes[0];
+    const xSpread = this.getXSpreadFactor();
+    const baseX = (plane0.userData.baseX ?? 0) * xSpread;
+    plane0.position.set(baseX, 0, lastPlane.position.z - this.planeGap);
+
+    this._wrapStartCameraZ = this.getPlaneFocalZ(lastIdx);
+    this._wrapEndCameraZ = this.getWrapTargetCameraZ();
+    this.snapVisibilityToFocal(lastIdx);
+  }
+
+  getWrapTargetCameraZ() {
+    if (!this.planes.length) return 0;
+    return this.planes[0].position.z + this.planeGap;
+  }
+
+  /**
+   * Restore canonical layout after wrap tween completes.
+   * Returns the camera Z correction to apply before the next frame renders.
+   */
+  commitForwardWrap(currentCameraZ) {
+    this.layoutPlanes();
+    const correction = this.getPlaneFocalZ(0) - currentCameraZ;
+    this._forwardWrapActive = false;
+    this._forwardWrapFromIndex = -1;
+    this._wrapStartCameraZ = null;
+    this._wrapEndCameraZ = null;
+    this.snapVisibilityToFocal(0, { includePeek: false });
+    return correction;
+  }
+
+  /** Hard-set opacity/blur for a settled focal index (no smoothing lag). */
+  snapVisibilityToFocal(index, { includePeek = true } = {}) {
+    this.planes.forEach((plane, i) => {
+      const u = plane.material.uniforms;
+      if (i === index) {
+        u.uOpacity.value = 1;
+        u.uBlur.value = 0;
+      } else if (includePeek && i === index + 1) {
+        u.uOpacity.value = this.peekOpacityFloor;
+        u.uBlur.value = this.peekBlurMax;
+      } else {
+        u.uOpacity.value = 0;
+        u.uBlur.value = this.peekBlurMax;
+      }
+    });
+  }
+
   /** Distance-along-the-rail (z range bounds). */
   getDepthRange() {
     if (!this.planes.length) return { nearestZ: 0, deepestZ: 0 };
@@ -269,6 +336,21 @@ export class Gallery {
    */
   getPlaneBlendData(cameraZ) {
     if (!this.planes.length) return null;
+
+    if (this._forwardWrapActive) {
+      const lastIdx = this._forwardWrapFromIndex;
+      const startZ = this._wrapStartCameraZ;
+      const endZ = this._wrapEndCameraZ;
+      const span = startZ - endZ;
+      const blend =
+        span === 0 ? 1 : Math.max(0, Math.min(1, (startZ - cameraZ) / span));
+      return {
+        currentPlaneIndex: lastIdx,
+        nextPlaneIndex: 0,
+        blend,
+      };
+    }
+
     const planeGap = Math.max(this.planeGap, 0.0001);
     const firstPlaneZ = this.planes[0].position.z;
     const lastPlaneIndex = this.planes.length - 1;
@@ -313,7 +395,14 @@ export class Gallery {
       if (index === currentPlaneIndex) target = 1 - blend;
       if (index === nextPlaneIndex) target = Math.max(target, blend);
 
-      if ((index === currentPlaneIndex + 1 || index === nextPlaneIndex + 1) && target < this.peekOpacityFloor) {
+      if (this._forwardWrapActive) {
+        if (index !== currentPlaneIndex && index !== nextPlaneIndex) {
+          target = 0;
+        }
+      } else if (
+        (index === currentPlaneIndex + 1 || index === nextPlaneIndex + 1) &&
+        target < this.peekOpacityFloor
+      ) {
         target = this.peekOpacityFloor;
       }
 

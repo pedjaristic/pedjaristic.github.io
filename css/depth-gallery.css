@@ -407,6 +407,15 @@ html[data-theme="light"] .project-page__company-logo {
   color: var(--color-accent);
 }
 
+/* Hidden until entrance animation — prevents flash before async bootstrap. */
+.intro-layer > * {
+  opacity: 0;
+}
+
+.intro-layer--shown > * {
+  opacity: 1;
+}
+
 /* Load-in fade for intro content */
 @keyframes introContentIn {
   from {
@@ -445,6 +454,10 @@ html[data-theme="light"] .project-page__company-logo {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .intro-layer > * {
+    opacity: 1;
+  }
+
   .intro-layer--entering > * {
     opacity: 1;
     animation: none;

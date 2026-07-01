@@ -23,7 +23,7 @@
   /* Theme-aware chrome (hover brackets vs text on images/video) */
   --color-hover-chrome-corner: #ffffff;
   --color-hover-chrome-label: rgba(255, 255, 255, 0.85);
-  --hover-chrome-corner-weight: 5px;
+  --hover-chrome-corner-weight: 4px;
   --hover-chrome-inset-ring: rgba(255, 255, 255, 0.15);
   --hover-chrome-inset-glow: rgba(0, 0, 0, 0.4);
   --color-on-media: rgba(255, 255, 255, 0.85);

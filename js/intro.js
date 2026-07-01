@@ -83,7 +83,10 @@ export class IntroLayer {
 
   /** Subtle staggered fade-in on first paint (home / intro only). */
   playEntrance() {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      this.element.classList.add("intro-layer--shown");
+      return;
+    }
     this.element.classList.add("intro-layer--entering");
   }
 
@@ -94,5 +97,6 @@ export class IntroLayer {
     this.currentOpacity = 1;
     this.element.style.opacity = "1";
     this.element.style.pointerEvents = "auto";
+    this.element.classList.add("intro-layer--shown");
   }
 }
